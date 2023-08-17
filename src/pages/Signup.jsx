@@ -97,7 +97,7 @@ const SignupPage = () => {
 
         const encrypted = encryptData(credentials)
 
-        axios.post(`h${import.meta.env.VITE_APP_API}/api/users/signup`, {
+        axios.post(`${import.meta.env.VITE_APP_API}/api/users/signup`, {
             data: encrypted
         })
             .then((res) => {

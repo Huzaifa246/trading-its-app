@@ -7,7 +7,7 @@ import { savedDataString } from "../../helpers/UserDetails/UserDetails"
 const Navbar = () => {
     const navigate = useNavigate()
     const savedDataProfile = JSON.parse(savedDataString);
-    const fullName = savedDataProfile.data.fullName;
+    const fullName = savedDataProfile?.data?.fullName || savedDataProfile?.data?.name || "User Not Found";
     const ProfileImg = savedDataProfile?.data?.profile_image?.url;
 
 

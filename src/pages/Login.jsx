@@ -40,7 +40,7 @@ const LoginPage = () => {
 
         const encrypted = encryptData(credentials)
 
-        axios.post(`h${import.meta.env.VITE_APP_API}/api/users/login`, {
+        axios.post(`${import.meta.env.VITE_APP_API}/api/users/login`, {
             data: encrypted
         })
             .then(async (res) => {
@@ -53,18 +53,29 @@ const LoginPage = () => {
                     setShowLoader(false)
                     navigate("/")
                 }
-                else{
+                else {
                     setShowLoader(false)
                     window.location.reload();
                     navigate("/login")
                 }
             })
-            .catch(err => {
-                const decrypted = decryptData(err.response.data.data)
-                // console.log(decrypted, "error from login")
-                if (decrypted.message.includes("user not found.")) {
-                    setLoginError("Invalid Credentials")
-                    setShowLoader(false)
+            .catch(async (err) => {
+                // const decrypted = decryptData(err.response.data.data)
+                // // console.log(decrypted, "error from login")
+                // if (decrypted.message.includes("user not found.")) {
+                //     setLoginError("Invalid Credentials")
+                //     setShowLoader(false)
+                // }
+                // setShowLoader(false)
+                const decrypted = await decryptData(err.response.data.data)
+                console.log(decrypted.message, "das")
+                if (decrypted?.message.includes("Admin Not Found.")) {
+                    setLoginError("Invalid Credentials, Please Check email.")
+                } else if (decrypted?.message.includes("Admin password is wrong.")) {
+                    setLoginError("Invalid Password, Please Check Your Password.")
+                }
+                else {
+                    setLoginError("An error occurred, Check Credentials");
                 }
                 setShowLoader(false)
             })

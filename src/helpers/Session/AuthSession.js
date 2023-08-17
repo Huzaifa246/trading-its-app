@@ -9,7 +9,7 @@ async function AuthSession() {
     token = localStorage.getItem("myToken");
   }
   if (token) {
-    const authUrl = `h${import.meta.env.VITE_APP_API}/api/users/auth/${token}`;
+    const authUrl = `${import.meta.env.VITE_APP_API}/api/users/auth/${token}`;
     try {
       const authResponse = await axios.get(authUrl);
       let decryptedData = decryptData(authResponse.data.data);

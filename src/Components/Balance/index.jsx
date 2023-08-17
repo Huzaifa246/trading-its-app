@@ -4,9 +4,17 @@ import { TbEyeHeart } from "react-icons/tb"
 import { savedDataString } from "../../helpers/UserDetails/UserDetails";
 
 const Balance = () => {
-    const savedDataProfile = JSON.parse(savedDataString);
-    const totalBalance = savedDataProfile?.data?.totalbalance || " ";
-    const userProfit = savedDataProfile?.data?.profit || " " || "No Profit";
+    let totalBalance = 59.00; // Default value
+    let userProfit = "No Profit"; // Default value
+
+    try {
+        const savedDataProfile = JSON.parse(savedDataString);
+        totalBalance = savedDataProfile?.data?.totalbalance || totalBalance;
+        userProfit = savedDataProfile?.data?.profit || userProfit;
+    } catch (error) {
+        console.error("Error parsing JSON data:", error);
+    }
+
     return (
         <div className={styles.balance}>
             <div className={styles.left}>
@@ -25,7 +33,7 @@ const Balance = () => {
                         </select>
                     </div>
                     <div>
-                        <span>{userProfit.toFixed(2)}%</span>
+                        <span>{userProfit}%</span>
                         <FaArrowTrendUp />
                     </div>
                 </div>

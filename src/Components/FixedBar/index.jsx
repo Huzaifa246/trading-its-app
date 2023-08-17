@@ -3,8 +3,17 @@ import { BsWallet2 } from "react-icons/bs"
 import { CgArrowsExchangeAltV } from "react-icons/cg"
 import { MdOutlineManageHistory } from "react-icons/md"
 import "./index.css"
-
+import React, { useState } from "react"
 const FixedBar = ({ fixedBarRef }) => {
+    const [activeItem, setActiveItem] = useState("home"); // Set the initial active item
+
+    const handleItemClick = (item) => {
+        setActiveItem(item);
+    };
+
+    const isItemActive = (item) => {
+        return item === activeItem;
+    };
     return (
         <div style={{
             position: "fixed",
@@ -25,9 +34,11 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: "white",
+                color: isItemActive("home") ? "white" : "#a8a8a8",
                 fontSize: "6vw"
-            }}>
+            }}
+                onClick={() => handleItemClick("home")}
+            >
                 <a href="/" className="a-tag-style">
                     <BiHomeSmile />
                     <p style={{ fontSize: "3vw" }}>Home</p>
@@ -80,9 +91,12 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: "#a8a8a8",
+                color: isItemActive("pastInvest") ? "white" : "#a8a8a8",
+                //#007aff
                 fontSize: "6vw"
-            }}>
+            }}
+                onClick={() => handleItemClick("pastInvest")}
+            >
                 <a href="/pastInvest" className="a-tag-style">
                     <BiBarChartAlt2 />
                     <p style={{ fontSize: "3vw" }}>History</p>
