@@ -6,6 +6,7 @@ import FixedBar from '../FixedBar';
 import { formatDateTime } from './../../helpers/DataFormat/DateFormat';
 import fetchAllInvestment from '../../helpers/getApis/getAllInvestment';
 
+
 const CurrentInvest = () => {
     const fixedBarRef = useRef(null);
     const savedDataProfile = JSON.parse(savedDataString);
