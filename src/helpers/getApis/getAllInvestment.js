@@ -3,7 +3,7 @@ import { decryptData } from '../encryption_decryption/Decryption';
 
 async function fetchAllInvestment(userId, investtype, tradeID = "") {
   try {
-    let url = `https://itsapp-3606ea51973b.herokuapp.com/api/users/get-user-investment/${userId}/${investtype}`;
+    let url = `h${import.meta.env.VITE_APP_API}/api/users/get-user-investment/${userId}/${investtype}`;
     // console.log(url,"main")
     const queryParams = [];
 

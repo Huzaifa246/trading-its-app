@@ -97,7 +97,7 @@ const SignupPage = () => {
 
         const encrypted = encryptData(credentials)
 
-        axios.post(`https://itsapp-3606ea51973b.herokuapp.com/api/users/signup`, {
+        axios.post(`h${import.meta.env.VITE_APP_API}/api/users/signup`, {
             data: encrypted
         })
             .then((res) => {

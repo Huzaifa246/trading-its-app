@@ -9,7 +9,7 @@ async function AuthSession() {
     token = localStorage.getItem("myToken");
   }
   if (token) {
-    const authUrl = `https://itsapp-3606ea51973b.herokuapp.com/api/users/auth/${token}`;
+    const authUrl = `h${import.meta.env.VITE_APP_API}/api/users/auth/${token}`;
     try {
       const authResponse = await axios.get(authUrl);
       let decryptedData = decryptData(authResponse.data.data);

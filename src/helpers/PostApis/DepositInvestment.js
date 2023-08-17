@@ -13,7 +13,7 @@ async function DepositInvestment(userId, amount) {
     console.log(encryptedPostData, "encrypted data DepositInvestment")
 
 
-    const response = await axios.post('https://itsapp-3606ea51973b.herokuapp.com/api/users/deposit-in-user-account',
+    const response = await axios.post(`h${import.meta.env.VITE_APP_API}/api/users/deposit-in-user-account`,
       { data: encryptedPostData },
       {
         headers: {

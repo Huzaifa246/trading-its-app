@@ -3,7 +3,7 @@ import { decryptData } from '../encryption_decryption/Decryption';
 
 async function fetchPastUserTrade(tradeId, startDate, endDate) {
   try {
-    let url = `https://itsapp-3606ea51973b.herokuapp.com/api/users/graph-data/${tradeId}/${startDate}/${endDate}`;
+    let url = `h${import.meta.env.VITE_APP_API}/api/users/graph-data/${tradeId}/${startDate}/${endDate}`;
     // const queryParams = [];
 
     // if (startDate !== "" && endDate !== "") {
