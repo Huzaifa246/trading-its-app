@@ -4,7 +4,7 @@ import { formatDateTime } from '../../helpers/DataFormat/DateFormat';
 import FixedBar from '../FixedBar';
 import fetchAllTradeOption from '../../helpers/getApis/getAllOptions';
 import { savedDataString } from '../../helpers/UserDetails/UserDetails';
-import fetchAllInvestment from '../../helpers/getApis/getAllinvestment';
+import fetchAllInvestment from '../../helpers/getApis/getAllInvestment';
 
 
 const PastInvestment = () => {
