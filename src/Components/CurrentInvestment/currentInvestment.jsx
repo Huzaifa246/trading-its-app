@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import fetchAllInvestment from "../../helpers/getApis/getAllinvestment";
+import fetchAllInvestment from "../../helpers/getApis/getAllInvestment";
 import { savedDataString } from '../../helpers/UserDetails/UserDetails';
 import styles from "./index.module.css";
 import fetchAllTradeOption from '../../helpers/getApis/getAllOptions';
