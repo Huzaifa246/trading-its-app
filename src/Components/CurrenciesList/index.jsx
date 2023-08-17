@@ -1,7 +1,7 @@
 import { savedDataString } from "../../helpers/UserDetails/UserDetails";
 import React, { useState, useEffect } from 'react';
-import fetchAllInvestment from "../../helpers/getApis/getAllinvestment";
 import { formatDateTime } from "../../helpers/DataFormat/DateFormat";
+import fetchAllInvestment from "../../helpers/getApis/getAllInvestment";
 
 const CurrenciesList = () => {
     // const data = [
