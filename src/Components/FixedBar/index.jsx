@@ -28,8 +28,10 @@ const FixedBar = ({ fixedBarRef }) => {
                 color: "white",
                 fontSize: "6vw"
             }}>
-                <BiHomeSmile />
-                <p style={{ fontSize: "3vw" }}>Home</p>
+                <a href="/" className="a-tag-style">
+                    <BiHomeSmile />
+                    <p style={{ fontSize: "3vw" }}>Home</p>
+                </a>
             </div>
             <div style={{
                 flex: 1,
@@ -81,8 +83,10 @@ const FixedBar = ({ fixedBarRef }) => {
                 color: "#a8a8a8",
                 fontSize: "6vw"
             }}>
-                <BiBarChartAlt2 />
-                <p style={{ fontSize: "3vw" }}>History</p>
+                <a href="/pastInvest" className="a-tag-style">
+                    <BiBarChartAlt2 />
+                    <p style={{ fontSize: "3vw" }}>History</p>
+                </a>
             </div>
             <div style={{
                 flex: 1,
