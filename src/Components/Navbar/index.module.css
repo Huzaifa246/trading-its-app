@@ -1,0 +1,36 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 1rem;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.left>img {
+    width: 14vw;
+    height: 14vw;
+    /* object-fit: cover; */
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.left>h5 {
+    font-size: 5vw;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 7vw;
+}
+
+.right>* {
+    cursor: pointer;
+}
