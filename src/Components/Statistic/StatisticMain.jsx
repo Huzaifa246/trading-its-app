@@ -1,27 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import StaticChart from './Chart/StaticChart';
-// import './statistic.css';';
 import StatisticTable from './MainTable/StatisticTable';
 import FixedBar from './../FixedBar/index';
 
 export const StatisticMain = () => {
-  return (
-    <>
-      <div style={{ marginTop: "1rem" }}></div>
-      <div className="col-12">
-        <h2
-          style={{
-            textAlign: "center",
-            color: "white",
-            fontSize: "24px"
-          }}
-        >
-          Statistic</h2>
-      </div>
-      <StaticChart />
-      <StatisticTable />
-      <FixedBar />
-    </>
-  )
-}
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const name = searchParams.get("name");
+  const graphValuesString = searchParams.get("graphValues");
+  const graphValues = JSON.parse(graphValuesString);
+
+  console.log(name, "name main");
+  console.log(graphValues, "graphValues main");
+
+    return (
+        <>
+            <div style={{ marginTop: "1rem" }}></div>
+            <StaticChart name={name} graphValues={graphValues} />
+            <StatisticTable />
+            <FixedBar />
+        </>
+    );
+};

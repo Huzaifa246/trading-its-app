@@ -1,11 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './mainTable.css';
 import { savedDataString } from '../../../helpers/UserDetails/UserDetails';
+import fetchAllTradeOption from '../../../helpers/getApis/getAllOptions';
+import InvestmentByUser from '../../../helpers/PostApis/investmentByUser';
 
 function StatisticTable() {
+    const [tradeOptions, setTradeOptions] = useState([]);
+    const [investmentResponse, setInvestmentResponse] = useState(null);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
+
     const savedDataProfile = JSON.parse(savedDataString);
     const userId = savedDataProfile?.data?._id;
-    console.log(userId, "userID")
+    const totalBalance = savedDataProfile?.data?.totalbalance;
+
+    useEffect(() => {
+        async function fetchData() {
+            const decryptedData = await fetchAllTradeOption();
+            setTradeOptions(decryptedData.data);
+        }
+        fetchData();
+    }, []);
+
+    const handleInvestment = () => {
+        setShowConfirmationModal(true);
+    };
+    const confirmInvestment = async () => {
+        try {
+            const investmentResponse = await InvestmentByUser(userId, investmentValue, "64cbebbd087e64a53520e594");
+            setInvestmentResponse(investmentResponse);
+            
+            window.location.reload();
+        } catch (error) {
+            console.error('Error making investment:', error);
+        } finally {
+            setShowConfirmationModal(false);
+        }
+    };
     const data = [
         {
             id: 1,
@@ -16,27 +47,39 @@ function StatisticTable() {
             increment: "+5.67%"
         }
     ]
-    const [rangeValue, setRangeValue] = useState(50);
+    const [rangeValue, setRangeValue] = useState(0);
 
-    const handleInvestment = () => {
-        console.log("Buy button clicked");
-    };
 
-    const sellPercentage = 100 - rangeValue;
-    const buyPercentage = rangeValue;
+    const depositValue = totalBalance - rangeValue;
+    const investmentValue = rangeValue;
 
     const handleRangeChange = (event) => {
         const newValue = event.target.value;
         setRangeValue(newValue);
     };
     const getRangeColor = (value) => {
-        return value >= 50 ? '#2fd3c9' : '#5c768b';
+        return value >= totalBalance / 2 ? '#2fd3c9' : '#5c768b';
     };
 
 
 
     return (
         <>
+            {showConfirmationModal && (
+                <div className="modal-overlay">
+                    <div className="confirmation-modal">
+                        <p>Confirm your investment of {investmentValue}?</p>
+                        <div className="modal-buttons">
+                            <button onClick={confirmInvestment} className="modal-confirm-btn">
+                                Confirm
+                            </button>
+                            <button onClick={() => setShowConfirmationModal(false)} className="modal-cancel-btn">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div>
                 <div style={{
                     padding: ".5rem 1rem .5rem"
@@ -91,17 +134,22 @@ function StatisticTable() {
                             type="range"
                             className="form-range range-style"
                             id="customRange1"
+                            min="0"
+                            max={totalBalance}
                             value={rangeValue}
                             onChange={handleRangeChange}
-                            style={{ '--range-color': getRangeColor(rangeValue) }}
+                            style={{
+                                '--range-color': getRangeColor(rangeValue),
+                                background: `linear-gradient(to right, #5c768b ${investmentValue / totalBalance * 100}%, #2fd3c9 0)`,
+                            }}
                         />
                     </div>
                     <div className='sell-buy-main'>
-                        <h6 className={`range-head ${sellPercentage >= 50 ? 'sell-percentage-grey' : ''}`}>
-                            {sellPercentage}% deposit
+                        <h6 className={`range-head ${depositValue >= totalBalance / 2 ? 'sell-percentage-grey' : ''}`}>
+                            {depositValue} deposit
                         </h6>
-                        <h6 className={`range-head ${buyPercentage >= 50 ? 'buy-percentage-blue' : ''}`}>
-                            {buyPercentage}% investment
+                        <h6 className={`range-head ${investmentValue >= totalBalance / 2 ? 'buy-percentage-blue' : ''}`}>
+                            {investmentValue} investment
                         </h6>
                     </div>
                     <div style={{ margin: "10px" }}>

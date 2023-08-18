@@ -5,8 +5,12 @@ import { FaArrowTrendUp } from 'react-icons/fa6';
 import fetchAllTradeOption from './../../helpers/getApis/getAllOptions';
 import React, { useState, useEffect, useRef } from 'react';
 import fetchCharUserTrade from '../../helpers/getApis/pastALLinvest';
+import { Link } from 'react-router-dom';
+import { useGraphValues } from '../../helpers/store';
 
 const Portfolio = () => {
+    const { setGraphValues } = useGraphValues();
+
     const [tradeOptions, setTradeOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState("");
     const [pastUserTradeData, setPastUserTradeData] = useState([]);
@@ -101,16 +105,16 @@ const Portfolio = () => {
                 {pastUserTradeData.map(item => {
 
                     const tradeOption = item?.tradeOption;
-                    // console.log(tradeOption)
                     const paymentData = item?.groupedPayments;
-                    // console.log(paymentData)
+
                     const investAtDates = Object.keys(paymentData);
-                    // const paymentValues = investAtDates.map(date => paymentData[date]);
+                    // Sort investAtDates in ascending order
+                    const sortedInvestAtDates = investAtDates.sort((a, b) => new Date(a) - new Date(b));
+
                     const correspondingTradeData = pastUserTradeData.find(data => data.tradeOption._id === tradeOption._id);
                     const paymentValues = investAtDates.map(date => correspondingTradeData.groupedPayments[date] || 0);
-                    // console.log(paymentValues, "pay")
+
                     const option = tradeOptions.find(item => item?._id === tradeOption?._id);
-                    // console.log(option, "optsss")
 
                     const Currentlysale = {
                         series: [
@@ -137,7 +141,7 @@ const Portfolio = () => {
                             xaxis: {
                                 offsetX: 0,
                                 offsetY: 0,
-                                categories: investAtDates || ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+                                categories: sortedInvestAtDates,
                                 labels: {
                                     low: 0,
                                     offsetX: 0,
@@ -192,8 +196,23 @@ const Portfolio = () => {
                                 gap: ".5rem",
                                 padding: ".5rem .75rem 0"
                             }}>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" alt={option?.value} style={{ width: "7vw" }} />
-                                <h5 style={{ fontSize: "3.9vw", fontWeight: "900", marginBottom: "0", color: "white" }}>{option?.name}</h5>
+                                <Link
+                                    // to={{
+                                    //     pathname: "/statistic",
+                                    //     state: {
+                                    //         name: option?.name,
+                                    //         graphValues: paymentValues,
+                                    //     },
+                                    // }}
+                                     to={`/statistic?name=${encodeURIComponent(option?.name)}&graphValues=${encodeURIComponent(JSON.stringify(paymentValues))}`}
+                                    style={{
+                                        textDecoration: 'none', display: "flex",
+                                        alignIxtems: "center", gap: "1rem"
+                                    }}
+                                >
+                                    < img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" alt={option?.value} style={{ width: "7vw" }} />
+                                    <h5 style={{ fontSize: "3.9vw", fontWeight: "900", marginBottom: "0", color: "white" }}>{option?.name}</h5>
+                                </Link>
                             </div>
                             <div style={{
                                 color: "white",
@@ -234,12 +253,12 @@ const Portfolio = () => {
                                 <span style={{ color: "#a8a8a8" }}>since 24h</span>
                             </div>
                             <div style={{ width: "100%", marginTop: "-4.5rem" }}>
-                                <Chart 
-                                // id="chart-currently"
-                                id={`chart-${tradeOption._id}`}
-                                options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
-                                    transform: "translateX(-8%) translateY(46px)",
-                                }} />
+                                <Chart
+                                    // id="chart-currently"
+                                    id={`chart-${tradeOption._id}`}
+                                    options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
+                                        transform: "translateX(-8%) translateY(46px)",
+                                    }} />
                             </div>
                         </SwiperSlide>
                     )
