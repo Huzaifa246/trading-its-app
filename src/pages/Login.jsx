@@ -39,12 +39,21 @@ const LoginPage = () => {
         }
 
         const encrypted = encryptData(credentials)
+        console.log(encrypted, "ery data")
 
-        axios.post(`${import.meta.env.VITE_APP_API}/api/users/login`, {
-            data: encrypted
+        // console.log(`${import.meta.env.VITE_APP_API}/api/users/login`)
+
+        //{
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // },
+        axios.post(`${import.meta.env.VITE_APP_API}/api/users/login`,  {
+            data: encrypted,
         })
             .then(async (res) => {
                 const decrypted = decryptData(res.data.data)
+                console.log(decrypted, "check")
                 // localStorage.setItem("token", decrypted.token)
                 localStorage.setItem("token", decrypted?.data)
                 const result = await AuthSession();

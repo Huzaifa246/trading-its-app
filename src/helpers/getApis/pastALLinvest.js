@@ -1,20 +1,9 @@
 import axios from 'axios';
 import { decryptData } from '../encryption_decryption/Decryption';
 
-async function fetchPastUserTrade(tradeId, startDate, endDate) {
+async function fetchCharUserTrade(tradeId, startDate, endDate) {
   try {
     let url = `${import.meta.env.VITE_APP_API}/api/users/graph-data/${tradeId}/${startDate}/${endDate}`;
-    // const queryParams = [];
-
-    // if (startDate !== "" && endDate !== "") {
-    //   queryParams.push(`${encodeURIComponent(startDate)}`);
-    //   queryParams.push(`${encodeURIComponent(endDate)}`);
-    // }
-
-    // if (queryParams.length > 0) {
-    //   url += `/${queryParams.join('/')}`;
-    // }
-
     console.log(url);
 
     const response = await axios.get(url);
@@ -29,4 +18,4 @@ async function fetchPastUserTrade(tradeId, startDate, endDate) {
   }
 }
 
-export default fetchPastUserTrade;
+export default fetchCharUserTrade;

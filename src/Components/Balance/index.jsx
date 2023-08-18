@@ -5,7 +5,7 @@ import { savedDataString } from "../../helpers/UserDetails/UserDetails";
 
 const Balance = () => {
     let totalBalance = 59.00; // Default value
-    let userProfit = "No Profit"; // Default value
+    let userProfit = "Ali"; // Default value
 
     try {
         const savedDataProfile = JSON.parse(savedDataString);
@@ -18,7 +18,7 @@ const Balance = () => {
     return (
         <div className={styles.balance}>
             <div className={styles.left}>
-                <h5>Portfolio Balance</h5>
+                <h5>Total Balance</h5>
                 <div>
                     <div>
                         <h2>

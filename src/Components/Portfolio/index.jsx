@@ -2,8 +2,68 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Chart from "react-apexcharts"
 import { FaArrowTrendUp } from 'react-icons/fa6';
+import fetchAllTradeOption from './../../helpers/getApis/getAllOptions';
+import React, { useState, useEffect, useRef } from 'react';
+import fetchCharUserTrade from '../../helpers/getApis/pastALLinvest';
 
 const Portfolio = () => {
+    const [tradeOptions, setTradeOptions] = useState([]);
+    const [selectedOption, setSelectedOption] = useState("");
+    const [pastUserTradeData, setPastUserTradeData] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const decryptedData = await fetchAllTradeOption();
+            setTradeOptions(decryptedData.data);
+            // console.log(decryptedData.data, "Trade Options");
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        async function fetchData() {
+            let startDate = new Date();
+            let endDate = new Date();
+            startDate.setDate(startDate.getDate() - 7);
+
+            // Convert dates to ISO string format
+            startDate = startDate.toISOString().split('T')[0];
+            endDate = endDate.toISOString().split('T')[0];
+
+            const fetchedData = [];
+
+            // Fetch past user trade data for each trade option
+            for (const tradeOption of tradeOptions) {
+                const tradeId = tradeOption._id;
+                const response = await fetchCharUserTrade(tradeId, startDate, endDate);
+                // console.log(response, "res from cur file for trade option");
+
+                if (response?.data) {
+                    const groupedPayments = {};
+
+                    // Group payments by date and sum them up
+                    for (const paymentData of response?.data) {
+                        const date = paymentData.invesAt.split('T')[0];
+                        if (groupedPayments[date]) {
+                            groupedPayments[date] += paymentData.payment;
+                        } else {
+                            groupedPayments[date] = paymentData.payment;
+                        }
+                    }
+
+                    fetchedData.push({ tradeOption, groupedPayments });
+                } else {
+                    console.log(`No data found for trade option ${tradeOption.name}`);
+                }
+            }
+            setPastUserTradeData(fetchedData);
+        }
+
+        if (tradeOptions.length > 0) {  // Fetch only when tradeOptions are available
+            fetchData();
+        }
+    }, [tradeOptions]);
+
     const currenciesData = [
         {
             name: "Bitcoin",
@@ -28,6 +88,7 @@ const Portfolio = () => {
         },
     ]
 
+    console.log(pastUserTradeData, "debug");
     return (
         <div>
             <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Portfolio</h6>
@@ -37,13 +98,25 @@ const Portfolio = () => {
                 className="mySwiper"
                 style={{ padding: ".5rem 1rem" }}
             >
-                {currenciesData.map(item => {
+                {pastUserTradeData.map(item => {
+
+                    const tradeOption = item?.tradeOption;
+                    // console.log(tradeOption)
+                    const paymentData = item?.groupedPayments;
+                    // console.log(paymentData)
+                    const investAtDates = Object.keys(paymentData);
+                    // const paymentValues = investAtDates.map(date => paymentData[date]);
+                    const correspondingTradeData = pastUserTradeData.find(data => data.tradeOption._id === tradeOption._id);
+                    const paymentValues = investAtDates.map(date => correspondingTradeData.groupedPayments[date] || 0);
+                    // console.log(paymentValues, "pay")
+                    const option = tradeOptions.find(item => item?._id === tradeOption?._id);
+                    // console.log(option, "optsss")
 
                     const Currentlysale = {
                         series: [
                             {
-                                name: "crypto price",
-                                data: item.graph_values,
+                                name: "investments",
+                                data: paymentValues || [6, 10],
                             },
                         ],
                         options: {
@@ -64,7 +137,7 @@ const Portfolio = () => {
                             xaxis: {
                                 offsetX: 0,
                                 offsetY: 0,
-                                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+                                categories: investAtDates || ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
                                 labels: {
                                     low: 0,
                                     offsetX: 0,
@@ -86,7 +159,7 @@ const Portfolio = () => {
                             grid: {
                                 show: false,
                             },
-                            colors: [item.color],
+                            colors: [tradeOption.color || "#f39900" || "#637feb" || "#26a17b"],
                             fill: {
                                 opacity: [0.5, 0.25, 1],
                             },
@@ -102,7 +175,7 @@ const Portfolio = () => {
                         },
                     };
                     return (
-                        <SwiperSlide key={item.value} style={{
+                        <SwiperSlide key={tradeOption._id} style={{
                             background: "#181f2d",
                             boxShadow: "0 0 20px rgba(8, 21, 66, 0.05)",
                             borderRadius: "16px",
@@ -119,8 +192,8 @@ const Portfolio = () => {
                                 gap: ".5rem",
                                 padding: ".5rem .75rem 0"
                             }}>
-                                <img src={item.img} alt={item.value} style={{ width: "7vw" }} />
-                                <h5 style={{ fontSize: "3.9vw", fontWeight: "900", marginBottom: "0", color: "white" }}>{item.name}</h5>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" alt={option?.value} style={{ width: "7vw" }} />
+                                <h5 style={{ fontSize: "3.9vw", fontWeight: "900", marginBottom: "0", color: "white" }}>{option?.name}</h5>
                             </div>
                             <div style={{
                                 color: "white",
@@ -161,7 +234,10 @@ const Portfolio = () => {
                                 <span style={{ color: "#a8a8a8" }}>since 24h</span>
                             </div>
                             <div style={{ width: "100%", marginTop: "-4.5rem" }}>
-                                <Chart id="chart-currently" options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
+                                <Chart 
+                                // id="chart-currently"
+                                id={`chart-${tradeOption._id}`}
+                                options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
                                     transform: "translateX(-8%) translateY(46px)",
                                 }} />
                             </div>

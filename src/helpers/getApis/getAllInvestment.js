@@ -21,7 +21,7 @@ async function fetchAllInvestment(userId, investtype, tradeID = "") {
     // console.log(response.data, "data");
     const encryptedData = response.data.data;
     const decryptedData = await decryptData(encryptedData);
-    console.log(decryptedData);
+    // console.log(decryptedData);
     return decryptedData;
   } catch (error) {
     console.error('Error fetching data at get ALL User Trade:', error);

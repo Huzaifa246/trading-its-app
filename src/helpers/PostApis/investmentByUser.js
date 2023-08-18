@@ -2,12 +2,12 @@ import axios from 'axios';
 import { encryptData } from '../encryption_decryption/Encryption';
 import { decryptData } from '../encryption_decryption/Decryption';
 
-async function InvestmentByUser(userId, amount, selectedOption) {
+async function InvestmentByUser(userId, amount, investmentTypeId) {
   try {
     const releaseBody = {
       userId: userId,
       amount: amount,
-      investmentTypeId: selectedOption
+      investmentTypeId: investmentTypeId
     };
     console.log(releaseBody, "api")
     const encryptedPostData = await encryptData(releaseBody);
