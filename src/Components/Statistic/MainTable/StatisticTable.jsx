@@ -84,7 +84,7 @@ function StatisticTable() {
                         <h6 className="state-h6-2nd">$8754.00</h6>
                     </div>
                 </div>
-                <div style={{ position: 'sticky', width: '100%', padding: '20px 15px', margin: "10px" }}>
+                <div style={{ position: 'sticky', width: '100%', padding: '20px 15px' }}>
                     <div className='range-main-style'>
                         <h6 className='range-head'>HOLDER ACTIVITY</h6>
                         <input
