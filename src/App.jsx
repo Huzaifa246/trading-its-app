@@ -6,7 +6,7 @@ import Signup from "./pages/Signup";
 import CurrentInvest from "./Components/CurrentInvestment/currentInvestment";
 import PastInvestment from './Components/PastInvestment/PastInvestment';
 import { StatisticMain } from "./Components/Statistic/StatisticMain";
-import { GraphValuesProvider } from "./helpers/store";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (

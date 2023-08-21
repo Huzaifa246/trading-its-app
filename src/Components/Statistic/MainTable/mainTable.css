@@ -79,6 +79,7 @@
   
   .range-style {
     width: 75%;
+    background: none !important;
   }
   
   .range-main-style {

@@ -6,11 +6,8 @@ import fetchAllTradeOption from './../../helpers/getApis/getAllOptions';
 import React, { useState, useEffect, useRef } from 'react';
 import fetchCharUserTrade from '../../helpers/getApis/pastALLinvest';
 import { Link } from 'react-router-dom';
-import { useGraphValues } from '../../helpers/store';
 
 const Portfolio = () => {
-    const { setGraphValues } = useGraphValues();
-
     const [tradeOptions, setTradeOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState("");
     const [pastUserTradeData, setPastUserTradeData] = useState([]);
@@ -204,7 +201,7 @@ const Portfolio = () => {
                                     //         graphValues: paymentValues,
                                     //     },
                                     // }}
-                                     to={`/statistic?name=${encodeURIComponent(option?.name)}&graphValues=${encodeURIComponent(JSON.stringify(paymentValues))}`}
+                                     to={`/statistic?name=${encodeURIComponent(option?.name)}&graphValues=${encodeURIComponent(JSON.stringify(paymentValues))}&optionId=${option?._id}`}
                                     style={{
                                         textDecoration: 'none', display: "flex",
                                         alignIxtems: "center", gap: "1rem"
