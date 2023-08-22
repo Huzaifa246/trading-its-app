@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DepositInvestment from '../../../helpers/PostApis/DepositInvestment';
+import { useSelector } from "react-redux";
 
 function StatisticTable({ optionId }) {
     const [showDepositModal, setShowDepositModal] = useState(false);
@@ -18,9 +19,9 @@ function StatisticTable({ optionId }) {
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
 
-    const savedDataProfile = JSON.parse(savedDataString);
-    const userId = savedDataProfile?.data?._id;
-    const totalBalance = savedDataProfile?.data?.totalbalance;
+    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
+    const userId = userDetails?.data?._id;
+    const totalBalance = userDetails?.data?.totalbalance;
 
     useEffect(() => {
         async function fetchData() {

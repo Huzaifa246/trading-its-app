@@ -5,9 +5,7 @@ import { decryptData } from "../encryption_decryption/Decryption";
 
 async function AuthSession() {
   let token = localStorage.getItem("token");
-  if (!token) {
-    token = localStorage.getItem("myToken");
-  }
+  
   if (token) {
     const authUrl = `${import.meta.env.VITE_APP_API}/api/users/auth/${token}`;
     try {

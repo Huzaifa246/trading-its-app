@@ -1,19 +1,14 @@
 import styles from "./index.module.css"
 import { FaArrowTrendUp } from "react-icons/fa6"
 import { TbEyeHeart } from "react-icons/tb"
-import { savedDataString } from "../../helpers/UserDetails/UserDetails";
+import { useSelector } from "react-redux";
 
 const Balance = () => {
-    let totalBalance = 59.00; // Default value
-    let userProfit = "Ali"; // Default value
+    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
+    console.log(userDetails)
 
-    try {
-        const savedDataProfile = JSON.parse(savedDataString);
-        totalBalance = savedDataProfile?.data?.totalbalance || totalBalance;
-        userProfit = savedDataProfile?.data?.profit || userProfit;
-    } catch (error) {
-        console.error("Error parsing JSON data:", error);
-    }
+    let totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable || "0"; // Default value
+    let userProfit =  userDetails?.data?.totalbalance || "0"; // Default value
 
     return (
         <div className={styles.balance}>
@@ -23,7 +18,7 @@ const Balance = () => {
                     <div>
                         <h2>
                             <span>$ </span>
-                            {totalBalance.toFixed(2)}
+                            {totalBalance}
                             {/* <span>00</span> */}
                         </h2>
                         <select>

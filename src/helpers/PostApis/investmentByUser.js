@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { encryptData } from '../encryption_decryption/Encryption';
 import { decryptData } from '../encryption_decryption/Decryption';
+import { AdminHeader } from '../header';
 
 async function InvestmentByUser(userId, amount, investmentTypeId) {
   try {
@@ -17,9 +18,7 @@ async function InvestmentByUser(userId, amount, investmentTypeId) {
     const response = await axios.post(`${import.meta.env.VITE_APP_API}/api/users/investment`,
       { data: encryptedPostData },
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: AdminHeader
       });
 
     const encryptedData = response.data.data;

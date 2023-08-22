@@ -8,8 +8,17 @@ import Loader from "../Components/Loader";
 import logo from "../../public/logo.png"
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import AuthSession from "../helpers/Session/AuthSession";
+import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch and useSelector
+import { userInfoReducer } from "../store/userSlice";
+ // Import your action
 
 const LoginPage = () => {
+    
+    // const userDetails = useSelector((state) => state.userInfo.userDetails);
+
+    // // Define a dispatch function using useDispatch
+    // const dispatch = useDispatch();
+    // console.log(userDetails, "store")
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -44,29 +53,35 @@ const LoginPage = () => {
         // console.log(`${import.meta.env.VITE_APP_API}/api/users/login`)
 
         //{
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
+        //                headers: {
+        //     "Content-Type": "application/json",
+        //     authorization: `Bearer ${token}`,
+        //     source: "front",
         // },
-        axios.post(`${import.meta.env.VITE_APP_API}/api/users/login`,  {
+        // },
+        axios.post(`${import.meta.env.VITE_APP_API}/api/users/login`, {
             data: encrypted,
         })
             .then(async (res) => {
                 const decrypted = decryptData(res.data.data)
                 console.log(decrypted, "check")
-                // localStorage.setItem("token", decrypted.token)
+                
                 localStorage.setItem("token", decrypted?.data)
-                const result = await AuthSession();
-                console.log(result)
-                if (result) {
-                    setShowLoader(false)
-                    navigate("/")
-                }
-                else {
-                    setShowLoader(false)
-                    window.location.reload();
-                    navigate("/login")
-                }
+                
+                setShowLoader(false)
+                navigate("/")
+
+                // const result = await AuthSession();
+                // console.log(result)
+                // if (result) {
+                //     setShowLoader(false)
+                //     navigate("/")
+                // }
+                // else {
+                //     setShowLoader(false)
+                //     window.location.reload();
+                //     navigate("/login")
+                // }
             })
             .catch(async (err) => {
                 // const decrypted = decryptData(err.response.data.data)

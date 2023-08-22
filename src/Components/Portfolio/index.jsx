@@ -6,6 +6,7 @@ import fetchAllTradeOption from './../../helpers/getApis/getAllOptions';
 import React, { useState, useEffect, useRef } from 'react';
 import fetchCharUserTrade from '../../helpers/getApis/pastALLinvest';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Portfolio = () => {
     const [tradeOptions, setTradeOptions] = useState([]);
@@ -60,7 +61,7 @@ const Portfolio = () => {
             setPastUserTradeData(fetchedData);
         }
 
-        if (tradeOptions.length > 0) {  // Fetch only when tradeOptions are available
+        if (tradeOptions?.length > 0) {  // Fetch only when tradeOptions are available
             fetchData();
         }
     }, [tradeOptions]);

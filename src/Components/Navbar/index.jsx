@@ -3,13 +3,15 @@ import React, { useRef } from 'react';
 import { GoSortAsc } from "react-icons/go"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
-import { savedDataString } from "../../helpers/UserDetails/UserDetails"
+import { savedDataString } from "../../helpers/UserDetails/UserDetails";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const navigate = useNavigate()
     const savedDataProfile = JSON.parse(savedDataString);
-    const fullName = savedDataProfile?.data?.fullName || savedDataProfile?.data?.name || "User Not Found";
-    const ProfileImg = savedDataProfile?.data?.profile_image?.url;
+    const fullName = userDetails?.data?.fullName || savedDataProfile?.data?.name || "User Not Found";
+    const ProfileImg = userDetails?.data?.profile_image?.url;
 
     const dropdownRef = useRef(null);
     const handleLogout = () => {
@@ -26,17 +28,17 @@ const Navbar = () => {
     return (
         <nav className={styles.nav}>
             <div className={styles.left} 
-            // onClick={() => {
-            //     localStorage.removeItem("token")
-            //     localStorage.removeItem("mySession")
-            //     navigate("/login")
-            // }}
-            onClick={toggleDropdown}
+            onClick={() => {
+                localStorage.removeItem("token")
+                localStorage.removeItem("mySession")
+                navigate("/login")
+            }}
+            // onClick={toggleDropdown}
             >
-                <img src={ProfileImg} alt="gc" />
+                <img src={ProfileImg} alt="pic" />
                 <h5>{fullName}</h5>
             </div>
-            <div className="btn-group">
+            {/* <div className="btn-group">
                 <button
                     type="button"
                     className="btn btn-secondary dropdown-toggle"
@@ -52,7 +54,7 @@ const Navbar = () => {
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
             <div className={styles.right}>
                 <GoSortAsc />
                 <IoMdNotificationsOutline />
