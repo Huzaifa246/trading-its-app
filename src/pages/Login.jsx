@@ -99,7 +99,7 @@ const LoginPage = () => {
                     setLoginError("Invalid Password, Please Check Your Password.")
                 }
                 else {
-                    setLoginError("An error occurred, Check Credentials");
+                    setLoginError(decrypted.message);
                 }
                 setShowLoader(false)
             })
