@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from "react-redux";
 import "./ProfileMain.css";
 import { Button } from 'react-bootstrap';
+import DeleteUserImage from '../../helpers/PostApis/DeleteImage';
 
 function ProfileMain() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -9,6 +10,20 @@ function ProfileMain() {
     const fullName = userDetails?.data?.fullName;
     const email = userDetails?.data?.email;
     const userImg = userDetails?.data?.profile_image?.url
+
+    const handleConfirmDelete = async (userId) => {
+        // setDelModalShow(false);
+
+        try {
+            // setIsLoading(true);
+            await DeleteUserImage(userId);
+            setUsers(users.filter(user => user?._id !== userId));
+            // setIsLoading(false);
+        } catch (error) {
+            console.error('Error deleting user Image:', error);
+            // setIsLoading(false);
+        }
+    };
 
     return (
         <>
@@ -25,7 +40,11 @@ function ProfileMain() {
                                         {
                                             userImg?.length === '' || userImg === "" ? (
                                                 <>
-                                                    <Button>Upload Image</Button>
+                                                    {/* <input
+                                                    /> */}
+                                                    <Button id="file-input"
+                                                        type="file"
+                                                        accept=".png, .jpg, .jpeg">Upload Image</Button>
                                                 </>
                                             ) : (
                                                 <>

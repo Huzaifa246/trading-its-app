@@ -20,7 +20,6 @@ export const StatisticMain = () => {
             <div style={{ marginTop: "1rem" }}></div>
             <StaticChart name={name} graphValues={graphValues}/>
             <StatisticTable optionId={optionId}/>
-            <FixedBar />
         </>
     );
 };

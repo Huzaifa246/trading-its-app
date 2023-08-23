@@ -30,7 +30,6 @@ const App = () => {
         .then((response) => {
           if (token) {
             dispatch(setUserDetails(decryptData(response.data.data)));
-            console.log(response, "responsee");
             console.log(token, "tt")
           }
           else {

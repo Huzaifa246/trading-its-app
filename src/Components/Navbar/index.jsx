@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import React, { useRef } from 'react';
+import React from 'react';
 import { GoSortAsc } from "react-icons/go"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
@@ -10,11 +10,9 @@ const Navbar = () => {
     const navigate = useNavigate()
     const fullName = userDetails?.data?.fullName || "User Not Found";
     const ProfileImg = userDetails?.data?.profile_image?.url;
-
-    const dropdownRef = useRef(null);
+    
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('mySession');
+        localStorage.removeItem("token");
         navigate('/login');
     };
     const toggleDropdown = () => {
@@ -28,7 +26,6 @@ const Navbar = () => {
             <div className={styles.left}
                 onClick={() => {
                     localStorage.removeItem("token")
-                    localStorage.removeItem("mySession")
                     navigate("/login")
                 }}
             // onClick={toggleDropdown}

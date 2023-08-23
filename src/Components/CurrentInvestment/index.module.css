@@ -1,23 +1,26 @@
 .container {
   display: flex;
-  background-color: #18202e;
   margin: 0.5rem 1rem;
   color: white;
   border-radius: 10px;
 }
 
 .item {
+  border-radius: 10px;
   flex: 1;
-  aspect-ratio: 2/1.5;
+  /* aspect-ratio: 2/1.1; */
+  padding: 5px;
+  margin: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  font-size: 5vw;
+  font-size: 4vw;
   color: #21c8d7;
-  position: relative;
+  /* position: relative; */
   cursor: pointer;
+  background-color: grey;
 }
 
 .item::before {

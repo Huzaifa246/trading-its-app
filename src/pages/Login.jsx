@@ -84,13 +84,6 @@ const LoginPage = () => {
                 // }
             })
             .catch(async (err) => {
-                // const decrypted = decryptData(err.response.data.data)
-                // // console.log(decrypted, "error from login")
-                // if (decrypted.message.includes("user not found.")) {
-                //     setLoginError("Invalid Credentials")
-                //     setShowLoader(false)
-                // }
-                // setShowLoader(false)
                 const decrypted = await decryptData(err.response.data.data)
                 console.log(decrypted.message, "das")
                 if (decrypted?.message.includes("Admin Not Found.")) {
@@ -100,6 +93,7 @@ const LoginPage = () => {
                 }
                 else {
                     setLoginError(decrypted.message);
+                    return localStorage.removeItem("token")
                 }
                 setShowLoader(false)
             })

@@ -7,10 +7,9 @@ const Balance = () => {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     console.log(userDetails)
 
-    let totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable || "0"; // Default value
-    let userProfit =  userDetails?.data?.totalbalance || "0";
-    let investmentBalance = userDetails?.data?.investmentBalance;
-    let teamCommissionBalance = userDetails?.data?.teamCommissionBalance;
+    let totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable || 0; // Default value
+    let availableBalance = userDetails?.data?.totalbalance || 0;
+    
     return (
         <div className={styles.balance}>
             <div className={styles.left}>
@@ -19,26 +18,19 @@ const Balance = () => {
                     <div>
                         <h2>
                             <span>$ </span>
-                            {totalBalance}
+                            {totalBalance.toFixed(2)}
                             {/* <span>00</span> */}
                         </h2>
-                        <select>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
-                            <option value="GBP">GBP</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span>{userProfit}</span>
-                        <FaArrowTrendUp />
-
-                        <span>{investmentBalance}</span>
-                        <span>{teamCommissionBalance}</span>
                     </div>
                 </div>
             </div>
             <div className={styles.right}>
-                <TbEyeHeart />
+                <div>
+                    <h5>Available Balance</h5>
+                </div>
+                <div>
+                    <span>{availableBalance?.toFixed(2)}</span>
+                </div>
             </div>
         </div>
     )

@@ -14,8 +14,8 @@ const Home = () => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            setPaddingBottom(fixedBarRef?.current?.offsetHeight)
             const token = localStorage.getItem("token")
+            setPaddingBottom(fixedBarRef?.current?.offsetHeight)
             if (!token) {
                 navigate("/login")
             }
