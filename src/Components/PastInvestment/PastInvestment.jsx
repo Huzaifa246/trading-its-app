@@ -22,7 +22,7 @@ const PastInvestment = () => {
             fetchInvestmentData();
         }
         fetchData();
-    }, []);
+    }, [userId]);
 
     const fetchInvestmentData = async () => {
         // setSelectedOption(selectedOptionId);
