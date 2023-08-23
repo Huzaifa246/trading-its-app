@@ -29,7 +29,7 @@ const Balance = () => {
                         </select>
                     </div>
                     <div>
-                        <span>{userProfit}%</span>
+                        <span>{userProfit}</span>
                         <FaArrowTrendUp />
 
                         <span>{investmentBalance}</span>
