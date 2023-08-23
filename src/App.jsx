@@ -12,6 +12,8 @@ import { decryptData } from "./helpers/encryption_decryption/Decryption";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import axios from "axios";
+import withFixedBar from "./FixedBarHoc.js/withFixedBar";
+import ProfileMain from "./Components/Profile/ProfileMain";
 
 
 const App = () => {
@@ -29,8 +31,9 @@ const App = () => {
           if (token) {
             dispatch(setUserDetails(decryptData(response.data.data)));
             console.log(response, "responsee");
+            console.log(token, "tt")
           }
-          else{
+          else {
             localStorage.removeItem("token");
             return;
           }
@@ -43,15 +46,21 @@ const App = () => {
     }
   }, [token]);
 
-  // console.log(userDetails)
+  // const HomeWithFixedBar = withFixedBar(Home);
+  const CurrentInvestWithFixedBar = withFixedBar(CurrentInvest);
+  const PastInvestmentWithFixedBar = withFixedBar(PastInvestment);
+  const StatisticMainWithFixedBar = withFixedBar(StatisticMain);
+  const ProfileMainWithFixedBar = withFixedBar(ProfileMain);
+
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/currentInvest" element={<CurrentInvest />} />
-        <Route path="/pastInvest" element={<PastInvestment />} />
-        <Route path="/statistic" element={<StatisticMain />} />
+        <Route path="/currentInvest" element={<CurrentInvestWithFixedBar />} />
+        <Route path="/pastInvest" element={<PastInvestmentWithFixedBar />} />
+        <Route path="/statistic" element={<StatisticMainWithFixedBar />} />
+        <Route path="/profile" element={<ProfileMainWithFixedBar />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

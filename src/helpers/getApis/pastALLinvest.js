@@ -1,16 +1,17 @@
 import axios from 'axios';
 import { decryptData } from '../encryption_decryption/Decryption';
-import { AdminHeader } from '../header';
+import { UserHeader } from '../header';
 
 async function fetchCharUserTrade(tradeId, startDate, endDate) {
   try {
     let url = `${import.meta.env.VITE_APP_API}/api/users/graph-data/${tradeId}/${startDate}/${endDate}`;
     console.log(url);
 
-    const response = await axios.get(url,{
-      headers: AdminHeader,
-    }
-  );
+    const response = await axios.get(url
+      , {
+        headers: UserHeader,
+      }
+    );
     const encryptedData = response.data.data;
     const decryptedData = await decryptData(encryptedData);
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './mainTable.css';
-import { savedDataString } from '../../../helpers/UserDetails/UserDetails';
 import fetchAllTradeOption from '../../../helpers/getApis/getAllOptions';
 import InvestmentByUser from '../../../helpers/PostApis/investmentByUser';
 import Modal from 'react-bootstrap/Modal';
@@ -26,7 +25,7 @@ function StatisticTable({ optionId }) {
     useEffect(() => {
         async function fetchData() {
             const decryptedData = await fetchAllTradeOption();
-            setTradeOptions(decryptedData.data);
+            setTradeOptions(decryptedData?.data);
         }
         fetchData();
     }, []);

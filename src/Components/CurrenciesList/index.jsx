@@ -1,7 +1,7 @@
-import { savedDataString } from "../../helpers/UserDetails/UserDetails";
 import React, { useState, useEffect } from 'react';
 import { formatDateTime } from "../../helpers/DataFormat/DateFormat";
 import fetchAllInvestment from "../../helpers/getApis/getAllInvestment";
+import { useSelector } from "react-redux";
 
 const CurrenciesList = () => {
     // const data = [
@@ -46,16 +46,15 @@ const CurrenciesList = () => {
     //         increment: "+5.67%"
     //     },
     // ]
-    const savedDataProfile = JSON.parse(savedDataString);
-    const userId = savedDataProfile?.data?._id;
+    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
+    const userId = userDetails?.data?._id;
     const [investmentData, setInvestmentData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const investtype = 'current';
-                const response = await fetchAllInvestment(userId, investtype, "");
-                console.log(response.data);
+                const response = await fetchAllInvestment(userId, investtype);
                 setInvestmentData(response.data);
             } catch (error) {
                 console.error("Error fetching investment data:", error);
@@ -63,8 +62,7 @@ const CurrenciesList = () => {
         }
 
         fetchData();
-    }, []);
-    // console.log(investmentData);
+    }, [userId]);
 
     return (
         <div style={{

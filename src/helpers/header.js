@@ -1,8 +1,7 @@
 let token = localStorage.getItem("token");
 
-export const AdminHeader = {
+export const UserHeader = {
     "Content-Type": "application/json",
     authorization: `Bearer ${token}`,
     source: "front",
   };
-  console.log(token, "AAA")

@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./index.module.css";
 import { formatDateTime } from '../../helpers/DataFormat/DateFormat';
 import FixedBar from '../FixedBar';
 import fetchAllTradeOption from '../../helpers/getApis/getAllOptions';
-import { savedDataString } from '../../helpers/UserDetails/UserDetails';
 import fetchAllInvestment from '../../helpers/getApis/getAllInvestment';
-
+import { useSelector } from "react-redux";
 
 const PastInvestment = () => {
-    const fixedBarRef = useRef(null);
-    const savedDataProfile = JSON.parse(savedDataString);
-    const userId = savedDataProfile?.data?._id;
+    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
+    const userId = userDetails?.data?._id;
 
     const [tradeOptions, setTradeOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState("");
@@ -106,7 +104,7 @@ const PastInvestment = () => {
                 </div>
 
             </div>
-            <FixedBar fixedBarRef={fixedBarRef} />
+            {/* <FixedBar fixedBarRef={fixedBarRef} /> */}
         </>
     )
 }

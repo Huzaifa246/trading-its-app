@@ -3,12 +3,10 @@ import { encryptData } from '../encryption_decryption/Encryption';
 import { decryptData } from '../encryption_decryption/Decryption';
 import { UserHeader } from '../header';
 
-async function InvestmentByUser(userId, amount, investmentTypeId) {
+async function UploadImage(userId) {
   try {
     const releaseBody = {
       userId: userId,
-      amount: amount,
-      investmentTypeId: investmentTypeId
     };
     console.log(releaseBody, "api")
     const encryptedPostData = await encryptData(releaseBody);
@@ -33,4 +31,4 @@ async function InvestmentByUser(userId, amount, investmentTypeId) {
   }
 }
 
-export default InvestmentByUser;
+export default UploadImage;

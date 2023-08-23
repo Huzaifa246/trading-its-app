@@ -7,7 +7,7 @@ import axios from "axios";
 import Loader from "../Components/Loader";
 import logo from "../../public/logo.png"
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import AuthSession from "../helpers/Session/AuthSession";
+// import AuthSession from "../helpers/Session/AuthSession";
 import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch and useSelector
 import { userInfoReducer } from "../store/userSlice";
  // Import your action
@@ -65,7 +65,7 @@ const LoginPage = () => {
             .then(async (res) => {
                 const decrypted = decryptData(res.data.data)
                 console.log(decrypted, "check")
-                
+
                 localStorage.setItem("token", decrypted?.data)
                 
                 setShowLoader(false)

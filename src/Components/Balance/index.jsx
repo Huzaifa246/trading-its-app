@@ -8,8 +8,9 @@ const Balance = () => {
     console.log(userDetails)
 
     let totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable || "0"; // Default value
-    let userProfit =  userDetails?.data?.totalbalance || "0"; // Default value
-
+    let userProfit =  userDetails?.data?.totalbalance || "0";
+    let investmentBalance = userDetails?.data?.investmentBalance;
+    let teamCommissionBalance = userDetails?.data?.teamCommissionBalance;
     return (
         <div className={styles.balance}>
             <div className={styles.left}>
@@ -30,6 +31,9 @@ const Balance = () => {
                     <div>
                         <span>{userProfit}%</span>
                         <FaArrowTrendUp />
+
+                        <span>{investmentBalance}</span>
+                        <span>{teamCommissionBalance}</span>
                     </div>
                 </div>
             </div>

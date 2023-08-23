@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { decryptData } from '../encryption_decryption/Decryption';
-import { AdminHeader } from '../header';
+import { UserHeader } from '../header';
 
 async function fetchAllInvestment(userId, investtype, tradeID = "") {
   try {
     let url = `${import.meta.env.VITE_APP_API}/api/users/get-user-investment/${userId}/${investtype}`;
-    // console.log(url,"main")
+
     const queryParams = [];
 
     if (tradeID !== "") {
@@ -18,14 +18,12 @@ async function fetchAllInvestment(userId, investtype, tradeID = "") {
 
     // console.log(url);
 
-    const response = await axios.get(url, {
-      headers: AdminHeader,
-    }
+    const response = await axios.get(url,
+      {
+        headers: UserHeader,
+      }
     );
-    //   , {
-    //     headers: AdminHeader,
-    //   }
-    // );
+    console.log(response)
     // console.log(response.data, "data");
     const encryptedData = response.data.data;
     const decryptedData = await decryptData(encryptedData);

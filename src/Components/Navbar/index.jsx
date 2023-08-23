@@ -3,14 +3,12 @@ import React, { useRef } from 'react';
 import { GoSortAsc } from "react-icons/go"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
-import { savedDataString } from "../../helpers/UserDetails/UserDetails";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const navigate = useNavigate()
-    const savedDataProfile = JSON.parse(savedDataString);
-    const fullName = userDetails?.data?.fullName || savedDataProfile?.data?.name || "User Not Found";
+    const fullName = userDetails?.data?.fullName || "User Not Found";
     const ProfileImg = userDetails?.data?.profile_image?.url;
 
     const dropdownRef = useRef(null);
@@ -18,25 +16,30 @@ const Navbar = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('mySession');
         navigate('/login');
-      };
-      const toggleDropdown = () => {
+    };
+    const toggleDropdown = () => {
         if (dropdownRef.current) {
-          const dropdown = new window.bootstrap.Dropdown(dropdownRef.current);
-          dropdown.toggle();
+            const dropdown = new window.bootstrap.Dropdown(dropdownRef.current);
+            dropdown.toggle();
         }
-      };
+    };
     return (
         <nav className={styles.nav}>
-            <div className={styles.left} 
-            onClick={() => {
-                localStorage.removeItem("token")
-                localStorage.removeItem("mySession")
-                navigate("/login")
-            }}
+            <div className={styles.left}
+                onClick={() => {
+                    localStorage.removeItem("token")
+                    localStorage.removeItem("mySession")
+                    navigate("/login")
+                }}
             // onClick={toggleDropdown}
             >
                 <img src={ProfileImg} alt="pic" />
                 <h5>{fullName}</h5>
+            </div>
+            <div>
+                <a href="/Profile">
+                    ProfileView
+                </a>
             </div>
             {/* <div className="btn-group">
                 <button

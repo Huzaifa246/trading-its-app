@@ -1,20 +1,13 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Chart from "react-apexcharts"
-import { FaArrowTrendUp } from 'react-icons/fa6';
+import { MdArrowBackIosNew } from 'react-icons/md';
 
 const StaticChart = ({ name, graphValues }) => {
 
     console.log(name, "name")
     console.log(graphValues, "values")
     const currenciesData = [
-        // {
-        //     name: "Bitcoin",
-        //     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
-        //     value: "btc",
-        //     color: "#f39900",
-        //     graph_values: [13, 15, 25, 20, 30, 26, 24, 15, 16, 20]
-        // },
         {
             name: "Ethereum",
             img: "https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/512/Ethereum-ETH-icon.png",
@@ -22,30 +15,30 @@ const StaticChart = ({ name, graphValues }) => {
             color: "#27cae1",
             graph_values: [15, 12, 13, 10, 12, 14, 16, 16, 8]
         },
-        // {
-        //     name: "USDT",
-        //     img: "https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/512/Tether-USDT-icon.png",
-        //     value: "usdt",
-        //     color: "#26a17b",
-        //     graph_values: [8, 9, 16, 7, 20, 8, 12, 14]
-        // },
     ]
 
     return (
         <>
-            <div className="col-12">
-                <h2
-                    style={{
+            <div className="row">
+                <div className="col-2 d-flex align-items-center justify-content-center" style={{ color: "white" }}>
+                    <a href="/">
+                        <MdArrowBackIosNew />
+                    </a>
+                </div>
+                <div className="col-8">
+                    <h2 style={{
                         textAlign: "center",
                         color: "white",
                         fontSize: "24px"
-                    }}
-                >
-                    {name}</h2>
+                    }}>
+                        {name}
+                    </h2>
+                </div>
             </div>
+
             <div style={{ marginTop: "1rem" }}>
                 <Swiper
-                    slidesPerView={"1"}
+                    // slidesPerView={"3"}
                     // spaceBetween={0}
                     className="mySwiper"
                 >
@@ -120,12 +113,12 @@ const StaticChart = ({ name, graphValues }) => {
                                 padding: 0,
                                 overflow: "hidden",
                                 cursor: "pointer",
-                                width: "35vw",
+                                width: "100%",
                                 transition: "250ms"
                             }}>
                                 <div style={{ width: "100%", marginTop: "-4.5rem" }}>
                                     <Chart id="chart-currently" options={Currentlysale.options} series={Currentlysale.series} type="area" minHeight={"200px"} height={"250px"} width={"118%"} style={{
-                                        transform: "translateX(-8%) translateY(46px)",
+                                        transform: "translateX(-8%) translateY(26px)",
                                     }} />
                                 </div>
                             </SwiperSlide>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { encryptData } from '../encryption_decryption/Encryption';
 import { decryptData } from '../encryption_decryption/Decryption';
-import { AdminHeader } from '../header';
+import { UserHeader } from '../header';
 
 async function DepositInvestment(userId, amount) {
   try {
@@ -17,7 +17,7 @@ async function DepositInvestment(userId, amount) {
     const response = await axios.post(`${import.meta.env.VITE_APP_API}/api/users/deposit-in-user-account`,
       { data: encryptedPostData },
       {
-        headers: AdminHeader,
+        headers: UserHeader,
       });
 
     const encryptedData = response.data.data;
