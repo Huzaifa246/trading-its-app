@@ -9,9 +9,9 @@ import DepositInvestment from '../../../helpers/PostApis/DepositInvestment';
 import { useSelector } from "react-redux";
 
 function StatisticTable({ optionId }) {
-    const [showDepositModal, setShowDepositModal] = useState(false);
-    const [depositAmount, setDepositAmount] = useState('');
-    const [depositResponse, setDepositResponse] = useState(null);
+    // const [showDepositModal, setShowDepositModal] = useState(false);
+    // const [depositAmount, setDepositAmount] = useState('');
+    // const [depositResponse, setDepositResponse] = useState(null);
 
     const [tradeOptions, setTradeOptions] = useState([]);
     const [investmentResponse, setInvestmentResponse] = useState(null);
@@ -20,7 +20,7 @@ function StatisticTable({ optionId }) {
 
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
-    const totalBalance = userDetails?.data?.totalbalance;
+    const totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable;
 
     useEffect(() => {
         async function fetchData() {
@@ -69,70 +69,34 @@ function StatisticTable({ optionId }) {
         return value >= totalBalance / 2 ? '#2fd3c9' : '#5c768b';
     };
 
-    const handleShowDepositModal = () => {
-        setShowDepositModal(true);
-    };
+    // const handleShowDepositModal = () => {
+    //     setShowDepositModal(true);
+    // };
 
-    const handleCloseDepositModal = () => {
-        setShowDepositModal(false);
-    };
+    // const handleCloseDepositModal = () => {
+    //     setShowDepositModal(false);
+    // };
 
-    const handleDeposit = async () => {
-        try {
-            if (depositAmount <= 0) {
-                // Display an error message or handle it in any way you prefer
-                console.error('Deposit amount must be greater than zero.');
-                return; // Exit the function without making the deposit
-            }
-            const response = await DepositInvestment(userId, depositAmount);
-            setDepositResponse(response);
-            window.location.reload(); // Refresh the page or update UI as needed
-        } catch (error) {
-            console.error('Error making deposit:', error);
-        } finally {
-            setShowDepositModal(false); // Close the deposit modal
-        }
-    };
+    // const handleDeposit = async () => {
+    //     try {
+    //         if (depositAmount <= 0) {
+    //             alert.error('Deposit amount must be greater than zero.');
+    //             return; // Exit the function without making the deposit
+    //         }
+    //         const response = await DepositInvestment(userId, depositAmount);
+    //         setDepositResponse(response);
+    //         window.location.reload(); // Refresh the page or update UI as needed
+    //     } catch (error) {
+    //         console.error('Error making deposit:', error);
+    //     } finally {
+    //         setShowDepositModal(false); // Close the deposit modal
+    //     }
+    // };
 
 
 
     return (
         <>
-            <Modal show={showDepositModal} onHide={handleCloseDepositModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Deposit Funds</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="depositAmount">Deposit Amount:</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                id="depositAmount"
-                                value={depositAmount}
-                                // onChange={(e) => setDepositAmount(e.target.value)}
-                                onChange={(e) => setDepositAmount(e.target.value)}
-                                min={0}
-                                onKeyPress={(event) => {
-                                    if (event.charCode < 48) {
-                                        event.preventDefault();
-                                    }
-                                }}
-                            />
-                        </div>
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseDepositModal}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleDeposit}>
-                        Deposit
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
             {showConfirmationModal && (
                 <div className="modal-overlay">
                     <div className="confirmation-modal">
@@ -224,13 +188,6 @@ function StatisticTable({ optionId }) {
                         <div className='button-style'>
                             <button onClick={handleInvestment} className='buy-btn'>
                                 Invest
-                            </button>
-                        </div>
-                        <div className='button-style'>
-                            <button
-                                // onClick={handleDeposit} 
-                                onClick={handleShowDepositModal} className='buy-btn'>
-                                Deposit
                             </button>
                         </div>
                     </div>

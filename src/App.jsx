@@ -14,6 +14,8 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import withFixedBar from "./FixedBarHoc.js/withFixedBar";
 import ProfileMain from "./Components/Profile/ProfileMain";
+import Deposit from "./Components/Deposit/Deposit";
+import AllInvestment from "./Components/ALLInvestments/allInvestment";
 
 
 const App = () => {
@@ -50,6 +52,8 @@ const App = () => {
   const PastInvestmentWithFixedBar = withFixedBar(PastInvestment);
   const StatisticMainWithFixedBar = withFixedBar(StatisticMain);
   const ProfileMainWithFixedBar = withFixedBar(ProfileMain);
+  const DepositWithFixedBar = withFixedBar(Deposit);
+  const AllInvestmentWithFixedBar = withFixedBar(AllInvestment);
 
 
   return (
@@ -60,6 +64,8 @@ const App = () => {
         <Route path="/pastInvest" element={<PastInvestmentWithFixedBar />} />
         <Route path="/statistic" element={<StatisticMainWithFixedBar />} />
         <Route path="/profile" element={<ProfileMainWithFixedBar />} />
+        <Route path="/deposit" element={<DepositWithFixedBar />} />
+        <Route path="/allInvestment" element={<AllInvestmentWithFixedBar />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

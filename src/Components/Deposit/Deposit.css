@@ -1,0 +1,85 @@
+.h1-deposit {
+  text-align: center;
+  color: #29c6e1;
+  text-transform: upperCase;
+}
+.Main-deposit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80vh;
+}
+
+.button-style {
+  display: flex;
+  justify-content: center;
+}
+.Depositbtn {
+  padding: 15px 15px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #4791e1, #27cae1);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+  width: 90%;
+}
+.Depositbtn[disabled] {
+  opacity: 0.6; /* Reduced opacity when disabled */
+  cursor: not-allowed; /* Change cursor when disabled */
+}
+.main-fm-deposit {
+  display: flex;
+  justify-content: center;
+}
+.fm-style-deposit {
+  width: 90%;
+  padding: 5vh 0;
+}
+
+.deposit-input-style {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
+.deposit-input-style:focus {
+  border: none;
+  /* border-bottom: 1px solid #27cae1 !important; */
+  background-color: transparent;
+  color: white;
+  outline: none !important;
+}
+input[type="number"] {
+  appearance: none;
+  border: none;
+  outline: none;
+  /* border-bottom: 0.1em solid #fffdfd; */
+  background: transparent;
+  border-radius: 0.2em 0.2em 0 0;
+  padding: 0.4em;
+  color: white;
+  transition: border-bottom 0.3s ease;
+  width: 60%;
+  font-size: 40px;
+  text-align: center;
+}
+.range-value {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+.deposit-range {
+  display: flex;
+  justify-content: space-between;
+}
+.deposit-range h6 {
+  color: #29c6e1 !important;
+}

@@ -1,25 +1,22 @@
 import styles from "./index.module.css";
-import React from 'react';
+import React, { useState } from 'react';
 import { GoSortAsc } from "react-icons/go"
-import { IoMdNotificationsOutline } from "react-icons/io"
+import { AiOutlineSetting } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
+import { FaUser } from "react-icons/fa"; // Import Profile icon
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
 const Navbar = () => {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const navigate = useNavigate()
     const fullName = userDetails?.data?.fullName || "User Not Found";
     const ProfileImg = userDetails?.data?.profile_image?.url;
-    
+    const [showDropdown, setShowDropdown] = useState(false);
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate('/login');
-    };
-    const toggleDropdown = () => {
-        if (dropdownRef.current) {
-            const dropdown = new window.bootstrap.Dropdown(dropdownRef.current);
-            dropdown.toggle();
-        }
     };
     return (
         <nav className={styles.nav}>
@@ -28,36 +25,32 @@ const Navbar = () => {
                     localStorage.removeItem("token")
                     navigate("/login")
                 }}
-            // onClick={toggleDropdown}
             >
                 <img src={ProfileImg} alt="pic" />
                 <h5>{fullName}</h5>
             </div>
-            <div>
-                <a href="/Profile">
-                    ProfileView
-                </a>
-            </div>
-            {/* <div className="btn-group">
-                <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
-                    Options
-                </button>
-                <ul className="dropdown-menu">
-                    <li>
-                        <a className="dropdown-item" href="#" onClick={handleLogout}>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </div> */}
             <div className={styles.right}>
                 <GoSortAsc />
-                <IoMdNotificationsOutline />
+                <div className={`${styles.settingIconContainer} dropdown-container`}>
+                    <AiOutlineSetting
+                        onClick={() => setShowDropdown(!showDropdown)}
+                    />
+                    {showDropdown && (
+                        <div className={`${styles.dropdown} dropdown-menu`}>
+                            <ul>
+                                <li className="li-style">
+                                    <a href="/profile" style={{ textDecoration: "none" }}>
+                                        <FaUser style={{ paddingRight: "5px" }} /> Profile
+                                    </a>
+                                </li>
+                                <li className="li-style">
+                                    <RiLogoutBoxRLine style={{ paddingRight: "5px", color: "red" }}/>
+                                    <button style={{ color: "red", backgroundColor: "transparent", border: "none" }} onClick={handleLogout}>Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </div>
         </nav>
     )

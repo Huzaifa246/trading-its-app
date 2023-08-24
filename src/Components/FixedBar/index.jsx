@@ -68,20 +68,22 @@ const FixedBar = ({ fixedBarRef }) => {
                 cursor: "pointer",
                 color: "#a8a8a8"
             }}>
-                <div style={{
-                    background: "#e1f8ff",
-                    color: "#000",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    scale: "2.5",
-                    transformOrigin: "bottom center",
-                    borderRadius: "2vw",
-                    fontSize: "6vw"
-                }}>
-                    <CgArrowsExchangeAltV style={{ boxShadow: "0 0 2px  #e1f8ff", borderRadius: "2vw" }} />
-                </div>
-                <p style={{ fontSize: "3vw" }}>Exchange</p>
+                <a href="/deposit" className="a-tag-style exchange">
+                    <div style={{
+                        background: "#e1f8ff",
+                        color: "#000",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        scale: "2.5",
+                        transformOrigin: "bottom center",
+                        borderRadius: "2vw",
+                        fontSize: "6vw"
+                    }}>
+                        <CgArrowsExchangeAltV style={{ boxShadow: "0 0 2px  #e1f8ff", borderRadius: "2vw" }} />
+                    </div>
+                    <p style={{ fontSize: "3vw", marginBottom: "0" }}>Deposit</p>
+                </a>
             </div>
             <div style={{
                 flex: 1,

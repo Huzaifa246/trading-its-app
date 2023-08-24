@@ -14,15 +14,15 @@ const Actions = () => {
     const TableData = [
         {
             name: "Invested",
-            value: withdrawable
-        },
-        {
-            name: "Commission",
             value: investmentBalance
         },
         {
-            name: "WithDraw",
+            name: "Commission",
             value: teamCommissionBalance
+        },
+        {
+            name: "WithDraw",
+            value: withdrawable
         },
     ]
     const data = [
