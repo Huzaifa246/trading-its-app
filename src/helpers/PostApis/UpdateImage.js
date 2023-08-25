@@ -3,17 +3,17 @@ import { encryptData } from '../encryption_decryption/Encryption';
 import { decryptData } from '../encryption_decryption/Decryption';
 import { UserHeader } from '../header';
 
-async function UploadImage(userId, base64String) {
+async function UpdateImage(userId, base64String) {
     try {
         const releaseBody = {
-            imagebase64: base64String,
+            profileImageBase64: base64String,
         };
         console.log(releaseBody, "api")
         const encryptedPostData = encryptData(releaseBody);
         console.log(encryptedPostData, "encrypted data")
 
 
-        const response = await axios.post(`${import.meta.env.VITE_APP_API}/api/users/upload-profile-picture/${userId}`,
+        const response = await axios.put(`${import.meta.env.VITE_APP_API}/api/users/update-profile-picture/${userId}`,
             { data: encryptedPostData },
             {
                 headers: UserHeader
@@ -30,4 +30,4 @@ async function UploadImage(userId, base64String) {
     }
 }
 
-export default UploadImage;
+export default UpdateImage;

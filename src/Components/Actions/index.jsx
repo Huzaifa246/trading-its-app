@@ -45,14 +45,14 @@ const Actions = () => {
     ]
     return (
         <>
-             <div className={styles.container}>
-                {
-                    TableData?.map(item => (
-                        <div key={item.name} className={styles.itemInvestment}>
-                            <span>{item.name.toUpperCase()}</span>
-                            {item.value !== undefined ? item.value.toFixed(2) : "N/A"}
-                        </div>
-                    ))
+            <div className={styles.container}>
+                {TableData?.map((item, index) => (
+                    <div key={item.name}
+                        className={`${styles.itemInvestment} ${index === TableData.length - 1 ? styles.lastItem : ""}`}>
+                        <span>{item.name.toUpperCase()}</span>
+                        {item.value !== undefined ? item.value.toFixed(2) : "N/A"}
+                    </div>
+                ))
                 }
             </div>
             <div className={styles.container}>

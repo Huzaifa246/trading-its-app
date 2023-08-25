@@ -42,6 +42,9 @@
     right: 0;
     transform: translateY(-50%);
 }
+.itemInvestment.lastItem::before {
+    width: 0;
+}
 .itemInvestment>span{
     font-size: 3vw;
     font-weight: 600;
