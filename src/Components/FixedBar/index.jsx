@@ -93,13 +93,13 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: isItemActive("pastInvest") ? "white" : "#a8a8a8",
+                color: isItemActive("allInvestment") ? "white" : "#a8a8a8",
                 //#007aff
                 fontSize: "6vw"
             }}
-                onClick={() => handleItemClick("pastInvest")}
+                onClick={() => handleItemClick("allInvestment")}
             >
-                <a href="/pastInvest" className="a-tag-style">
+                <a href="/allInvestment" className="a-tag-style">
                     <BiBarChartAlt2 />
                     <p style={{ fontSize: "3vw" }}>History</p>
                 </a>

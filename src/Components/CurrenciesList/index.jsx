@@ -75,7 +75,7 @@ const CurrenciesList = () => {
                 marginBottom: ".4rem"
             }}>
                 <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600 }}>Current Investments</h6>
-                <a href="/currentInvest">
+                <a href="/allInvestment">
                     <p style={{ color: "white", fontSize: "4vw", fontWeight: 500 }}>See All</p>
                 </a>
             </div>
