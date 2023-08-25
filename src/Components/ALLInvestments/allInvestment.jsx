@@ -5,6 +5,7 @@ import Loader from './../Loader/index';
 import { formatDateTime } from '../../helpers/DataFormat/DateFormat';
 import fetchAllInvestment from './../../helpers/getApis/getAllInvestment';
 import fetchAllTradeOption from '../../helpers/getApis/getAllOptions';
+import Navbar from './../Navbar/index';
 
 function AllInvestment() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -46,7 +47,7 @@ function AllInvestment() {
             } else if (tradeOption !== "" && (timeOption === "current" || timeOption === "past")) {
                 response = await fetchAllInvestment(userId, timeOption, tradeOption);
             } else {
-               return
+                return
             }
 
             setInvestmentData(response.data);
@@ -74,7 +75,8 @@ function AllInvestment() {
 
     return (
         <>
-            <div>
+            <Navbar />
+            <div style={{marginBottom: "100px"}}>
                 <div className={styles.container}>
                     <div
                         className={`${styles.item} ${selectedTimeOption === "current" ? styles.selected : ''}`}

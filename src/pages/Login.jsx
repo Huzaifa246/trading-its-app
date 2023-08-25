@@ -42,7 +42,7 @@ const LoginPage = () => {
             setLoginError("Invalid Email or Password")
             return
         }
-        setShowLoader(true)
+        // setShowLoader(true)
         const credentials = {
             email, password
         }
@@ -87,8 +87,10 @@ const LoginPage = () => {
                 const decrypted = await decryptData(err.response.data.data)
                 console.log(decrypted.message, "das")
                 if (decrypted?.message.includes("Admin Not Found.")) {
+                    setShowLoader(false)
                     setLoginError("Invalid Credentials, Please Check email.")
                 } else if (decrypted?.message.includes("Admin password is wrong.")) {
+                    setShowLoader(false)
                     setLoginError("Invalid Password, Please Check Your Password.")
                 }
                 else {

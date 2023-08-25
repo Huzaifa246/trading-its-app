@@ -26,6 +26,7 @@ function ProfileMain() {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const [userToDelete, setUserToDelete] = useState(null);
 
@@ -150,16 +151,16 @@ function ProfileMain() {
             } else {
                 const response = await UpdatePasswordApi(userId, oldPassword, newPassword);
                 setModalMessage(response.message);
-                setShowModal(true);
+                setShowUpdateModal(true);
                 if (response?.data?.success) {
                     setModalMessage(response.message);
-                    setShowModal(true);
+                    setShowUpdateModal(true);
                 } else if (response) {
                     setModalMessage(response.data.message);
-                    setShowModal(true);
+                    setShowUpdateModal(true);
                 } else {
                     setModalMessage('Password update failed');
-                    setShowModal(true);
+                    setShowUpdateModal(true);
                 }
             }
         } catch (error) {
@@ -171,6 +172,10 @@ function ProfileMain() {
         setShowModal(false);
         window.location.reload();
     };
+    const UpdateCloseModal = () => {
+        setShowUpdateModal(false);
+        window.location.reload();
+    };
     const EditCloseModal = () => {
         setShowModalEdit(false);
         window.location.reload();
@@ -178,13 +183,13 @@ function ProfileMain() {
     return (
         <>
             {isImageUploading && <Loader />}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            <Modal show={showUpdateModal} onHide={UpdateCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Password Update</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{modalMessage}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleCloseModal}>
+                    <Button variant="primary" onClick={UpdateCloseModal}>
                         Close
                     </Button>
                 </Modal.Footer>

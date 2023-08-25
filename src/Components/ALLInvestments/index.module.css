@@ -45,4 +45,8 @@
   .selected {
     background-color: transparent;
   }
-  
+  .main-Heading-investment{
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+  }

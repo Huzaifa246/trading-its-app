@@ -32,7 +32,7 @@ const Navbar = () => {
             <div className={styles.right}>
                 <GoSortAsc />
                 <div className={`${styles.settingIconContainer} dropdown-container`}>
-                    <AiOutlineSetting
+                    <AiOutlineSetting style={{height: "3vh"}}
                         onClick={() => setShowDropdown(!showDropdown)}
                     />
                     {showDropdown && (
