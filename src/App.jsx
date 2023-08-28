@@ -52,7 +52,7 @@ const App = () => {
   const ProfileMainWithFixedBar = withFixedBar(ProfileMain);
   const DepositWithFixedBar = withFixedBar(Deposit);
   const AllInvestmentWithFixedBar = withFixedBar(AllInvestment);
-  const WithDrawBalanceWithFixedBar = withFixedBar(MainWithDraw);
+  const MainWithDrawWithFixedBar = withFixedBar(MainWithDraw);
 
 
   return (
@@ -65,7 +65,7 @@ const App = () => {
         <Route path="/profile" element={<ProfileMainWithFixedBar />} />
         <Route path="/deposit" element={<DepositWithFixedBar />} />
         <Route path="/allInvestment" element={<AllInvestmentWithFixedBar />} />
-        <Route path="/withdraw" element={<WithDrawBalanceWithFixedBar />} /> 
+        <Route path="/withdraw" element={<MainWithDrawWithFixedBar />} /> 
         
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

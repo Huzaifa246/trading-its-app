@@ -3,7 +3,6 @@ import { Button, Modal } from 'react-bootstrap';
 import DepositInvestment from '../../helpers/PostApis/DepositInvestment';
 import { useSelector } from 'react-redux';
 import './Deposit.css';
-import Navbar from './../Navbar/index';
 
 function Deposit() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -62,7 +61,6 @@ function Deposit() {
     };
     return (
         <>
-            <Navbar />
             <Modal show={showDepositModal} onHide={handleCloseDepositModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Deposit Amount</Modal.Title>

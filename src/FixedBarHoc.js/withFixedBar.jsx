@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FixedBar from "../Components/FixedBar";
+import Navbar from "../Components/Navbar";
 
 const withFixedBar = (WrappedComponent) => {
   return (props) => {
@@ -20,6 +21,7 @@ const withFixedBar = (WrappedComponent) => {
 
     return (
       <div>
+        <Navbar />
         <div style={{ paddingBottom: `${paddingBottom}px` }}>
           <FixedBar />
           <WrappedComponent {...props} fixedBarRef={fixedBarRef} />

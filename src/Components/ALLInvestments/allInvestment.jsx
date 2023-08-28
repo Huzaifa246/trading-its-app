@@ -5,7 +5,6 @@ import Loader from './../Loader/index';
 import { formatDateTime } from '../../helpers/DataFormat/DateFormat';
 import fetchAllInvestment from './../../helpers/getApis/getAllInvestment';
 import fetchAllTradeOption from '../../helpers/getApis/getAllOptions';
-import Navbar from './../Navbar/index';
 
 function AllInvestment() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -75,7 +74,6 @@ function AllInvestment() {
 
     return (
         <>
-            <Navbar />
             <div style={{marginBottom: "100px"}}>
                 <div className={styles.container}>
                     <div

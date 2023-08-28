@@ -4,7 +4,6 @@ import { setLayout } from '../../store/withDrawSlice'
 import MyWithDraw from './MyWithDraw/MyWithDraw'
 import WithDrawBalance from './WithDraw/WithDrawBalance'
 import { Button } from 'react-bootstrap';
-import Navbar from '../Navbar';
 import "./main.css";
 
 function MainWithDraw() {
@@ -12,7 +11,6 @@ function MainWithDraw() {
     const dispatch = useDispatch();
     return (
         <>
-            <Navbar />
             <div>
                 <div 
                 style={{
