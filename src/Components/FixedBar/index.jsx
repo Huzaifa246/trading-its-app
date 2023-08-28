@@ -112,11 +112,14 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: "#a8a8a8",
+                color: isItemActive("withdraw") ? "white" : "#a8a8a8",
                 fontSize: "6vw"
             }}>
-                <MdOutlineManageHistory />
-                <p style={{ fontSize: "3vw" }}>History</p>
+                
+                <a href="/withdraw" className="a-tag-style">
+                    <MdOutlineManageHistory />
+                    <p style={{ fontSize: "3vw" }}>WithDraw</p>
+                </a>
             </div>
         </div>
     )

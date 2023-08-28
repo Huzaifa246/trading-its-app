@@ -1,24 +1,35 @@
 .my-wd-btn {
-    background: linear-gradient(to right, #1c92fc, #20d6de);
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 1rem;
-    border-radius: 20px;
-    flex: 1;
-    padding: 5px;
-    margin: 5px 1px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
+  background: linear-gradient(to right, #1c92fc, #20d6de);
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 20px;
+  flex: 1;
+  padding: 5px;
+  margin: 5px 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 .my-wd-btn.active {
-    border: 2px solid #20d6de;
-    background: none;
-  }
-.my-wd-main{
-    display: flex;
-    margin: 0.5rem 1rem;
+  border: 2px solid #20d6de;
+  background: none;
+}
+.cancel-wd-btn {
+  border: 2px solid red;
+  color: white;
+  border-radius: 10px;
+  background: transparent;
+  padding: 5px;
+}
+.my-wd-main {
+  display: flex;
+  margin: 0.5rem 1rem;
+}
+.wd-list {
+  padding: 0 10px;
+  margin-bottom: 100px;
 }

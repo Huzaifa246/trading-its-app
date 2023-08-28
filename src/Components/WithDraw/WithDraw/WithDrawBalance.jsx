@@ -72,7 +72,7 @@ function WithDrawBalance() {
             setIsError(true);
         }
         setEditableValue(e.target.value);
-        setIsDepositDisabled(isNaN(newValue) || newValue < 0 || newValue > withDraw);
+        setIsDepositDisabled(isNaN(newValue) || newValue <= 0 || newValue > withDraw);
     };
 
     return (
@@ -134,7 +134,7 @@ function WithDrawBalance() {
                                     className="form-range range-style"
                                     id="customRange1"
                                     min={0.0}
-                                    max={withDraw || 0}
+                                    max={withDraw}
                                     step={0.01}
                                     value={rangeValue}
                                     onChange={handleRangeChange}

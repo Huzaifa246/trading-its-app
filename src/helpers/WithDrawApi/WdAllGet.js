@@ -18,6 +18,7 @@ async function WithDrawAll(userId, status = '') {
       if (response.status === 200) {
         const encryptedData = response.data.data;
         const decryptedData = await decryptData(encryptedData);
+        console.log(decryptedData)
         return decryptedData;
       } else {
         console.error(`Failed to fetch data. Status code: ${response.status}`);
