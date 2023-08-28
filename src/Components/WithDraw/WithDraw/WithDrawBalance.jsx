@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import DepositInvestment from '../../helpers/PostApis/DepositInvestment';
+import { Button, Modal, Toast } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import './Deposit.css';
-import Navbar from './../Navbar/index';
+import './withdraw.css';
+import WdPostByUser from './../../../helpers/WithDrawApi/WdPostByUser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Deposit() {
+function WithDrawBalance() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
+    const idOfSender = userDetails?.data?.binance_id;
+    const withDraw = userDetails?.data?.withdrawable;
 
     const [showDepositModal, setShowDepositModal] = useState(false);
-    const [depositResponse, setDepositResponse] = useState(null);
-    const [depositText, setDepositText] = useState('');
-    const [rangeValue, setRangeValue] = useState(50.00); // Initial value is set to 50.00
-    const [editableValue, setEditableValue] = useState(rangeValue.toFixed(2));  // Initial value is set to 50
+    const [withDrawResponse, setWithDrawResponse] = useState(null);
+    const [withDrawText, setWithDrawText] = useState('');
+    const [rangeValue, setRangeValue] = useState(withDraw); // Initial value is set to 50.00
+    const [editableValue, setEditableValue] = useState(rangeValue?.toFixed(2));  // Initial value is set to 50
     const [isError, setIsError] = useState(false); // Flag to track if there's an error
     const [isDepositDisabled, setIsDepositDisabled] = useState(true);
 
@@ -25,15 +28,22 @@ function Deposit() {
         setShowDepositModal(false);
     };
 
-    const handleDeposit = async () => {
+    const handleWithDraw = async () => {
         try {
-            const formattedRangeValue = rangeValue.toFixed(2);
-            const response = await DepositInvestment(userId, formattedRangeValue.toString());
-            setDepositResponse(response);
-            setDepositText('Deposit successful.');
-            window.location.reload();
+            if (idOfSender !== "" && idOfSender !== null) {
+                const formattedRangeValue = rangeValue?.toFixed(2);
+                const response = await WdPostByUser(userId, formattedRangeValue.toString(), idOfSender);
+                setWithDrawResponse(response);
+                setWithDrawText('withDraw successful.');
+                window.location.reload();
+            }
+            else {
+                toast.error("Please provide a valid sender ID. Enter your binance ID in Profile.", {
+                    position: "top-center",
+                });
+            }
         } catch (error) {
-            console.error('Error making deposit:', error);
+            console.error('Error making withDraw:', error);
         } finally {
             setShowDepositModal(false);
         }
@@ -44,54 +54,58 @@ function Deposit() {
         const newValue = parseFloat(e.target.value);
         setRangeValue(newValue);
         setEditableValue(newValue.toFixed(2));
-        setIsError(newValue < 50 || newValue > 500);
-        setIsDepositDisabled(newValue < 50 || newValue > 500);
+        setIsError(newValue < 0 || newValue > withDraw);
+        setIsDepositDisabled(newValue < 0 || newValue > withDraw);
     };
     const handleEditableValueChange = (e) => {
         const newValue = parseFloat(e.target.value);
-        if (!isNaN(newValue) && newValue >= 50 && newValue <= 500) {
-            setRangeValue(newValue);
-            setIsError(false);
-        } else if (newValue < 50) {
-            setIsError(true);
-        } else if (newValue > 500) {
+        if (!isNaN(newValue) && newValue >= 0 && newValue <= withDraw) {
+            // Ensure exactly 2 decimal places
+            const roundedValue = parseFloat(newValue?.toFixed(2));
+            if (roundedValue === newValue) {
+                setRangeValue(newValue);
+                setIsError(false);
+            } else {
+                setIsError(true);
+            }
+        } else {
             setIsError(true);
         }
         setEditableValue(e.target.value);
-        setIsDepositDisabled(newValue < 50 || newValue > 500); // Disable the deposit button if the value is less than 50
+        setIsDepositDisabled(isNaN(newValue) || newValue < 0 || newValue > withDraw);
     };
+
     return (
         <>
-            <Navbar />
+            <ToastContainer />
             <Modal show={showDepositModal} onHide={handleCloseDepositModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Deposit Amount</Modal.Title>
+                    <Modal.Title>With Draw Amount</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Are you sure you want to deposit amount : <b>{rangeValue} </b></p>
+                    <p>Are you sure you want to with Draw amount : <b>{rangeValue} </b></p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseDepositModal}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleDeposit}>
+                    <Button variant="primary" onClick={handleWithDraw}>
                         Confirm
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <div className="Main-deposit">
+            <div className="Main-wdraw">
                 <div>
-                    <h1 className="h1-deposit">Add Funds</h1>
+                    <h1 className="h1-wdraw">With Draw</h1>
                     <div>
                         <div className="range-value">
                             <input
                                 type="number"
-                                className={`form-control deposit-input-style ${isError ? 'is-invalid' : ''}`}
+                                className={`form-control wdraw-input-style ${isError ? 'is-invalid' : ''}`}
                                 value={editableValue}
                                 onChange={handleEditableValueChange}
-                                min="50"
-                                max={500}
-                                // step={0.01}
+                                min="0"
+                                max={withDraw}
                             />
                         </div>
                     </div>
@@ -99,19 +113,19 @@ function Deposit() {
                 <div>
                     {isError && (
                         <div className="invalid-feedback">
-                            Value must be between 50 and 500.
+                            Value must be between 0 and {withDraw}.
                         </div>
                     )}
                 </div>
                 <div>
-                    <div className="main-fm-deposit">
-                        <form className="fm-style-deposit">
-                            <div className='deposit-range'>
+                    <div className="main-fm-wdraw">
+                        <form className="fm-style-wdraw">
+                            <div className='wdraw-range'>
                                 <h6>
-                                    50
+                                    0
                                 </h6>
                                 <h6>
-                                    500
+                                    {withDraw}
                                 </h6>
                             </div>
                             <div className="form-group">
@@ -119,8 +133,8 @@ function Deposit() {
                                     type="range"
                                     className="form-range range-style"
                                     id="customRange1"
-                                    min={50.0}
-                                    max={500}
+                                    min={0.0}
+                                    max={withDraw || 0}
                                     step={0.01}
                                     value={rangeValue}
                                     onChange={handleRangeChange}
@@ -131,7 +145,7 @@ function Deposit() {
                     <div className="button-style">
                         <button onClick={handleShowDepositModal} className="Depositbtn"
                             disabled={isDepositDisabled}>
-                            Deposit
+                            With Draw
                         </button>
                     </div>
                 </div>
@@ -140,4 +154,4 @@ function Deposit() {
     );
 }
 
-export default Deposit;
+export default WithDrawBalance;

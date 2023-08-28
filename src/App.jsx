@@ -16,13 +16,12 @@ import withFixedBar from "./FixedBarHoc.js/withFixedBar";
 import ProfileMain from "./Components/Profile/ProfileMain";
 import Deposit from "./Components/Deposit/Deposit";
 import AllInvestment from "./Components/ALLInvestments/allInvestment";
-
+// import WithDrawBalance from './Components/WithDraw/WithDraw/WithDrawBalance';
+import MainWithDraw from "./Components/WithDraw/MainWithDraw";
 
 const App = () => {
-  // const userDetails = useSelector((state) => state.userInfoStore.userDetails);
   const dispatch = useDispatch();
   let token = localStorage.getItem("token");
-
   useEffect(() => {
     if (token) {
       axios
@@ -46,7 +45,6 @@ const App = () => {
         });
     }
   }, [token]);
-
   // const HomeWithFixedBar = withFixedBar(Home);
   const CurrentInvestWithFixedBar = withFixedBar(CurrentInvest);
   const PastInvestmentWithFixedBar = withFixedBar(PastInvestment);
@@ -54,6 +52,7 @@ const App = () => {
   const ProfileMainWithFixedBar = withFixedBar(ProfileMain);
   const DepositWithFixedBar = withFixedBar(Deposit);
   const AllInvestmentWithFixedBar = withFixedBar(AllInvestment);
+  const WithDrawBalanceWithFixedBar = withFixedBar(MainWithDraw);
 
 
   return (
@@ -66,6 +65,8 @@ const App = () => {
         <Route path="/profile" element={<ProfileMainWithFixedBar />} />
         <Route path="/deposit" element={<DepositWithFixedBar />} />
         <Route path="/allInvestment" element={<AllInvestmentWithFixedBar />} />
+        <Route path="/withdraw" element={<WithDrawBalanceWithFixedBar />} /> 
+        
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
