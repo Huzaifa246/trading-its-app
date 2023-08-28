@@ -15,17 +15,6 @@
   margin-left: 0px;
 }
 
-.bg-left-grad {
-  background: linear-gradient(
-    to right top,
-    #051937,
-    #002844,
-    #00364f,
-    #004558,
-    #02545e
-  );
-}
-
 .user-profile {
   padding: 20px 0;
 }
@@ -116,7 +105,33 @@ h6 {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.user-info-style{
-    display: flex;
-    justify-content: space-between;
+.user-info-style {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.sec-container {
+  color: white;
+}
+.main-container-pf{
+  background: linear-gradient(
+    to right top,
+    #051937,
+    #002844,
+    #00364f,
+    #004558,
+    #02545e
+  );
+}
+.input_field {
+  all: inherit;
+  border: 2px solid #afafaf2f;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: .5s;
+  background-color: rgba(255, 255, 255, 0.068);
+}
+
+.input_field:focus {
+  border-color: #21c8d7;
 }

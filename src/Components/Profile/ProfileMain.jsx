@@ -233,8 +233,8 @@ function ProfileMain() {
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full">
-                            <div className="row m-l-0 m-r-0">
-                                <div className="col-sm-12 bg-left-grad user-profile">
+                            <div className="row m-l-0 m-r-0 main-container-pf">
+                                <div className="col-sm-12 user-profile">
                                     <div className="card-block text-center text-white">
                                         <div className="p-b-5">
                                             <img src={userImg || defImg} className="img-radius" alt="Profile-Image" />
@@ -276,14 +276,14 @@ function ProfileMain() {
 
                                     </div>
                                 </div>
-                                <div className="col-sm-12">
+                                <div className="col-sm-12 sec-container">
                                     <div className="card-block">
                                         <div className='user-info-style'>
                                             <h6 className="p-b-5 f-w-600"><b>User Information </b></h6>
 
                                             {isFullNameEdit || isBinanceIdEdit ? (
                                                 <FiCheck
-                                                    style={{ color: 'green', cursor: 'pointer' }}
+                                                    style={{ color: '#3498db', cursor: 'pointer', fontWeight: 600 }}
                                                     onClick={handleUserDetailsUpdate} // Update user details when clicked
                                                 />
                                             ) : (
@@ -302,7 +302,7 @@ function ProfileMain() {
                                                 {isFullNameEdit ? (
                                                     <input
                                                         type="text"
-                                                        className="form-control"
+                                                        className="form-control input_field"
                                                         value={fullName}
                                                         onChange={(e) => setFullName(e.target.value)}
                                                         onBlur={handleUserDetailsUpdate}
@@ -318,7 +318,7 @@ function ProfileMain() {
                                                 {isBinanceIdEdit ? (
                                                     <input
                                                         type="text"
-                                                        className="form-control"
+                                                        className="form-control input_field"
                                                         value={binanceId}
                                                         onChange={(e) => setBinanceId(e.target.value)}
                                                         onBlur={handleUserDetailsUpdate}
@@ -343,7 +343,7 @@ function ProfileMain() {
                                                             <p className="m-b-10 f-w-600">Old Password</p>
                                                             <input
                                                                 type="password"
-                                                                className="form-control"
+                                                                className="form-control input_field"
                                                                 value={oldPassword}
                                                                 onChange={(e) => setOldPassword(e.target.value)}
                                                             />
@@ -352,7 +352,7 @@ function ProfileMain() {
                                                             <p className="m-b-10 f-w-600">New Password</p>
                                                             <input
                                                                 type="password"
-                                                                className="form-control"
+                                                                className="form-control input_field"
                                                                 value={newPassword}
                                                                 onChange={(e) => setNewPassword(e.target.value)}
                                                             />
