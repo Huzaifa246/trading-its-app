@@ -14,7 +14,7 @@ function Deposit() {
     const [rangeValue, setRangeValue] = useState(50.00); // Initial value is set to 50.00
     const [editableValue, setEditableValue] = useState(rangeValue.toFixed(2));  // Initial value is set to 50
     const [isError, setIsError] = useState(false); // Flag to track if there's an error
-    const [isDepositDisabled, setIsDepositDisabled] = useState(true);
+    const [isDepositDisabled, setIsDepositDisabled] = useState(false);
 
     const handleShowDepositModal = () => {
         setShowDepositModal(true);
@@ -89,7 +89,7 @@ function Deposit() {
                                 onChange={handleEditableValueChange}
                                 min="50"
                                 max={500}
-                                // step={0.01}
+                            // step={0.01}
                             />
                         </div>
                     </div>
