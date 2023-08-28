@@ -18,6 +18,7 @@ import Deposit from "./Components/Deposit/Deposit";
 import AllInvestment from "./Components/ALLInvestments/allInvestment";
 // import WithDrawBalance from './Components/WithDraw/WithDraw/WithDrawBalance';
 import MainWithDraw from "./Components/WithDraw/MainWithDraw";
+import Referral from "./Components/Referral/Referral";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const App = () => {
   const DepositWithFixedBar = withFixedBar(Deposit);
   const AllInvestmentWithFixedBar = withFixedBar(AllInvestment);
   const MainWithDrawWithFixedBar = withFixedBar(MainWithDraw);
+  const ReferralWithFixedBar = withFixedBar(Referral);
 
 
   return (
@@ -66,6 +68,7 @@ const App = () => {
         <Route path="/deposit" element={<DepositWithFixedBar />} />
         <Route path="/allInvestment" element={<AllInvestmentWithFixedBar />} />
         <Route path="/withdraw" element={<MainWithDrawWithFixedBar />} /> 
+        <Route path="/referral" element={<ReferralWithFixedBar />} /> 
         
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
