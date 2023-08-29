@@ -13,11 +13,12 @@ const Home = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        if (typeof window !== "undefined" || token !== "") {
             const token = localStorage.getItem("token")
             setPaddingBottom(fixedBarRef?.current?.offsetHeight)
             if (!token) {
                 navigate("/login")
+                localStorage.removeItem("token")
             }
         }
     }, [])

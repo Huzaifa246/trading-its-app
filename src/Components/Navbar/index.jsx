@@ -32,7 +32,10 @@ const Navbar = () => {
             <div className={styles.right}>
                 <GoSortAsc />
                 <div className={`${styles.settingIconContainer} dropdown-container`}>
-                    <AiOutlineSetting style={{height: "3vh"}}
+                    <AiOutlineSetting style={{
+                        height: "2.8vh",
+                        marginBottom: "5px"
+                    }}
                         onClick={() => setShowDropdown(!showDropdown)}
                     />
                     {showDropdown && (
@@ -44,7 +47,7 @@ const Navbar = () => {
                                     </a>
                                 </li>
                                 <li className="li-style">
-                                    <RiLogoutBoxRLine style={{ paddingRight: "5px", color: "red" }}/>
+                                    <RiLogoutBoxRLine style={{ paddingRight: "5px", color: "red" }} />
                                     <button style={{ color: "red", backgroundColor: "transparent", border: "none" }} onClick={handleLogout}>Logout</button>
                                 </li>
                             </ul>

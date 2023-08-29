@@ -12,14 +12,20 @@ function MainWithDraw() {
     return (
         <>
             <div>
-                <div 
-                style={{
-                    display: 'flex',
-                    justifyContent: "space-around"
-                }}
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: "space-around"
+                    }}
                 >
-                    <Button className="glow-on-hover" onClick={() => dispatch(setLayout('WithDrawBalance'))}>Request WidthDraw</Button>
-                    <Button className="glow-on-hover" onClick={() => dispatch(setLayout('MyWithDraw'))}>My WithDraws</Button>
+                    <Button
+                        className={`${currentLayout === 'WithDrawBalance' ? 'glow-on-hover' : 'unselected'
+                            }`}
+                        onClick={() => dispatch(setLayout('WithDrawBalance'))}>Request WidthDraw</Button>
+                    <Button
+                        className={`${currentLayout === 'MyWithDraw' ? 'glow-on-hover' : 'unselected'
+                            }`}
+                        onClick={() => dispatch(setLayout('MyWithDraw'))}>My WithDraws</Button>
                 </div>
 
                 {currentLayout === 'WithDrawBalance' ? <WithDrawBalance /> : <MyWithDraw />}

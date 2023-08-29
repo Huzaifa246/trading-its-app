@@ -1,6 +1,58 @@
 .Main-update-del {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+.edit-style {
+  position: absolute;
+  right: 0em;
+  left: 45px;
+  top: 4.1em;
+}
+.Update-btn {
+  background: transparent;
+  border: 2px solid #3498db;
+  color: white;
+  padding: 3px 4px;
+  border-radius: 5px;
+}
+.del-btn {
+  background: transparent;
+  /* border: 1px solid red; */
+  border: 2px solid #3498db;
+  color: white;
+  padding: 3px 4px;
+  border-radius: 5px;
+}
+.edit-btn{
+  align-items: center;
+  background-color: transparent;
+  border-radius: 5px;
+  color: white;
+  line-height: 1;
+  padding: 0 0.5rem;
+  text-align: center;
+  border: 2px solid #3498db;
+}
+.edit-btn:hover {
+  align-items: center;
+  border-radius: 5px;
+  color: white;
+  line-height: 1;
+  padding: 0 0.5rem;
+  text-align: center;
+  border: 2px solid #3498db;
+  background: linear-gradient(to right, #4791e1, #27cae1);
+}
+.FiEdit-inner-style {
+  color: #fff;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 100%;
+  background: #007aff;
+  padding: 2px;
 }
 .card {
   border-radius: 5px;
@@ -108,27 +160,28 @@ h6 {
 .user-info-style {
   display: flex;
   justify-content: space-between;
-  
 }
 .sec-container {
   color: white;
 }
-.main-container-pf{
-  background: linear-gradient(
+.main-container-pf {
+  /* background: linear-gradient(
     to right top,
     #051937,
     #002844,
     #00364f,
     #004558,
     #02545e
-  );
+  ); */
+  /* background: linear-gradient(7deg, rgba(14,48,46,1) 0%, rgba(0,10,39,1) 100%); */
+  background: linear-gradient(7deg, rgba(9,29,28,1) 0%, rgba(0,9,34,1) 100%);
 }
 .input_field {
   all: inherit;
   border: 2px solid #afafaf2f;
   padding: 10px 14px;
   border-radius: 8px;
-  transition: .5s;
+  transition: 0.5s;
   background-color: rgba(255, 255, 255, 0.068);
 }
 

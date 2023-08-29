@@ -66,20 +66,21 @@ const Portfolio = () => {
             setPastUserTradeData(fetchedData);
         }
 
-        if (tradeOptions?.length > 0) {  // Fetch only when tradeOptions are available
+        if (tradeOptions?.length > 0) {
             fetchData();
         }
     }, [tradeOptions]);
 
-    console.log(pastUserTradeData, "debug");
     if (isLoading) {
         return <Loader />;
     }
     return (
-        <div>
-            {pastUserTradeData.length === 0 ? (
-                // Show a message or component when there is no data
-                <p>No data available.</p>
+        <>
+            {isLoading ? (
+                <Loader />
+            ) : pastUserTradeData.length === 0 ? (
+
+                <p className='txt-center-white'>No data available.</p>
             ) : (
                 <>
                     <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Portfolio</h6>
@@ -253,7 +254,7 @@ const Portfolio = () => {
                     </Swiper>
                 </>
             )}
-        </div>
+        </>
     )
 }
 

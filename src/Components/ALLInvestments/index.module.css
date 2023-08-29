@@ -17,9 +17,8 @@
     gap: 0.5rem;
     font-size: 4vw;
     color: #21c8d7;
-    /* position: relative; */
     cursor: pointer;
-    background-color: grey;
+    background-color: transparent;
   }
   
   .item::before {
@@ -43,7 +42,8 @@
     color: white;
   }
   .selected {
-    background-color: transparent;
+    /* background-color: transparent; */
+    background: linear-gradient(to right, #4791e1, #27cae1);
   }
   .main-Heading-investment{
     color: white;

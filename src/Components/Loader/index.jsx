@@ -12,7 +12,8 @@ const Loader = () => {
             left: 0,
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            zIndex: "1000"
         }}>
             <div style={{
                 height: "80%",

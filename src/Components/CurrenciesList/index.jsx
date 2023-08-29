@@ -4,48 +4,7 @@ import fetchAllInvestment from "../../helpers/getApis/getAllInvestment";
 import { useSelector } from "react-redux";
 
 const CurrenciesList = () => {
-    // const data = [
-    //     {
-    //         id: 1,
-    //         name: "Binance coin",
-    //         abbr: "BNB",
-    //         icon: "https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png",
-    //         value: "$363.23",
-    //         increment: "+5.67%"
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Binance coin",
-    //         abbr: "BNB",
-    //         icon: "https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png",
-    //         value: "$363.23",
-    //         increment: "+5.67%"
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "Binance coin",
-    //         abbr: "BNB",
-    //         icon: "https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png",
-    //         value: "$363.23",
-    //         increment: "+5.67%"
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "Binance coin",
-    //         abbr: "BNB",
-    //         icon: "https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png",
-    //         value: "$363.23",
-    //         increment: "+5.67%"
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "Binance coin",
-    //         abbr: "BNB",
-    //         icon: "https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png",
-    //         value: "$363.23",
-    //         increment: "+5.67%"
-    //     },
-    // ]
+
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
     const [investmentData, setInvestmentData] = useState([]);
@@ -106,7 +65,7 @@ const CurrenciesList = () => {
                         </div>
                     ))
                 ) : (
-                    <p>Loading...</p>
+                    <p className='txt-center-white'>No Data Found</p>
                 )}
             </div>
         </div>

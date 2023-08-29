@@ -5,8 +5,6 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 
 const StaticChart = ({ name, graphValues }) => {
 
-    console.log(name, "name")
-    console.log(graphValues, "values")
     const currenciesData = [
         {
             name: "Ethereum",

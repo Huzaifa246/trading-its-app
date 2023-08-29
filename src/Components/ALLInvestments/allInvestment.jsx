@@ -12,7 +12,7 @@ function AllInvestment() {
     const [selectedTimeOption, setSelectedTimeOption] = useState("current"); // Store the selected time option
     const [selectedTradeOption, setSelectedTradeOption] = useState("");
     const [investmentData, setInvestmentData] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [showAll, setShowAll] = useState(true);
     const [tradeOptions, setTradeOptions] = useState([]);
 
@@ -52,6 +52,8 @@ function AllInvestment() {
             setInvestmentData(response.data);
         } catch (error) {
             console.error("Error fetching investment data:", error);
+        } finally {
+            setLoading(false); // Set loading to false after data is fetched or if there's an error
         }
     };
 
@@ -59,22 +61,28 @@ function AllInvestment() {
         setSelectedTimeOption(timeOption);
         setSelectedTradeOption("");
         setShowAll(false);
+        setLoading(true);
     };
 
     const handleTradeOptionClick = (tradeOption) => {
         setSelectedTradeOption(tradeOption);
+        setLoading(true);
     };
 
     const handleShowAllClick = () => {
         setSelectedTimeOption("");
         setSelectedTradeOption("");
         setShowAll(true);
+        setLoading(true);
     };
 
 
     return (
         <>
-            <div style={{marginBottom: "100px"}}>
+            <div style={{ marginBottom: "100px" }}>
+                <h1 className='txt-center-white'>
+                    All Investment
+                </h1>
                 <div className={styles.container}>
                     <div
                         className={`${styles.item} ${selectedTimeOption === "current" ? styles.selected : ''}`}
@@ -99,7 +107,8 @@ function AllInvestment() {
                 </div >
                 <div className={styles.container}>
                     <div
-                        className={`${styles.item} ${showAll ? styles.selected : ''}`}
+                        // className={`${styles.item} ${(selectedTimeOption === "current" || selectedTimeOption === "past" || showAll) ? styles.selected : ''}`}
+                        className={`${styles.item} ${((selectedTimeOption === "current" || selectedTimeOption === "past") && !selectedTradeOption) || showAll ? styles.selected : ''}`}
                         onClick={handleShowAllClick}
                         style={{ borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px" }}
                     >
@@ -110,6 +119,7 @@ function AllInvestment() {
                             key={item?._id}
                             className={`${styles.item} ${selectedTradeOption === item?._id ? styles.selected : ''}`}
                             onClick={() => handleTradeOptionClick(item?._id)}
+                            disabled={showAll}
                         >
                             <span>{item?.name.toUpperCase()}</span>
                         </div>
@@ -121,46 +131,50 @@ function AllInvestment() {
                     padding: ".5rem 1rem .5rem"
                 }}>
                     <div style={{ padding: ".5rem" }}>
-                        {investmentData?.length > 0 ? (
-                            investmentData?.map(item => (
-                                (selectedTradeOption === "" || item.investment_name._id === selectedTradeOption) && (
-                                    <div
-                                        key={item._id}
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            color: "white",
-                                            gap: "1rem",
-                                            marginBottom: "1rem",
-                                            justifyContent: "space-between",
-                                        }}
-                                    >
-                                        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                            <img
-                                                src={"https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png"}
-                                                alt={item?.investment_name?.name}
-                                                style={{ width: "11vw", height: "11vw", objectFit: "cover" }}
-                                            />
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
+                            investmentData?.length > 0 ? (
+                                investmentData?.map(item => (
+                                    (selectedTradeOption === "" || item.investment_name._id === selectedTradeOption) && (
+                                        <div
+                                            key={item._id}
+                                            style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                color: "white",
+                                                gap: "1rem",
+                                                marginBottom: "1rem",
+                                                justifyContent: "space-between",
+                                            }}
+                                        >
+                                            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                                                <img
+                                                    src={"https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png"}
+                                                    alt={item?.investment_name?.name}
+                                                    style={{ width: "11vw", height: "11vw", objectFit: "cover" }}
+                                                />
+                                                <div>
+                                                    <h2 style={{ fontSize: "4vw", fontWeight: 600 }}>
+                                                        {item?.investment_name?.name}
+                                                    </h2>
+                                                    <span style={{ color: "#a8a8a8", fontSize: "3.7vw" }}>
+                                                        {formatDateTime(item?.invesAt)}
+                                                    </span>
+                                                </div>
+                                            </div>
                                             <div>
-                                                <h2 style={{ fontSize: "4vw", fontWeight: 600 }}>
-                                                    {item?.investment_name?.name}
-                                                </h2>
-                                                <span style={{ color: "#a8a8a8", fontSize: "3.7vw" }}>
-                                                    {formatDateTime(item?.invesAt)}
+                                                <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
+                                                <span style={{ color: "#21c8d7", fontSize: "3vw" }}>
+                                                    {item?.profitPercentage.toFixed(2)}
                                                 </span>
                                             </div>
                                         </div>
-                                        <div>
-                                            <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
-                                            <span style={{ color: "#21c8d7", fontSize: "3vw" }}>
-                                                {item?.profitPercentage.toFixed(2)}
-                                            </span>
-                                        </div>
-                                    </div>
-                                )
-                            ))
-                        ) : (
-                            <p style={{ color: "white", textAlign: 'center' }}>Click button to get its data</p>
+                                    )
+                                ))
+                            ) : (
+                                <p className='txt-center-white'>Click button to get its data</p>
+                            )
                         )}
                     </div>
                 </div>

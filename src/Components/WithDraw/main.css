@@ -6,7 +6,6 @@
     position: relative;
     z-index: 0;
     border-radius: 20px;
-
 }
 
 .glow-on-hover:before {
@@ -54,4 +53,13 @@
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
+}
+.unselected{
+    height: 50px;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 20px;
 }

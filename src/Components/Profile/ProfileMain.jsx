@@ -11,6 +11,8 @@ import UploadImage from '../../helpers/PostApis/UploadImage';
 import Loader from '../Loader';
 import UpdateImage from './../../helpers/PostApis/UpdateImage';
 import EditUserDetails from '../../helpers/PostApis/EditUserDetails';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProfileMain() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -87,13 +89,22 @@ function ProfileMain() {
             const base64String = reader.result;
 
             setImageBase64(base64String);
-
+            setIsImageUploading(true);
             try {
                 const response = await UploadImage(userId, base64String);
                 if (response.success) {
-                    alert(response.message)
-                    window.location.reload()
+                    setIsImageUploading(false);
+                    toast.success(response.message, {
+                        position: "top-center",
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 3000);
                 } else {
+                    setIsImageUploading(false);
+                    toast.error(response.message, {
+                        position: "top-center",
+                    });
                     return "image upload failed"
                 }
             } catch (error) {
@@ -144,11 +155,15 @@ function ProfileMain() {
         try {
             if (!newPassword) {
                 setModalMessage('New password cannot be empty');
+                setShowUpdateModal(true);
             } else if (oldPassword === newPassword) {
                 setModalMessage('Old and new passwords cannot be the same');
-            } else if (!oldPassword) {
-                setModalMessage('Old password empty. Check Please!!');
-            } else {
+                setShowUpdateModal(true);
+            } else if (!oldPassword.trim()) {
+                setModalMessage('Old password is empty. Please enter your old password');
+                setShowUpdateModal(true);
+            }
+            else {
                 const response = await UpdatePasswordApi(userId, oldPassword, newPassword);
                 setModalMessage(response.message);
                 setShowUpdateModal(true);
@@ -156,7 +171,7 @@ function ProfileMain() {
                     setModalMessage(response.message);
                     setShowUpdateModal(true);
                 } else if (response) {
-                    setModalMessage(response.data.message);
+                    setModalMessage(response.message);
                     setShowUpdateModal(true);
                 } else {
                     setModalMessage('Password update failed');
@@ -183,6 +198,7 @@ function ProfileMain() {
     return (
         <>
             {isImageUploading && <Loader />}
+            <ToastContainer />
             <Modal show={showUpdateModal} onHide={UpdateCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Password Update</Modal.Title>
@@ -241,8 +257,8 @@ function ProfileMain() {
                                         </div>
                                         {(userImg === '' || userImg === defImg) ? (
                                             <>
-                                                <label htmlFor="file-input" className="fi-edit-label">
-                                                    <FiEdit2 onClick={handleFileUploadClick} />
+                                                <label htmlFor="file-input" className="fi-edit-label edit-style">
+                                                    <FiEdit2 onClick={handleFileUploadClick} className='FiEdit-inner-style'/>
                                                 </label>
                                                 <input
                                                     id="file-input"
@@ -255,9 +271,9 @@ function ProfileMain() {
                                         ) : (
                                             <>
                                                 <div className='Main-update-del'>
-                                                    <div>
+                                                    <div style={{padding: "0 5px"}}>
                                                         <label htmlFor="file-input" className="fi-edit-label">
-                                                            <FiEdit2 onClick={handleFileUploadClick} style={{ color: 'yellow' }} />
+                                                            <button onClick={handleFileUploadClick} className='Update-btn'>Update</button> 
                                                         </label>
                                                         <input
                                                             id="file-input"
@@ -267,8 +283,8 @@ function ProfileMain() {
                                                             onChange={(event) => handleImageChange(event)}
                                                         />
                                                     </div>
-                                                    <div>
-                                                        <AiOutlineDelete style={{ color: 'red' }} onClick={() => handleConfirmDelete(userId)} />
+                                                    <div style={{padding: "0 5px"}}>
+                                                        <button className='del-btn' onClick={() => handleConfirmDelete(userId)}> Delete </button>
                                                     </div>
                                                 </div>
                                             </>
@@ -287,13 +303,15 @@ function ProfileMain() {
                                                     onClick={handleUserDetailsUpdate} // Update user details when clicked
                                                 />
                                             ) : (
-                                                <FiEdit2
-                                                    style={{ color: '#0d6efd', cursor: 'pointer' }}
+                                                <Button
+                                                    className='edit-btn'
                                                     onClick={() => {
                                                         setIsFullNameEdit(!isFullNameEdit); // Toggle edit mode for FullName
                                                         setIsBinanceIdEdit(!isBinanceIdEdit); // Toggle edit mode for Binance Id
                                                     }}
-                                                />
+                                                >
+                                                    Edit
+                                                </Button>
                                             )}
                                         </div>
                                         <div className="row">
@@ -345,6 +363,7 @@ function ProfileMain() {
                                                                 type="password"
                                                                 className="form-control input_field"
                                                                 value={oldPassword}
+                                                                required
                                                                 onChange={(e) => setOldPassword(e.target.value)}
                                                             />
                                                         </div>
@@ -352,6 +371,7 @@ function ProfileMain() {
                                                             <p className="m-b-10 f-w-600">New Password</p>
                                                             <input
                                                                 type="password"
+                                                                required
                                                                 className="form-control input_field"
                                                                 value={newPassword}
                                                                 onChange={(e) => setNewPassword(e.target.value)}

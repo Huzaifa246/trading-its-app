@@ -12,9 +12,6 @@ export const StatisticMain = () => {
   const graphValues = JSON.parse(graphValuesString);
   const optionId = searchParams.get("optionId"); 
 
-  console.log(name, "name main");
-  console.log(graphValues, "graphValues main");
-
     return (
         <>
             <div style={{ marginTop: "1rem" }}></div>

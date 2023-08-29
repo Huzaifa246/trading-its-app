@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './mainTable.css';
 import fetchAllTradeOption from '../../../helpers/getApis/getAllOptions';
 import InvestmentByUser from '../../../helpers/PostApis/investmentByUser';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DepositInvestment from '../../../helpers/PostApis/DepositInvestment';
 import { useSelector } from "react-redux";
+import { Modal, Button } from 'react-bootstrap';
 
 function StatisticTable({ optionId }) {
     // const [showDepositModal, setShowDepositModal] = useState(false);
@@ -16,7 +14,7 @@ function StatisticTable({ optionId }) {
     const [tradeOptions, setTradeOptions] = useState([]);
     const [investmentResponse, setInvestmentResponse] = useState(null);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
@@ -37,14 +35,19 @@ function StatisticTable({ optionId }) {
         try {
             const investmentResponse = await InvestmentByUser(userId, investmentValue, optionId);
             setInvestmentResponse(investmentResponse);
-
-            window.location.reload();
+            if (investmentResponse.success) {
+                setShowSuccessModal(true);
+            }
         } catch (error) {
             console.error('Error making investment:', error);
         } finally {
             setShowConfirmationModal(false);
         }
     };
+    const handleSuccessModalClose = () => {
+        setShowSuccessModal(false);
+        window.location.reload();
+    }
     const data = [
         {
             id: 1,
@@ -69,49 +72,37 @@ function StatisticTable({ optionId }) {
         return value >= totalBalance / 2 ? '#2fd3c9' : '#5c768b';
     };
 
-    // const handleShowDepositModal = () => {
-    //     setShowDepositModal(true);
-    // };
-
-    // const handleCloseDepositModal = () => {
-    //     setShowDepositModal(false);
-    // };
-
-    // const handleDeposit = async () => {
-    //     try {
-    //         if (depositAmount <= 0) {
-    //             alert.error('Deposit amount must be greater than zero.');
-    //             return; // Exit the function without making the deposit
-    //         }
-    //         const response = await DepositInvestment(userId, depositAmount);
-    //         setDepositResponse(response);
-    //         window.location.reload(); // Refresh the page or update UI as needed
-    //     } catch (error) {
-    //         console.error('Error making deposit:', error);
-    //     } finally {
-    //         setShowDepositModal(false); // Close the deposit modal
-    //     }
-    // };
-
-
-
     return (
         <>
-            {showConfirmationModal && (
-                <div className="modal-overlay">
-                    <div className="confirmation-modal">
-                        <p>Confirm your investment of {investmentValue}?</p>
-                        <div className="modal-buttons">
-                            <button onClick={confirmInvestment} className="modal-confirm-btn">
-                                Confirm
-                            </button>
-                            <button onClick={() => setShowConfirmationModal(false)} className="modal-cancel-btn">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm your investment</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Confirm your investment of {investmentValue}?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowConfirmationModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={confirmInvestment}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showSuccessModal} onHide={handleSuccessModalClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Investment Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Your investment was successful!</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSuccessModalClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <div>
                 <div style={{
                     padding: ".5rem 1rem .5rem"
@@ -184,9 +175,12 @@ function StatisticTable({ optionId }) {
                             {investmentValue} investment
                         </h6>
                     </div>
-                    <div style={{ margin: "10px" }}>
+                    <div style={{ padding: "0 10px" }}>
                         <div className='button-style'>
-                            <button onClick={handleInvestment} className='buy-btn'>
+                            <button onClick={handleInvestment} 
+                             className={`buy-btn ${investmentValue === 0 ? 'disabled-button' : ''}`}
+                             disabled={investmentValue === 0}
+                            >
                                 Invest
                             </button>
                         </div>
