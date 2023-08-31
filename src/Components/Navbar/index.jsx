@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa"; // Import Profile icon
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import defImg1 from "../../../public/default-img.png";
 
 const Navbar = () => {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -20,13 +21,8 @@ const Navbar = () => {
     };
     return (
         <nav className={styles.nav}>
-            <div className={styles.left}
-                onClick={() => {
-                    localStorage.removeItem("token")
-                    navigate("/login")
-                }}
-            >
-                <img src={ProfileImg} alt="pic" />
+            <div className={styles.left}>
+                <img src={ProfileImg || defImg1} alt="pic" />
                 <h5>{fullName}</h5>
             </div>
             <div className={styles.right}>

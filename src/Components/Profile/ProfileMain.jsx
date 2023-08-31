@@ -6,6 +6,7 @@ import DeleteUserImage from '../../helpers/PostApis/DeleteImage';
 import UpdatePasswordApi from '../../helpers/PostApis/UpdatePassword';
 import defImg from "../../../public/avatar.svg"
 import defImg1 from "../../../public/avatar1.jpeg";
+import defImg2 from "../../../public/default-img.png";
 import { FiEdit2, FiCheck } from "react-icons/fi";
 import UploadImage from '../../helpers/PostApis/UploadImage';
 import Loader from '../Loader';
@@ -246,16 +247,16 @@ function ProfileMain() {
                 </Modal.Footer>
             </Modal>
             <div className="page-content page-container" id="page-content">
-                <div className="row container d-flex justify-content-center" style={{ margin: "20px 0" }}>
+                <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full">
                             <div className="row main-container-pf">
                                 <div className="col-sm-12 user-profile">
                                     <div className="card-block text-center text-white">
                                         <div className="p-b-15">
-                                            <img src={userImg || defImg1} className="img-radius" alt="Profile-Image" />
+                                            <img src={userImg || defImg2} className="img-radius" alt="Profile-Image" />
                                         </div>
-                                        {(userImg === '' || userImg === defImg1) ? (
+                                        {(userImg === '' || userImg === defImg2) ? (
                                             <>
                                                 <label htmlFor="file-input" className="fi-edit-label edit-style">
                                                     <FiEdit2 onClick={handleFileUploadClick} className='FiEdit-inner-style' />
@@ -355,8 +356,8 @@ function ProfileMain() {
                     </div>
                 </div>
             </div>
-            <div className="page-content page-container" id="page-content">
-                <div className="row container d-flex justify-content-center" style={{ margin: "20px 0" }}>
+            <div className="page-content page-container" style={{marginBottom: "100px"}} id="page-content">
+                <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full ">
                             <div className="row">

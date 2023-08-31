@@ -32,3 +32,6 @@
 .exchange p{
     padding-top: 5px;
 }
+.active {
+    color: blue;
+}

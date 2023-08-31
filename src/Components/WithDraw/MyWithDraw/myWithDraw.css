@@ -1,6 +1,6 @@
 .my-wd-btn {
   color: white;
-  font-size: 1rem;
+  font-size: 3vw;
   border-radius: 5px;
   flex: 1;
   margin: 10px 2px;
@@ -16,7 +16,7 @@
   background: linear-gradient(to right, #1c92fc, #20d6de);
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-size: 3vw;
   border-radius: 5px;
   flex: 1;
   margin: 10px 2px;

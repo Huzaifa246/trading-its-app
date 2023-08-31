@@ -21,11 +21,11 @@ function MainWithDraw() {
                     <Button
                         className={`${currentLayout === 'WithDrawBalance' ? 'withDraw-btn' : 'unselected'
                             }`}
-                        onClick={() => dispatch(setLayout('WithDrawBalance'))}>Request WidthDrawal</Button>
+                        onClick={() => dispatch(setLayout('WithDrawBalance'))}>Request WithDrawal</Button>
                     <Button
                         className={`${currentLayout === 'MyWithDraw' ? 'withDraw-btn' : 'unselected'
                             }`}
-                        onClick={() => dispatch(setLayout('MyWithDraw'))}>My WidthDrawal</Button>
+                        onClick={() => dispatch(setLayout('MyWithDraw'))}>My WithDrawal</Button>
                 </div>
 
                 {currentLayout === 'WithDrawBalance' ? <WithDrawBalance className={`${currentLayout === 'WithDrawBalance' ? 'withDraw-btn' : 'unselected'

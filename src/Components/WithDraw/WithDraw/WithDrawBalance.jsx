@@ -96,7 +96,7 @@ function WithDrawBalance() {
             </Modal>
             <div className="Main-wdraw">
                 <div>
-                    <h1 className="h1-wdraw">With Draw</h1>
+                    <h1 className="h1-wdraw">With Drawal</h1>
                     <div>
                         <div className="range-value">
                             <input

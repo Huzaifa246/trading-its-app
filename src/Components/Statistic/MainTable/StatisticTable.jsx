@@ -152,8 +152,8 @@ function StatisticTable({ optionId }) {
                     <div style={{ padding: "0 10px" }}>
                         <div className='button-style'>
                             <button onClick={handleInvestment}
-                                className={`buy-btn ${investmentValue <= 0 && investmentValue > totalBalance ? 'disabled-button' : ''}`}
-                                disabled={investmentValue <= 0 && totalBalance > 0 || isError}
+                                className={`buy-btn ${investmentValue <= 0 || investmentValue > totalBalance ? 'disabled-button' : ''}`}
+                                disabled={investmentValue <= 0 || investmentValue > totalBalance  || isError}
                             >
                                 Invest
                             </button>

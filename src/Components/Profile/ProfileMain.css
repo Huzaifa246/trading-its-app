@@ -154,7 +154,8 @@ h6 {
   color: white;
 }
 .main-container-pf {
-  background: linear-gradient(7deg, rgba(9,29,28,1) 0%, rgba(0,9,34,1) 100%);
+  /* background: linear-gradient(7deg, rgba(9,29,28,1) 0%, rgba(0,9,34,1) 100%); */
+  background: #0b121d;
 }
 .input_field {
   all: inherit;

@@ -4,15 +4,22 @@ import { CgArrowsExchangeAltV } from "react-icons/cg"
 import { MdOutlineManageHistory } from "react-icons/md"
 import "./index.css"
 import React, { useState } from "react"
+import { NavLink } from "react-router-dom";
+
 const FixedBar = ({ fixedBarRef }) => {
-    const [activeItem, setActiveItem] = useState("home"); // Set the initial active item
+    const [activeItem, setActiveItem] = useState("");
 
     const handleItemClick = (item) => {
         setActiveItem(item);
     };
 
-    const isItemActive = (item) => {
-        return item === activeItem;
+    const handleLinkClick = (item, event) => {
+        // Check if it's the same link before preventing default
+        if (activeItem !== item) {
+            setActiveItem(item);
+        } else {
+            event.preventDefault(); // Prevent navigation for the current active item
+        }
     };
     return (
         <div style={{
@@ -34,15 +41,15 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: isItemActive("home") ? "white" : "#a8a8a8",
+                color: activeItem === "home" ? "blue" : "#a8a8a8",
                 fontSize: "6vw"
             }}
                 onClick={() => handleItemClick("home")}
             >
-                <a href="/" className="a-tag-style">
-                    <BiHomeSmile />
-                    <p style={{ fontSize: "3vw" }}>Home</p>
-                </a>
+                <NavLink to="/" className="a-tag-style" onClick={(event) => handleLinkClick("home", event)}>
+                    <BiHomeSmile style={{ color: activeItem === "home" ? "blue" : "#a8a8a8" }} />
+                    <p style={{ fontSize: "3vw", color: activeItem === "home" ? "blue" : "#a8a8a8" }}>Home</p>
+                </NavLink>
             </div>
             <div style={{
                 flex: 1,
@@ -55,8 +62,8 @@ const FixedBar = ({ fixedBarRef }) => {
                 color: "#a8a8a8",
                 fontSize: "6vw"
             }}>
-                <BsWallet2 style={{ scale: ".8" }} />
-                <p style={{ fontSize: "3vw" }}>Wallet</p>
+                <BsWallet2 style={{ scale: ".8", color: activeItem === "wallet" ? "blue" : "#a8a8a8" }} />
+                <p style={{ fontSize: "3vw", color: activeItem === "wallet" ? "blue" : "#a8a8a8" }}>Wallet</p>
             </div>
             <div style={{
                 flex: 1,
@@ -67,11 +74,14 @@ const FixedBar = ({ fixedBarRef }) => {
                 fontWeight: "500",
                 cursor: "pointer",
                 color: "#a8a8a8"
-            }}>
-                <a href="/deposit" className="a-tag-style exchange">
+            }}
+                onClick={() => handleItemClick("deposit")}
+            >
+                <NavLink to="/deposit" className="a-tag-style exchange" 
+                onClick={(event) => handleLinkClick("deposit", event)}>
                     <div style={{
                         background: "#e1f8ff",
-                        color: "#000",
+                        color: activeItem === "deposit" ? "blue" : "#000",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -82,8 +92,8 @@ const FixedBar = ({ fixedBarRef }) => {
                     }}>
                         <CgArrowsExchangeAltV style={{ boxShadow: "0 0 2px  #e1f8ff", borderRadius: "2vw" }} />
                     </div>
-                    <p style={{ fontSize: "3vw", marginBottom: "0" }}>Deposit</p>
-                </a>
+                    <p style={{ fontSize: "3vw", marginBottom: "0", color: activeItem === "deposit" ? "blue" : "#a8a8a8" }}>Deposit</p>
+                </NavLink>
             </div>
             <div style={{
                 flex: 1,
@@ -93,16 +103,17 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: isItemActive("allInvestment") ? "white" : "#a8a8a8",
-                //#007aff
+                color: activeItem === "allInvestment" ? "blue" : "#a8a8a8",
                 fontSize: "6vw"
             }}
                 onClick={() => handleItemClick("allInvestment")}
             >
-                <a href="/allInvestment" className="a-tag-style">
-                    <BiBarChartAlt2 />
-                    <p style={{ fontSize: "3vw" }}>History</p>
-                </a>
+                <NavLink to="/allInvestment" className="a-tag-style"
+                onClick={(event) => handleLinkClick("allInvestment", event)}
+                >
+                    <BiBarChartAlt2 style={{ color: activeItem === "allInvestment" ? "blue" : "#a8a8a8" }} />
+                    <p style={{ fontSize: "3vw", color: activeItem === "allInvestment" ? "blue" : "#a8a8a8" }}>History</p>
+                </NavLink>
             </div>
             <div style={{
                 flex: 1,
@@ -112,14 +123,17 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: isItemActive("withdraw") ? "white" : "#a8a8a8",
+                color: activeItem === "withdraw" ? "blue" : "#a8a8a8",
                 fontSize: "6vw"
-            }}>
-                
-                <a href="/withdraw" className="a-tag-style">
-                    <MdOutlineManageHistory />
-                    <p style={{ fontSize: "3vw" }}>WithDrawal</p>
-                </a>
+            }}
+                onClick={() => handleItemClick("withdraw")}
+            >
+                <NavLink to="/withdraw" className="a-tag-style" 
+                onClick={(event) => handleLinkClick("withdraw", event)}
+                >
+                    <MdOutlineManageHistory style={{ color: activeItem === "withdraw" ? "blue" : "#a8a8a8" }} />
+                    <p style={{ fontSize: "3vw", color: activeItem === "withdraw" ? "blue" : "#a8a8a8" }}>WithDrawal</p>
+                </NavLink>
             </div>
         </div>
     )

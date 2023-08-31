@@ -13,6 +13,7 @@ function AllInvestment() {
     const [selectedTradeOption, setSelectedTradeOption] = useState("");
     const [investmentData, setInvestmentData] = useState([]);
     const [isLoading, setLoading] = useState(false);
+    const [insideLoading, setInsideLoading] = useState(true);
     const [showAll, setShowAll] = useState(true);
     const [tradeOptions, setTradeOptions] = useState([]);
 
@@ -37,6 +38,7 @@ function AllInvestment() {
 
     const fetchInvestmentData = async (timeOption, tradeOption) => {
         try {
+            setInsideLoading(true)
             let response;
 
             if ((timeOption === "current" || timeOption === "past") && tradeOption !== "") {
@@ -53,7 +55,7 @@ function AllInvestment() {
         } catch (error) {
             console.error("Error fetching investment data:", error);
         } finally {
-            setLoading(false); // Set loading to false after data is fetched or if there's an error
+            setInsideLoading(false); // Set loading to false after data is fetched or if there's an error
         }
     };
 
@@ -88,7 +90,6 @@ function AllInvestment() {
                         className={`${styles.item} ${selectedTimeOption === "current" ? styles.selected : ''}`}
                         onClick={() => handleTimeOptionClick("current")}
                         style={{
-                            border: "5px solid #037782",
                             borderRadius: "20px",
                         }}
                     >
@@ -98,7 +99,6 @@ function AllInvestment() {
                         className={`${styles.item} ${selectedTimeOption === "past" ? styles.selected : ''}`}
                         onClick={() => handleTimeOptionClick("past")}
                         style={{
-                            border: "5px solid #037782",
                             borderRadius: "20px",
                         }}
                     >
@@ -131,50 +131,48 @@ function AllInvestment() {
                     padding: ".5rem 1rem .5rem"
                 }}>
                     <div style={{ padding: ".5rem" }}>
-                        {isLoading ? (
+                        {isLoading || insideLoading ? (
                             <Loader />
-                        ) : (
-                            investmentData?.length > 0 ? (
-                                investmentData?.map(item => (
-                                    (selectedTradeOption === "" || item.investment_name._id === selectedTradeOption) && (
-                                        <div
-                                            key={item._id}
-                                            style={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                color: "white",
-                                                gap: "1rem",
-                                                marginBottom: "1rem",
-                                                justifyContent: "space-between",
-                                            }}
-                                        >
-                                            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                                <img
-                                                    src={"https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png"}
-                                                    alt={item?.investment_name?.name}
-                                                    style={{ width: "11vw", height: "11vw", objectFit: "cover" }}
-                                                />
-                                                <div>
-                                                    <h2 style={{ fontSize: "4vw", fontWeight: 600 }}>
-                                                        {item?.investment_name?.name}
-                                                    </h2>
-                                                    <span style={{ color: "#a8a8a8", fontSize: "3.7vw" }}>
-                                                        {formatDateTime(item?.invesAt)}
-                                                    </span>
-                                                </div>
-                                            </div>
+                        ) : investmentData?.length > 0 ? (
+                            investmentData?.map(item =>
+                                (selectedTradeOption === "" || item.investment_name._id === selectedTradeOption) && (
+                                    <div
+                                        key={item._id}
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            color: "white",
+                                            gap: "1rem",
+                                            marginBottom: "1rem",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                                            <img
+                                                src={"https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png"}
+                                                alt={item?.investment_name?.name}
+                                                style={{ width: "11vw", height: "11vw", objectFit: "cover" }}
+                                            />
                                             <div>
-                                                <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
-                                                <span style={{ color: "#21c8d7", fontSize: "3vw" }}>
-                                                    {item?.profitPercentage.toFixed(2)}
+                                                <h2 style={{ fontSize: "4vw", fontWeight: 600 }}>
+                                                    {item?.investment_name?.name}
+                                                </h2>
+                                                <span style={{ color: "#a8a8a8", fontSize: "3.7vw" }}>
+                                                    {formatDateTime(item?.invesAt)}
                                                 </span>
                                             </div>
                                         </div>
-                                    )
-                                ))
-                            ) : (
-                                <p className='txt-center-white'>No data found</p>
+                                        <div>
+                                            <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
+                                            <span style={{ color: "#21c8d7", fontSize: "3vw" }}>
+                                                {item?.profitPercentage.toFixed(2)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                )
                             )
+                            ) : (
+                            <p className='txt-center-white'>No data found</p>
                         )}
                     </div>
                 </div>
