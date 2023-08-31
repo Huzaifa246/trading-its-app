@@ -66,6 +66,7 @@ function AllInvestment() {
 
     const handleTradeOptionClick = (tradeOption) => {
         setSelectedTradeOption(tradeOption);
+        setShowAll(false);
         setLoading(true);
     };
 
