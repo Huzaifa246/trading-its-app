@@ -1,22 +1,30 @@
 .my-wd-btn {
-  background: linear-gradient(to right, #1c92fc, #20d6de);
-  border: none;
-  outline: none;
   color: white;
   font-size: 1rem;
   border-radius: 5px;
   flex: 1;
-  /* padding: 5px; */
   margin: 10px 2px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  border: none;
+  background: transparent;
 }
 .my-wd-btn.active {
-  border: 2px solid #20d6de;
-  background: none;
+  background: linear-gradient(to right, #1c92fc, #20d6de);
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  flex: 1;
+  margin: 10px 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 .cancel-wd-btn {
   border: 2px solid red;

@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Chart from "react-apexcharts"
 import { MdArrowBackIosNew } from 'react-icons/md';
-
+import "./StaticChart.css";
 const StaticChart = ({ name, graphValues }) => {
 
     const currenciesData = [
