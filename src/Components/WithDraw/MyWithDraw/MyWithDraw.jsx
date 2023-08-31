@@ -5,6 +5,7 @@ import { formatDateTime } from '../../../helpers/DataFormat/DateFormat';
 import './myWithDraw.css';
 import { Modal, Button } from 'react-bootstrap';
 import WdPostCancelUser from '../../../helpers/WithDrawApi/WdPostCancelUser';
+import Loader from '../../Loader';
 
 function MyWithDraw() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
@@ -12,6 +13,7 @@ function MyWithDraw() {
     const [withDrawData, setWithDrawData] = useState([]);
     const [status, setStatus] = useState('');
     const [activeStatus, setActiveStatus] = useState('');
+    const [isLoading, setLoading] = useState(false);
 
     // State for withdrawal cancellation confirmation
     const [cancellationModalOpen, setCancellationModalOpen] = useState(false);
@@ -19,11 +21,15 @@ function MyWithDraw() {
 
     useEffect(() => {
         async function fetchData() {
+            setLoading(true);
             try {
                 const response = await WithDrawAll(userId, status); // Pass the selected status
                 setWithDrawData(response.data);
             } catch (error) {
                 console.error("Error fetching investment data:", error);
+            }
+            finally{
+                setLoading(false);
             }
         }
         fetchData();
@@ -80,56 +86,64 @@ function MyWithDraw() {
                     <button className={`my-wd-btn ${activeStatus === 'canceled' ? 'active' : ''}`} onClick={() => handleStatusChange('canceled')}>Canceled</button>
                 </div>
                 <div className='wd-list'>
-                    {withDrawData?.map((item) => (
-                        <div
-                            key={item._id}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                color: 'white',
-                                gap: '1rem',
-                                marginBottom: '1rem',
-                                justifyContent: 'space-between',
-                            }}
-                        >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <img
-                                    src="https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png"
-                                    alt={item?.binance_id || "Add Id"}
-                                    style={{ width: '11vw', height: '11vw', objectFit: 'cover' }}
-                                />
-                                <div>
-                                    <h2 style={{ fontSize: '4vw', fontWeight: 600 }}>
-                                        {item?.amount?.toFixed(2)}
-                                    </h2>
-                                    <span style={{ color: '#a8a8a8', fontSize: '3.7vw' }}>
-                                        {formatDateTime(item?.createdAt)}
-                                    </span>
-                                </div>
-                            </div>
-                            <div>
-                                <h2 style={{ fontSize: '4vw', fontWeight: 700 }}>{`${item?.binance_id || "Add Id"}`}</h2>
-                                <span style={{
-                                    color: '#21c8d7', fontSize: '3vw', display: "flex",
-                                    justifyContent: "flex-end"
-                                }}>
-                                    {item?.status === "pending" ? (
-                                        <button className='cancel-wd-btn'
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "flex-end"
-                                            }}
-                                            onClick={() => handleCancelClick(item)}>Cancel</button>
-                                    ) : (
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        withDrawData?.length > 0 ? (
+                            withDrawData?.map((item) => (
+                                <div
+                                    key={item._id}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        color: 'white',
+                                        gap: '1rem',
+                                        marginBottom: '1rem',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                        <img
+                                            src="https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png"
+                                            alt={item?.binance_id || "Add Id"}
+                                            style={{ width: '11vw', height: '11vw', objectFit: 'cover' }}
+                                        />
+                                        <div>
+                                            <h2 style={{ fontSize: '4vw', fontWeight: 600 }}>
+                                                {item?.amount?.toFixed(2)}
+                                            </h2>
+                                            <span style={{ color: '#a8a8a8', fontSize: '3.7vw' }}>
+                                                {formatDateTime(item?.createdAt)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h2 style={{ fontSize: '4vw', fontWeight: 700 }}>{`${item?.binance_id || "Add Id"}`}</h2>
                                         <span style={{
-                                            display: "flex",
+                                            color: '#21c8d7', fontSize: '3vw', display: "flex",
                                             justifyContent: "flex-end"
-                                        }}>{item?.status}</span>
-                                    )}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
+                                        }}>
+                                            {item?.status === "pending" ? (
+                                                <button className='cancel-wd-btn'
+                                                    style={{
+                                                        display: "flex",
+                                                        justifyContent: "flex-end"
+                                                    }}
+                                                    onClick={() => handleCancelClick(item)}>Cancel</button>
+                                            ) : (
+                                                <span style={{
+                                                    display: "flex",
+                                                    justifyContent: "flex-end"
+                                                }}>{item?.status}</span>
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className='txt-center-white'>No data found</p>
+                        )
+                    )}
                 </div>
             </div >
         </>

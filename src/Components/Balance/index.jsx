@@ -24,14 +24,14 @@ const Balance = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.right}>
+            {/* <div className={styles.right}>
                 <div>
                     <h5>Available Balance</h5>
                 </div>
                 <div>
                     <span>{availableBalance?.toFixed(2)}</span>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

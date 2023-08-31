@@ -16,7 +16,7 @@
     justify-content: center;
   }
   .Depositbtn {
-    padding: 15px 15px;
+    padding: 10px;
     border-radius: 10px;
     background: linear-gradient(to right, #4791e1, #27cae1);
     color: #fff;
@@ -27,7 +27,6 @@
     outline: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease;
-    width: 90%;
   }
   .Depositbtn[disabled] {
     opacity: 0.6; /* Reduced opacity when disabled */

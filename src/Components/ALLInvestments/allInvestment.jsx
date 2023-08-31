@@ -173,7 +173,7 @@ function AllInvestment() {
                                     )
                                 ))
                             ) : (
-                                <p className='txt-center-white'>Click button to get its data</p>
+                                <p className='txt-center-white'>No data found</p>
                             )
                         )}
                     </div>

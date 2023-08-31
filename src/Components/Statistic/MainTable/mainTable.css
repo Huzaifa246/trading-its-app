@@ -1,93 +1,83 @@
-.state-change-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  .state-change-container .state-h6-head{
-    color: grey;
-  }
-  .state-change-container .state-updown{
-    color: #349692;
-    text-align: center;
-    font-weight: 500;
-  }
-  .state-changeFrst{
-    text-align: start;
-  }
-  .state-changeSec{
-    text-align: center;
-  }
-  .state-changeThrd{
-    text-align: end;
-  }
-  .state-changeThrd .state-h6-2nd,
-  .state-changeSec .state-h6-2nd {
-    color: white;
-    font-weight: 500;
-  }
+/* -- */
+.buy-btn {
+  padding: 15px 15px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #4791e1, #27cae1);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+  width: 100%;
+}
+.button-style {
+  display: flex;
+  justify-content: center;
+}
 
-  /* -- */
-  .buy-btn {
-    padding: 15px 15px;
-    border-radius: 10px;
-    background: linear-gradient(to right, #4791e1, #27cae1);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    outline: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease;
-    width: 100%;
-  }
-  .button-style {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .range-head {
-    text-align: center;
-    color: gray;
-  }
-  
-  .sell-buy-main {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .range-style {
-    width: 75%;
-    background: none !important;
-  }
-  
-  .range-main-style {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .sell-percentage-grey {
-    color: #296697;
-  }
-  
-  .buy-percentage-blue {
-    color: #33cfc3;
-  }
-  
-  .range-style::-webkit-slider-thumb {
-    background-color: var(--range-color);
-  }
-  
-  .range-style::-moz-range-thumb {
-    background-color: var(--range-color);
-  }
-  
-  .range-style::-ms-thumb {
-    background-color: var(--range-color);
-  }
-  .disabled-button {
-    opacity: 0.5; /* Adjust the opacity value as needed */
+.range-head {
+  text-align: center;
+  color: gray;
+}
+
+.sell-buy-main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.range-style {
+  width: 75%;
+  background: none !important;
+}
+
+.range-main-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sell-percentage-grey {
+  color: #296697;
+}
+
+.buy-percentage-blue {
+  color: #33cfc3;
+}
+
+.range-style::-webkit-slider-thumb {
+  background-color: var(--range-color);
+}
+
+.range-style::-moz-range-thumb {
+  background-color: var(--range-color);
+}
+
+.range-style::-ms-thumb {
+  background-color: var(--range-color);
+}
+.disabled-button {
+  opacity: 0.5; /* Adjust the opacity value as needed */
+}
+.Invest-input {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  background: transparent !important;
+}
+.Invest-input:focus {
+  border: none;
+  background-color: transparent;
+  color: white !important;
+  outline: none !important;
+}
+.Main-invest-style{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 40vh;
 }

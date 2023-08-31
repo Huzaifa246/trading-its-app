@@ -118,7 +118,7 @@ const FixedBar = ({ fixedBarRef }) => {
                 
                 <a href="/withdraw" className="a-tag-style">
                     <MdOutlineManageHistory />
-                    <p style={{ fontSize: "3vw" }}>WithDraw</p>
+                    <p style={{ fontSize: "3vw" }}>WithDrawal</p>
                 </a>
             </div>
         </div>

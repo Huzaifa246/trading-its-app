@@ -60,7 +60,7 @@ const CurrenciesList = () => {
                             </div>
                             <div>
                                 <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
-                                <span style={{ color: "#21c8d7", fontSize: "3vw" }}>{item?.status}</span>
+                                {/* <span style={{ color: "#21c8d7", fontSize: "3vw" }}>{item?.status}</span> */}
                             </div>
                         </div>
                     ))

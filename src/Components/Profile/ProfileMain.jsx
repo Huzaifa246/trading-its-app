@@ -5,8 +5,8 @@ import { Button, Modal } from 'react-bootstrap';
 import DeleteUserImage from '../../helpers/PostApis/DeleteImage';
 import UpdatePasswordApi from '../../helpers/PostApis/UpdatePassword';
 import defImg from "../../../public/avatar.svg"
+import defImg1 from "../../../public/avatar1.jpeg";
 import { FiEdit2, FiCheck } from "react-icons/fi";
-import { AiOutlineDelete } from "react-icons/ai"
 import UploadImage from '../../helpers/PostApis/UploadImage';
 import Loader from '../Loader';
 import UpdateImage from './../../helpers/PostApis/UpdateImage';
@@ -97,7 +97,7 @@ function ProfileMain() {
                     toast.success(response.message, {
                         position: "top-center",
                     });
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location.reload();
                     }, 3000);
                 } else {
@@ -249,16 +249,16 @@ function ProfileMain() {
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full">
-                            <div className="row m-l-0 m-r-0 main-container-pf">
+                            <div className="row main-container-pf">
                                 <div className="col-sm-12 user-profile">
                                     <div className="card-block text-center text-white">
-                                        <div className="p-b-5">
-                                            <img src={userImg || defImg} className="img-radius" alt="Profile-Image" />
+                                        <div className="p-b-15">
+                                            <img src={userImg || defImg1} className="img-radius" alt="Profile-Image" />
                                         </div>
-                                        {(userImg === '' || userImg === defImg) ? (
+                                        {(userImg === '' || userImg === defImg1) ? (
                                             <>
                                                 <label htmlFor="file-input" className="fi-edit-label edit-style">
-                                                    <FiEdit2 onClick={handleFileUploadClick} className='FiEdit-inner-style'/>
+                                                    <FiEdit2 onClick={handleFileUploadClick} className='FiEdit-inner-style' />
                                                 </label>
                                                 <input
                                                     id="file-input"
@@ -271,9 +271,9 @@ function ProfileMain() {
                                         ) : (
                                             <>
                                                 <div className='Main-update-del'>
-                                                    <div style={{padding: "0 5px"}}>
+                                                    <div style={{ padding: "0 5px" }}>
                                                         <label htmlFor="file-input" className="fi-edit-label">
-                                                            <button onClick={handleFileUploadClick} className='Update-btn'>Update</button> 
+                                                            <button onClick={handleFileUploadClick} className='Update-btn'>Update</button>
                                                         </label>
                                                         <input
                                                             id="file-input"
@@ -283,7 +283,7 @@ function ProfileMain() {
                                                             onChange={(event) => handleImageChange(event)}
                                                         />
                                                     </div>
-                                                    <div style={{padding: "0 5px"}}>
+                                                    <div style={{ padding: "0 5px" }}>
                                                         <button className='del-btn' onClick={() => handleConfirmDelete(userId)}> Delete </button>
                                                     </div>
                                                 </div>
@@ -298,10 +298,12 @@ function ProfileMain() {
                                             <h6 className="p-b-5 f-w-600"><b>User Information </b></h6>
 
                                             {isFullNameEdit || isBinanceIdEdit ? (
-                                                <FiCheck
-                                                    style={{ color: '#3498db', cursor: 'pointer', fontWeight: 600 }}
+                                                <Button
+                                                    className='edit-btn'
                                                     onClick={handleUserDetailsUpdate} // Update user details when clicked
-                                                />
+                                                >
+                                                    Save
+                                                </Button>
                                             ) : (
                                                 <Button
                                                     className='edit-btn'
@@ -346,46 +348,52 @@ function ProfileMain() {
                                                 )}
                                             </div>
                                         </div>
-
-                                        <div className="row">
-                                            <div className="col-sm-12">
-                                                <h6 className="m-b-20 m-t-40 p-b-5  f-w-600"
-                                                    onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
-                                                >
-                                                    Password Update
-                                                </h6>
-
-                                                {isPasswordUpdateOpen && (
-                                                    <div className="row">
-                                                        <div className="col-sm-6">
-                                                            <p className="m-b-10 f-w-600">Old Password</p>
-                                                            <input
-                                                                type="password"
-                                                                className="form-control input_field"
-                                                                value={oldPassword}
-                                                                required
-                                                                onChange={(e) => setOldPassword(e.target.value)}
-                                                            />
-                                                        </div>
-                                                        <div className="col-sm-6">
-                                                            <p className="m-b-10 f-w-600">New Password</p>
-                                                            <input
-                                                                type="password"
-                                                                required
-                                                                className="form-control input_field"
-                                                                value={newPassword}
-                                                                onChange={(e) => setNewPassword(e.target.value)}
-                                                            />
-                                                        </div>
-                                                        <button className="btn btn-primary mt-3" onClick={handlePasswordUpdate}>
-                                                            Update Password
-                                                        </button>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="page-content page-container" id="page-content">
+                <div className="row container d-flex justify-content-center" style={{ margin: "20px 0" }}>
+                    <div className="col-xl-6 col-md-12">
+                        <div className="card user-card-full ">
+                            <div className="row">
+                                <div className="col-sm-12 main-container-pf">
+                                    <h6 className="m-b-20 m-t-20 p-b-5 f-w-600 pass-color"
+                                        onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
+                                    >
+                                        Password Update
+                                    </h6>
+
+                                    {isPasswordUpdateOpen && (
+                                        <div className="row">
+                                            <div className="col-sm-6">
+                                                <p className="m-b-10 f-w-600 color-white">Old Password</p>
+                                                <input
+                                                    type="password"
+                                                    className="form-control input_field"
+                                                    value={oldPassword}
+                                                    required
+                                                    onChange={(e) => setOldPassword(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="col-sm-6">
+                                                <p className="m-b-10 f-w-600 color-white">New Password</p>
+                                                <input
+                                                    type="password"
+                                                    required
+                                                    className="form-control input_field"
+                                                    value={newPassword}
+                                                    onChange={(e) => setNewPassword(e.target.value)}
+                                                />
+                                            </div>
+                                            <button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
+                                                Update Password
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

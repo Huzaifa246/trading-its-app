@@ -19,16 +19,17 @@ function MainWithDraw() {
                     }}
                 >
                     <Button
-                        className={`${currentLayout === 'WithDrawBalance' ? 'glow-on-hover' : 'unselected'
+                        className={`${currentLayout === 'WithDrawBalance' ? 'withDraw-btn' : 'unselected'
                             }`}
-                        onClick={() => dispatch(setLayout('WithDrawBalance'))}>Request WidthDraw</Button>
+                        onClick={() => dispatch(setLayout('WithDrawBalance'))}>Request WidthDrawal</Button>
                     <Button
-                        className={`${currentLayout === 'MyWithDraw' ? 'glow-on-hover' : 'unselected'
+                        className={`${currentLayout === 'MyWithDraw' ? 'withDraw-btn' : 'unselected'
                             }`}
-                        onClick={() => dispatch(setLayout('MyWithDraw'))}>My WithDraws</Button>
+                        onClick={() => dispatch(setLayout('MyWithDraw'))}>My WidthDrawal</Button>
                 </div>
 
-                {currentLayout === 'WithDrawBalance' ? <WithDrawBalance /> : <MyWithDraw />}
+                {currentLayout === 'WithDrawBalance' ? <WithDrawBalance className={`${currentLayout === 'WithDrawBalance' ? 'withDraw-btn' : 'unselected'
+                    }`} /> : <MyWithDraw />}
             </div>
         </>
     )

@@ -15,6 +15,8 @@ function StatisticTable({ optionId }) {
     const [investmentResponse, setInvestmentResponse] = useState(null);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [rangeValue, setRangeValue] = useState('');
 
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
@@ -48,24 +50,14 @@ function StatisticTable({ optionId }) {
         setShowSuccessModal(false);
         window.location.reload();
     }
-    const data = [
-        {
-            id: 1,
-            name: "Binance coin",
-            abbr: "BNB",
-            icon: "https://s3.cointelegraph.com/storage/uploads/view/f90d3fbc91f706a937b53ce93894b6d3.png",
-            value: "$363.23",
-            increment: "+5.67%"
-        }
-    ]
-    const [rangeValue, setRangeValue] = useState(0);
 
 
     const depositValue = totalBalance - rangeValue;
     const investmentValue = rangeValue;
 
     const handleRangeChange = (event) => {
-        const newValue = event.target.value;
+        const newValue = parseFloat(event.target.value);
+        setIsError(newValue <= 0 || newValue > totalBalance);
         setRangeValue(newValue);
     };
     const getRangeColor = (value) => {
@@ -103,52 +95,33 @@ function StatisticTable({ optionId }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <div>
+            <div className='Main-invest-style'>
                 <div style={{
-                    padding: ".5rem 1rem .5rem"
+                    padding: ".5rem 1rem"
                 }}>
-                    <div style={{
-                        padding: ".5rem",
-                    }}>
-                        {data?.map(item => (
-                            <div key={item.id} style={{
-                                display: "flex",
-                                alignItems: "center",
-                                color: "white",
-                                gap: "1rem",
-                                marginBottom: "1rem",
-                                justifyContent: "space-between"
-                            }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                    {/* <img src={item?.icon} alt={item?.name} style={{ width: "11vw", height: "11vw", objectFit: "cover" }} /> */}
-                                    <div>
-                                        <h1 style={{ fontSize: "4.5vw", fontWeight: 600, color: "#515c6c" }}>Price Index</h1>
-                                        <h2 style={{ fontSize: "4vw", fontWeight: 600 }}>{item?.name}</h2>
-                                        <span style={{ color: "#a8a8a8", fontSize: "3.7vw" }}>{item?.value}</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h1 style={{ fontSize: "4.5vw", fontWeight: 600, color: "#515c6c" }}>Market Cap</h1>
-                                    <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.value}`}</h2>
-                                    <span style={{ color: "#21c8d7", fontSize: "3vw" }}>{item?.increment}</span>
-                                </div>
-                            </div>
-                        ))}
+                </div>
+                <div>
+                    <h1 className="h1-deposit">Add Investment</h1>
+                    <div>
+                        <div className="range-value">
+                            <input
+                                type="number"
+                                className={`form-control Invest-input ${isError ? 'is-invalid' : ''}`}
+                                id="customRange1"
+                                min="0.00"
+                                max={totalBalance}
+                                value={rangeValue}
+                                onChange={handleRangeChange}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="state-change-container">
-                    <div className="state-changeFrst">
-                        <h6 className='state-h6-head'> Daily Change</h6>
-                        <h6 className='state-updown'>4.86%</h6>
-                    </div>
-                    <div className="state-changeSec">
-                        <h6 className='state-h6-head'> High Price</h6>
-                        <h6 className="state-h6-2nd">$7999.00</h6>
-                    </div>
-                    <div className='state-changeThrd'>
-                        <h6 className='state-h6-head'> Low Price</h6>
-                        <h6 className="state-h6-2nd">$8754.00</h6>
-                    </div>
+                <div>
+                    {isError && (
+                        <div className="invalid-feedback">
+                            Value must be between 0 and {totalBalance}
+                        </div>
+                    )}
                 </div>
                 <div style={{ position: 'sticky', width: '100%', padding: '20px 15px' }}>
                     <div className='range-main-style'>
@@ -158,6 +131,7 @@ function StatisticTable({ optionId }) {
                             className="form-range range-style"
                             id="customRange1"
                             min="0"
+                            step={0.01}
                             max={totalBalance}
                             value={rangeValue}
                             onChange={handleRangeChange}
@@ -169,17 +143,17 @@ function StatisticTable({ optionId }) {
                     </div>
                     <div className='sell-buy-main'>
                         <h6 className={`range-head ${depositValue >= totalBalance / 2 ? 'sell-percentage-grey' : ''}`}>
-                            {depositValue} deposit
+                            {totalBalance || depositValue} deposit
                         </h6>
                         <h6 className={`range-head ${investmentValue >= totalBalance / 2 ? 'buy-percentage-blue' : ''}`}>
-                            {investmentValue} investment
+                            {"0" || investmentValue} investment
                         </h6>
                     </div>
                     <div style={{ padding: "0 10px" }}>
                         <div className='button-style'>
-                            <button onClick={handleInvestment} 
-                             className={`buy-btn ${investmentValue === 0 ? 'disabled-button' : ''}`}
-                             disabled={investmentValue === 0}
+                            <button onClick={handleInvestment}
+                                className={`buy-btn ${investmentValue <= 0 && investmentValue > totalBalance ? 'disabled-button' : ''}`}
+                                disabled={investmentValue <= 0 && totalBalance > 0 || isError}
                             >
                                 Invest
                             </button>
