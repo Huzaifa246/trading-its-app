@@ -13,7 +13,6 @@ function AllInvestment() {
     const [selectedTradeOption, setSelectedTradeOption] = useState("");
     const [investmentData, setInvestmentData] = useState([]);
     const [isLoading, setLoading] = useState(false);
-    const [insideLoading, setInsideLoading] = useState(true);
     const [showAll, setShowAll] = useState(true);
     const [tradeOptions, setTradeOptions] = useState([]);
 
@@ -38,7 +37,6 @@ function AllInvestment() {
 
     const fetchInvestmentData = async (timeOption, tradeOption) => {
         try {
-            setInsideLoading(true)
             let response;
 
             if ((timeOption === "current" || timeOption === "past") && tradeOption !== "") {
@@ -55,7 +53,7 @@ function AllInvestment() {
         } catch (error) {
             console.error("Error fetching investment data:", error);
         } finally {
-            setInsideLoading(false); // Set loading to false after data is fetched or if there's an error
+            setLoading(false); // Set loading to false after data is fetched or if there's an error
         }
     };
 
@@ -131,7 +129,7 @@ function AllInvestment() {
                     padding: ".5rem 1rem .5rem"
                 }}>
                     <div style={{ padding: ".5rem" }}>
-                        {isLoading || insideLoading ? (
+                        {isLoading ? (
                             <Loader />
                         ) : investmentData?.length > 0 ? (
                             investmentData?.map(item =>
