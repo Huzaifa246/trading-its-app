@@ -7,7 +7,7 @@ import UpdatePasswordApi from '../../helpers/PostApis/UpdatePassword';
 import defImg from "../../../public/avatar.svg"
 import defImg1 from "../../../public/avatar1.jpeg";
 import defImg2 from "../../../public/default-img.png";
-import { FiEdit2, FiCheck } from "react-icons/fi";
+import { FiEdit2, FiEye, FiEyeOff } from "react-icons/fi";
 import UploadImage from '../../helpers/PostApis/UploadImage';
 import Loader from '../Loader';
 import UpdateImage from './../../helpers/PostApis/UpdateImage';
@@ -27,7 +27,10 @@ function ProfileMain() {
 
     const [isPasswordUpdateOpen, setIsPasswordUpdateOpen] = useState(false);
     const [oldPassword, setOldPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
     const [showModal, setShowModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
@@ -42,7 +45,9 @@ function ProfileMain() {
     const [binanceId, setBinanceId] = useState('');
     const [showModalEdit, setShowModalEdit] = useState(false);
 
-
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     useEffect(() => {
         // Set initial values for fullName and binanceId when userDetails changes
         setFullName(userDetails?.data?.fullName || '');
@@ -356,7 +361,7 @@ function ProfileMain() {
                     </div>
                 </div>
             </div>
-            <div className="page-content page-container" style={{marginBottom: "100px"}} id="page-content">
+            <div className="page-content page-container" style={{ marginBottom: "100px" }} id="page-content">
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full ">
@@ -383,11 +388,30 @@ function ProfileMain() {
                                             <div className="col-sm-6">
                                                 <p className="m-b-10 f-w-600 color-white">New Password</p>
                                                 <input
-                                                    type="password"
+                                                    type={showPassword ? "text" : "password"}
                                                     required
                                                     className="form-control input_field"
                                                     value={newPassword}
                                                     onChange={(e) => setNewPassword(e.target.value)}
+                                                />
+                                                <div className="input-group-append">
+                                                    <button
+                                                        className="btn btn-outline-secondary"
+                                                        type="button"
+                                                        onClick={togglePasswordVisibility}
+                                                    >
+                                                        {showPassword ? <FiEyeOff /> : <FiEye />}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6">
+                                                <p className="m-b-10 f-w-600 color-white">Confirm Password</p>
+                                                <input
+                                                    type={showPassword ? "text" : "password"} // Use the 'showPassword' state
+                                                    required
+                                                    className="form-control input_field"
+                                                    value={confirmPassword}
+                                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                                 />
                                             </div>
                                             <button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>

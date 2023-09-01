@@ -106,15 +106,13 @@ const StaticChart = ({ name, graphValues }) => {
                         };
                         return (
                             <SwiperSlide key={item.value} style={{
-                                // background: "#181f2d",
-                                // boxShadow: "0 0 20px rgba(8, 21, 66, 0.05)",
                                 padding: 0,
                                 overflow: "hidden",
                                 cursor: "pointer",
                                 width: "100%",
                                 transition: "250ms"
                             }}>
-                                <div style={{ width: "100%", marginTop: "-4.5rem" }}>
+                                <div style={{ width: "100%", marginTop: "-4rem" }}>
                                     <Chart id="chart-currently" options={Currentlysale.options} series={Currentlysale.series} type="area" minHeight={"200px"} height={"250px"} width={"118%"} style={{
                                         transform: "translateX(-8%) translateY(26px)",
                                     }} />

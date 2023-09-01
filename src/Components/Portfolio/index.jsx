@@ -11,7 +11,7 @@ import Loader from '../Loader';
 const Portfolio = () => {
     const [tradeOptions, setTradeOptions] = useState([]);
     const [pastUserTradeData, setPastUserTradeData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isChartLoading, setIsChartLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
@@ -21,7 +21,7 @@ const Portfolio = () => {
             } catch (error) {
                 console.error("Error fetching trade options:", error);
             } finally {
-                setIsLoading(false);
+                setIsChartLoading(false);
             }
         }
         fetchData();
@@ -71,16 +71,18 @@ const Portfolio = () => {
         }
     }, [tradeOptions]);
 
-    if (isLoading) {
+    if (isChartLoading) {
         return <Loader />;
     }
-    return (
-        <>
-            {isLoading ? (
-                <Loader />
-            ) : pastUserTradeData.length === 0 ? (
 
-                <p className='txt-center-white'>No data available.</p>
+    if (pastUserTradeData.length <= 0) {
+        return null; // Don't render anything if there is no data
+    }
+    return (
+
+        <>
+            {isChartLoading ? (
+                <Loader />
             ) : (
                 <>
                     <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Portfolio</h6>
@@ -90,7 +92,7 @@ const Portfolio = () => {
                         className="mySwiper"
                         style={{ padding: ".5rem 1rem" }}
                     >
-                        {pastUserTradeData.map(item => {
+                        {pastUserTradeData?.map(item => {
 
                             const tradeOption = item?.tradeOption;
                             const paymentData = item?.groupedPayments;
@@ -185,13 +187,6 @@ const Portfolio = () => {
                                         padding: ".5rem .75rem 0"
                                     }}>
                                         <Link
-                                            // to={{
-                                            //     pathname: "/statistic",
-                                            //     state: {
-                                            //         name: option?.name,
-                                            //         graphValues: paymentValues,
-                                            //     },
-                                            // }}
                                             to={`/statistic?name=${encodeURIComponent(option?.name)}&graphValues=${encodeURIComponent(JSON.stringify(paymentValues))}&optionId=${option?._id}`}
                                             style={{
                                                 textDecoration: 'none', display: "flex",

@@ -125,7 +125,7 @@ function WithDrawBalance() {
                                     0
                                 </h6>
                                 <h6>
-                                    {withDraw}
+                                    {withDraw?.toFixed(2)}
                                 </h6>
                             </div>
                             <div className="form-group">
