@@ -177,6 +177,10 @@ function ProfileMain() {
                 setModalMessage('Old password is empty. Please enter your old password');
                 setShowUpdateModal(true);
             }
+            else if (newPassword !== confirmPassword) {
+                setModalMessage('New password and confirm password do not match');
+                setShowUpdateModal(true);
+            }
             else {
                 const response = await UpdatePasswordApi(userId, oldPassword, newPassword);
                 setModalMessage(response.message);
@@ -261,16 +265,18 @@ function ProfileMain() {
             </Modal>
             {/* Profile View */}
             <Modal show={isProfileViewOpen} onHide={() => setIsProfileViewOpen(false)}
-             className="custom-modal-content"
-             centered
+                className="custom-modal-content"
+                centered
             >
                 <Modal.Body>
                     <div className="text-center position-relative">
                         <img
                             src={profileViewImage}
                             alt="Profile"
-                            style={{ borderRadius: '50%', maxWidth: '100%',
-                            height: "400px" }}
+                            style={{
+                                borderRadius: '50%', maxWidth: '400px', width: "300px",
+                                maxHeight: "400px", height: "400px", objectFit: 'cover'
+                            }}
                         />
                     </div>
                 </Modal.Body>
