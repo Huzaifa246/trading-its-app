@@ -187,8 +187,8 @@ h6 {
 .input-field:focus + .eye-style-absolute button {
   color: black;
 }
-.row{
-  margin-left: 0;
+.row>*{
+  padding-left: 0;
 }
 .modal-content {
   background: transparent;
