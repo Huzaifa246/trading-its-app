@@ -281,6 +281,7 @@ function ProfileMain() {
                     </div>
                 </Modal.Body>
             </Modal>
+            <div className="padding-top"></div>
             <div className="page-content page-container" id="page-content">
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">

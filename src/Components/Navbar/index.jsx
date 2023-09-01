@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoSortAsc } from "react-icons/go"
 import { AiOutlineSetting } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
@@ -14,13 +14,30 @@ const Navbar = () => {
     const fullName = userDetails?.data?.fullName || "User Not Found";
     const ProfileImg = userDetails?.data?.profile_image?.url;
     const [showDropdown, setShowDropdown] = useState(false);
+    const [hasScrolled, setHasScrolled] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate('/login');
     };
+    useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > 0) {
+            setHasScrolled(true);
+          } else {
+            setHasScrolled(false);
+          }
+        };
+  
+        window.addEventListener('scroll', handleScroll);
+  
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+      
     return (
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${hasScrolled ? styles.scrolled : ''}`}>
             <div className={styles.left}>
                 <img src={ProfileImg || defImg1} alt="pic" />
                 <h5>{fullName}</h5>

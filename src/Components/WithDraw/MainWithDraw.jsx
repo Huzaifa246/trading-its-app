@@ -11,6 +11,7 @@ function MainWithDraw() {
     const dispatch = useDispatch();
     return (
         <>
+            <div className="padding-top"></div>
             <div>
                 <div
                     style={{

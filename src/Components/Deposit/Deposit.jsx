@@ -77,6 +77,7 @@ function Deposit() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <div className="padding-top"></div>
             <div className="Main-deposit">
                 <div>
                     <h1 className="h1-deposit">Add Funds</h1>

@@ -4,7 +4,14 @@
     align-items: center;
     color: white;
     padding: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
+.scrolled {
+    background-color: #0a0d13af;
+    border-radius: 20px;
+  }
 
 .left {
     display: flex;

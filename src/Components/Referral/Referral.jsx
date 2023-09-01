@@ -25,19 +25,20 @@ function Referral() {
     console.log(allReferral, "a")
     return (
         <>
+            <div className="padding-top"></div>
             <div>
                 <h1 className="h1-deposit">
                     Referral
                 </h1 >
                 <div>
                     {error && <div
-                    style={{
-                        color: "white",
-                        textAlign: "center"
-                    }}
+                        style={{
+                            color: "white",
+                            textAlign: "center"
+                        }}
                     >{error}
-                    <br />
-                    No Referral Found
+                        <br />
+                        No Referral Found
                     </div>}
                 </div>
             </div>

@@ -80,6 +80,7 @@ function AllInvestment() {
 
     return (
         <>
+            <div className="padding-top"></div>
             <div style={{ marginBottom: "100px" }}>
                 <h1 className='txt-center-white'>
                     All Investment

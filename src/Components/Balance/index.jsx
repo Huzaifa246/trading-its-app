@@ -11,6 +11,8 @@ const Balance = () => {
     let availableBalance = userDetails?.data?.totalbalance || 0;
     
     return (
+        <>
+        <div className="padding-top"></div>
         <div className={styles.balance}>
             <div className={styles.left}>
                 <h5>Total Balance</h5>
@@ -33,6 +35,7 @@ const Balance = () => {
                 </div>
             </div> */}
         </div>
+        </>
     )
 }
 

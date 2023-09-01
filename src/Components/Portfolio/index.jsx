@@ -240,7 +240,7 @@ const Portfolio = () => {
                                             // id="chart-currently"
                                             id={`chart-${tradeOption._id}`}
                                             options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
-                                                transform: "translateX(-8%) translateY(45px)",
+                                                transform: "translateX(-8%) translateY(44px)",
                                             }} />
                                     </div>
                                 </SwiperSlide>

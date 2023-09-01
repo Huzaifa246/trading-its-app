@@ -5,18 +5,19 @@ import StatisticTable from './MainTable/StatisticTable';
 import FixedBar from './../FixedBar/index';
 
 export const StatisticMain = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const name = searchParams.get("name");
-  const graphValuesString = searchParams.get("graphValues");
-  const graphValues = JSON.parse(graphValuesString);
-  const optionId = searchParams.get("optionId"); 
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const name = searchParams.get("name");
+    const graphValuesString = searchParams.get("graphValues");
+    const graphValues = JSON.parse(graphValuesString);
+    const optionId = searchParams.get("optionId");
 
     return (
         <>
+            <div className="padding-top"></div>
             <div style={{ marginTop: "1rem" }}></div>
-            <StaticChart name={name} graphValues={graphValues}/>
-            <StatisticTable optionId={optionId}/>
+            <StaticChart name={name} graphValues={graphValues} />
+            <StatisticTable optionId={optionId} />
         </>
     );
 };
