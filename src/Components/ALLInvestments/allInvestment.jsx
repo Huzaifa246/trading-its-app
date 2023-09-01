@@ -12,9 +12,10 @@ function AllInvestment() {
     const [selectedTimeOption, setSelectedTimeOption] = useState("current"); // Store the selected time option
     const [selectedTradeOption, setSelectedTradeOption] = useState("");
     const [investmentData, setInvestmentData] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
     const [showAll, setShowAll] = useState(true);
     const [tradeOptions, setTradeOptions] = useState([]);
+    const [isApiCallInProgress, setApiCallInProgress] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -37,6 +38,12 @@ function AllInvestment() {
 
     const fetchInvestmentData = async (timeOption, tradeOption) => {
         try {
+
+            if (isApiCallInProgress) {
+                return;
+            }
+            setApiCallInProgress(true); // Set the flag to indicate API call is in progress
+
             let response;
 
             if ((timeOption === "current" || timeOption === "past") && tradeOption !== "") {
@@ -53,7 +60,8 @@ function AllInvestment() {
         } catch (error) {
             console.error("Error fetching investment data:", error);
         } finally {
-            setLoading(false); // Set loading to false after data is fetched or if there's an error
+            //setLoading(false); 
+            setApiCallInProgress(false); // Reset the flag here
         }
     };
 
@@ -61,20 +69,20 @@ function AllInvestment() {
         setSelectedTimeOption(timeOption);
         setSelectedTradeOption("");
         setShowAll(false);
-        setLoading(true);
+        // setLoading(true);
     };
 
     const handleTradeOptionClick = (tradeOption) => {
         setSelectedTradeOption(tradeOption);
         setShowAll(false);
-        setLoading(true);
+        // setLoading(true);
     };
 
     const handleShowAllClick = () => {
         setSelectedTimeOption("");
         setSelectedTradeOption("");
         setShowAll(true);
-        setLoading(true);
+        // setLoading(true);
     };
 
 
