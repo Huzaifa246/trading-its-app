@@ -213,7 +213,7 @@ function ProfileMain() {
         <>
             {isImageUploading && <Loader />}
             <ToastContainer />
-            <Modal show={showUpdateModal} onHide={UpdateCloseModal}>
+            <Modal show={showUpdateModal} onHide={UpdateCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Password Update</Modal.Title>
                 </Modal.Header>
@@ -224,7 +224,7 @@ function ProfileMain() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Image</Modal.Title>
                 </Modal.Header>
@@ -241,7 +241,7 @@ function ProfileMain() {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={showModalEdit} onHide={handleCloseModal}>
+            <Modal show={showModalEdit} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Update User Details</Modal.Title>
                 </Modal.Header>
@@ -262,13 +262,15 @@ function ProfileMain() {
             {/* Profile View */}
             <Modal show={isProfileViewOpen} onHide={() => setIsProfileViewOpen(false)}
              className="custom-modal-content"
+             centered
             >
                 <Modal.Body>
                     <div className="text-center position-relative">
                         <img
                             src={profileViewImage}
                             alt="Profile"
-                            style={{ borderRadius: '50%', maxWidth: '100%' }}
+                            style={{ borderRadius: '50%', maxWidth: '100%',
+                            height: "400px" }}
                         />
                     </div>
                 </Modal.Body>
