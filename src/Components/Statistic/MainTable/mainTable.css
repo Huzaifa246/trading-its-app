@@ -1,6 +1,6 @@
 /* -- */
 .buy-btn {
-  padding: 15px 15px;
+  padding: 10;
   border-radius: 10px;
   background: linear-gradient(to right, #4791e1, #27cae1);
   color: #fff;
@@ -79,5 +79,5 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 30vh;
+  height: 25vh;
 }
