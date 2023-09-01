@@ -45,6 +45,14 @@ function ProfileMain() {
     const [binanceId, setBinanceId] = useState('');
     const [showModalEdit, setShowModalEdit] = useState(false);
 
+    const [isProfileViewOpen, setIsProfileViewOpen] = useState(false);
+    const [profileViewImage, setProfileViewImage] = useState('');
+
+    //Profile view
+    const handleProfileViewClick = (imageURL) => {
+        setProfileViewImage(imageURL);
+        setIsProfileViewOpen(true);
+    };
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -251,6 +259,26 @@ function ProfileMain() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            {/* Profile View */}
+            <Modal show={isProfileViewOpen} onHide={() => setIsProfileViewOpen(false)}>
+                <Modal.Body>
+                    <div className="text-center position-relative">
+                        <img
+                            src={profileViewImage}
+                            alt="Profile"
+                            style={{ borderRadius: '50%', maxWidth: '100%' }}
+                        />
+                        {/* <button
+                            type="button"
+                            className="close position-absolute"
+                            style={{ top: '10px', right: '10px' }}
+                            onClick={() => setIsProfileViewOpen(false)}
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button> */}
+                    </div>
+                </Modal.Body>
+            </Modal>
             <div className="page-content page-container" id="page-content">
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">
@@ -259,7 +287,10 @@ function ProfileMain() {
                                 <div className="col-sm-12 user-profile">
                                     <div className="card-block text-center text-white">
                                         <div className="p-b-15">
-                                            <img src={userImg || defImg2} className="img-radius" alt="Profile-Image" />
+                                            <img src={userImg || defImg2} className="img-radius" alt="Profile-Image"
+                                                onClick={() => handleProfileViewClick(userImg || defImg2)}
+                                                style={{ cursor: 'pointer' }}
+                                            />
                                         </div>
                                         {(userImg === '' || userImg === defImg2) ? (
                                             <>
@@ -375,7 +406,7 @@ function ProfileMain() {
 
                                     {isPasswordUpdateOpen && (
                                         <div className="row">
-                                            <div className="col-sm-6">
+                                            <div className="col-sm-6 col-md-12">
                                                 <p className="m-b-10 f-w-600 color-white">Old Password</p>
                                                 <input
                                                     type="password"
@@ -385,7 +416,7 @@ function ProfileMain() {
                                                     onChange={(e) => setOldPassword(e.target.value)}
                                                 />
                                             </div>
-                                            <div className="col-sm-6">
+                                            <div className="col-sm-6 col-md-12">
                                                 <p className="m-b-10 f-w-600 color-white">New Password</p>
                                                 <input
                                                     type={showPassword ? "text" : "password"}
@@ -394,9 +425,9 @@ function ProfileMain() {
                                                     value={newPassword}
                                                     onChange={(e) => setNewPassword(e.target.value)}
                                                 />
-                                                <div className="input-group-append">
+                                                <div className="input-group-append eye-style-absolute">
                                                     <button
-                                                        className="btn btn-outline-secondary"
+                                                        className="btn btn-secondary bg-transparent border-0"
                                                         type="button"
                                                         onClick={togglePasswordVisibility}
                                                     >
@@ -404,7 +435,7 @@ function ProfileMain() {
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div className="col-sm-6">
+                                            <div className="col-sm-6 col-md-12">
                                                 <p className="m-b-10 f-w-600 color-white">Confirm Password</p>
                                                 <input
                                                     type={showPassword ? "text" : "password"} // Use the 'showPassword' state
@@ -414,9 +445,11 @@ function ProfileMain() {
                                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                                 />
                                             </div>
-                                            <button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
-                                                Update Password
-                                            </button>
+                                            <div>
+                                                <button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
+                                                    Update Password
+                                                </button>
+                                            </div>
                                         </div>
                                     )}
                                 </div>

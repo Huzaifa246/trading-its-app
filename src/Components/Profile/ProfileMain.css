@@ -158,7 +158,6 @@ h6 {
   background: #0b121d;
 }
 .input_field {
-  all: inherit;
   border: 2px solid #afafaf2f;
   padding: 10px 14px;
   border-radius: 8px;
@@ -175,4 +174,22 @@ h6 {
 }
 .pass-color{
   color: #27cae1;
+}
+.eye-style-absolute{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  top: 7%;
+  right: 0;
+  padding-right: 1px;
+}
+.input-field:focus + .eye-style-absolute button {
+  color: black;
+}
+.row{
+  margin-left: 0;
+}
+.modal-content {
+  background: transparent;
 }
