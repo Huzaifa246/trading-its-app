@@ -190,6 +190,6 @@ h6 {
 .row>*{
   padding-left: 0;
 }
-.modal-content {
+.custom-modal-content .modal-content{
   background: transparent;
 }

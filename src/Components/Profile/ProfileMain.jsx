@@ -260,7 +260,9 @@ function ProfileMain() {
                 </Modal.Footer>
             </Modal>
             {/* Profile View */}
-            <Modal show={isProfileViewOpen} onHide={() => setIsProfileViewOpen(false)}>
+            <Modal show={isProfileViewOpen} onHide={() => setIsProfileViewOpen(false)}
+             className="custom-modal-content"
+            >
                 <Modal.Body>
                     <div className="text-center position-relative">
                         <img
@@ -268,14 +270,6 @@ function ProfileMain() {
                             alt="Profile"
                             style={{ borderRadius: '50%', maxWidth: '100%' }}
                         />
-                        {/* <button
-                            type="button"
-                            className="close position-absolute"
-                            style={{ top: '10px', right: '10px' }}
-                            onClick={() => setIsProfileViewOpen(false)}
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button> */}
                     </div>
                 </Modal.Body>
             </Modal>
