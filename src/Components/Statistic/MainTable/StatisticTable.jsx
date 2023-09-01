@@ -101,7 +101,9 @@ function StatisticTable({ optionId }) {
                 }}>
                 </div>
                 <div>
-                    <h1 className="h1-deposit">Add Investment</h1>
+                    <h1 className="h1-deposit" style={{
+                        marginTop: "20px"
+                    }}>Add Investment</h1>
                     <div>
                         <div className="range-value">
                             <input
