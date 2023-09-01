@@ -275,7 +275,7 @@ function ProfileMain() {
                             alt="Profile"
                             style={{
                                 borderRadius: '50%', maxWidth: '400px', width: "300px",
-                                maxHeight: "400px", height: "400px", objectFit: 'cover'
+                                maxHeight: "400px", height: "300px", objectFit: 'cover'
                             }}
                         />
                     </div>
