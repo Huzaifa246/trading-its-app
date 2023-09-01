@@ -137,7 +137,7 @@ function AllInvestment() {
                             //     investmentData?.map(item =>
                             //         (selectedTradeOption === "" || item.investment_name._id === selectedTradeOption) && (
                             : (() => {
-                                const filteredData = investmentData.filter(item =>
+                                const filteredData = investmentData?.filter(item =>
                                     selectedTradeOption === "" || item.investment_name._id === selectedTradeOption
                                 );
 
