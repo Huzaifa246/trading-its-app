@@ -146,7 +146,7 @@ function StatisticTable({ optionId }) {
                             {depositValue?.toFixed(2)} deposit
                         </h6>
                         <h6 className={`range-head ${investmentValue >= totalBalance / 2 ? 'buy-percentage-blue' : ''}`}>
-                            {investmentValue?.toFixed(2)} investment
+                            {investmentValue} investment
                         </h6>
                     </div>
                     <div style={{ padding: "0 10px" }}>
