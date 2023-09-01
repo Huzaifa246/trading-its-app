@@ -11,6 +11,7 @@
   gap: 0.5rem;
   border: none;
   background: transparent;
+  padding: 5px;
 }
 .my-wd-btn.active {
   background: linear-gradient(to right, #1c92fc, #20d6de);
@@ -20,6 +21,7 @@
   border-radius: 5px;
   flex: 1;
   margin: 10px 2px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
