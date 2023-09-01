@@ -135,7 +135,9 @@ h6 {
 .m-t-20 {
   margin-top: 20px;
 }
-
+.m-t-10{
+  margin-top: 10px;
+}
 .user-card-full .social-link li {
   display: inline-block;
 }
@@ -163,6 +165,7 @@ h6 {
   border-radius: 8px;
   transition: 0.5s;
   background-color: rgba(255, 255, 255, 0.068);
+  width: 98%;
 }
 
 .input_field:focus {
@@ -180,7 +183,7 @@ h6 {
   align-items: center;
   position: absolute;
   height: 100%;
-  top: 7%;
+  top: 5%;
   right: 0;
   padding-right: 1px;
 }
@@ -192,4 +195,13 @@ h6 {
 }
 .custom-modal-content .modal-content{
   background: transparent;
+}
+.up-btn-style{
+  display: flex;
+  justify-content: center;
+  padding-right: 0 !important;
+  margin-bottom: 15px;
+}
+.container{
+  padding-right: 0;
 }

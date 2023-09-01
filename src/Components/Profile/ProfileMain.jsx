@@ -357,8 +357,8 @@ function ProfileMain() {
                                             )}
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <p className="m-b-10 f-w-600">FullName</p>
+                                            <div className="col-sm-6 col-md-12">
+                                                <p className="m-b-10 f-w-600  m-t-10">FullName</p>
                                                 {isFullNameEdit ? (
                                                     <input
                                                         type="text"
@@ -368,13 +368,30 @@ function ProfileMain() {
                                                         onBlur={handleUserDetailsUpdate}
                                                     />
                                                 ) : (
-                                                    <h6 className="text-muted f-w-400">{fNameU || "techon"}</h6>
+                                                    <input
+                                                        type="text"
+                                                        className="input_field"
+                                                        value={fNameU || "ITS"}
+                                                        disabled
+                                                        style={{
+                                                            width: "100%"
+                                                        }}
+                                                    />
                                                 )}
-                                                <p className="m-b-10 f-w-600">Email</p>
-                                                <h6 className="text-muted f-w-400">{email || "techon@gmail.com"}</h6>
+                                                <p className="m-b-10 f-w-600 m-t-10">Email</p>
+                                                <input
+                                                    type="text"
+                                                    className="input_field"
+                                                    value={email || "its@gmail.com"}
+                                                    disabled
+                                                    style={{
+                                                        width: "100%"
+                                                    }}
+                                                />
+                                                {/* <h6 className="text-muted f-w-400">{email || "techon@gmail.com"}</h6> */}
                                             </div>
-                                            <div className="col-sm-6">
-                                                <p className="m-b-10 f-w-600">Binance Id</p>
+                                            <div className="col-sm-6 col-md-12">
+                                                <p className="m-b-10 f-w-600 m-t-10">Binance Id</p>
                                                 {isBinanceIdEdit ? (
                                                     <input
                                                         type="text"
@@ -384,7 +401,15 @@ function ProfileMain() {
                                                         onBlur={handleUserDetailsUpdate}
                                                     />
                                                 ) : (
-                                                    <h6 className="text-muted f-w-400">{bin_id}</h6>
+                                                    <input
+                                                        type="text"
+                                                        className="input_field"
+                                                        value={bin_id}
+                                                        disabled
+                                                        style={{
+                                                            width: "100%"
+                                                        }}
+                                                    />
                                                 )}
                                             </div>
                                         </div>
@@ -448,10 +473,10 @@ function ProfileMain() {
                                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                                 />
                                             </div>
-                                            <div>
-                                                <button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
+                                            <div className='up-btn-style'>
+                                                <Button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
                                                     Update Password
-                                                </button>
+                                                </Button>
                                             </div>
                                         </div>
                                     )}

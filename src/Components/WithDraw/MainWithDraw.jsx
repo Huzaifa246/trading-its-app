@@ -16,7 +16,8 @@ function MainWithDraw() {
                 <div
                     style={{
                         display: 'flex',
-                        justifyContent: "space-around"
+                        justifyContent: "space-around",
+                        margin: "0.5rem 1rem"
                     }}
                 >
                     <Button

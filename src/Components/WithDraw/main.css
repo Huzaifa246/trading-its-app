@@ -1,14 +1,4 @@
 .withDraw-btn {
-  /* border-radius: 10px;
-  background: linear-gradient(to right, #4791e1, #27cae1);
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 3vw;
-  outline: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease;
-  min-width: 125px; */
   border-radius: 20px;
   color: #fff;
   flex: 1;
@@ -19,21 +9,11 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  font-size: 4vw;
+  font-size: 3vw;
   cursor: pointer;
-  font-weight: bold;
   background: linear-gradient(to right, #4791e1, #27cae1);
 }
 .unselected {
-  /* color: #fff;
-  background: #111;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  border: 2px solid #4791e1;
-  font-size: 3vw;
-  min-width: 125px; */
   border-radius: 20px;
   color: #fff;
   flex: 1;
@@ -44,9 +24,8 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  font-size: 4vw;
+  font-size: 3vw;
   cursor: pointer;
   background-color: transparent;
-  font-weight: bold;
   border: none;
 }
