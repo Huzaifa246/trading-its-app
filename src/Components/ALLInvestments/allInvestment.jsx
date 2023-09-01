@@ -141,8 +141,8 @@ function AllInvestment() {
                                     selectedTradeOption === "" || item.investment_name._id === selectedTradeOption
                                 );
 
-                                if (filteredData.length > 0) {
-                                    return filteredData.map(item => (
+                                if (filteredData?.length > 0) {
+                                    return filteredData?.map(item => (
                                         <div
                                             key={item._id}
                                             style={{
