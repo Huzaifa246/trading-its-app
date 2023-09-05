@@ -357,7 +357,7 @@ function ProfileMain() {
                                             )}
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6 col-md-12">
+                                            <div className="col-sm-12 col-md-12">
                                                 <p className="m-b-10 f-w-600  m-t-10">FullName</p>
                                                 {isFullNameEdit ? (
                                                     <input
@@ -390,7 +390,7 @@ function ProfileMain() {
                                                 />
                                                 {/* <h6 className="text-muted f-w-400">{email || "techon@gmail.com"}</h6> */}
                                             </div>
-                                            <div className="col-sm-6 col-md-12">
+                                            <div className="col-sm-12 col-md-12">
                                                 <p className="m-b-10 f-w-600 m-t-10">Binance Id</p>
                                                 {isBinanceIdEdit ? (
                                                     <input
@@ -420,66 +420,68 @@ function ProfileMain() {
                     </div>
                 </div>
             </div>
-            <div className="page-content page-container" style={{ marginBottom: "100px" }} id="page-content">
+            <div className="page-content page-container" style={{ marginBottom: "100px", paddingRight: "5px" }} id="page-content">
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full ">
-                            <div className="row">
-                                <div className="col-sm-12 main-container-pf">
-                                    <h6 className="m-b-20 m-t-20 p-b-5 f-w-600 pass-color"
-                                        onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
-                                    >
-                                        Password Update
-                                    </h6>
+                            <div className="row main-container-pf">
+                                <div className="col-sm-12 card-block">
+                                    <div style={{ padding: "0 5px" }}>
+                                        <h6 className="m-b-20 m-t-20 p-b-5 f-w-600 pass-color"
+                                            onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
+                                        >
+                                            Password Update
+                                        </h6>
 
-                                    {isPasswordUpdateOpen && (
-                                        <div className="row">
-                                            <div className="col-sm-6 col-md-12">
-                                                <p className="m-b-10 f-w-600 color-white">Old Password</p>
-                                                <input
-                                                    type="password"
-                                                    className="form-control input_field"
-                                                    value={oldPassword}
-                                                    required
-                                                    onChange={(e) => setOldPassword(e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="col-sm-6 col-md-12">
-                                                <p className="m-b-10 f-w-600 color-white">New Password</p>
-                                                <input
-                                                    type={showPassword ? "text" : "password"}
-                                                    required
-                                                    className="form-control input_field"
-                                                    value={newPassword}
-                                                    onChange={(e) => setNewPassword(e.target.value)}
-                                                />
-                                                <div className="input-group-append eye-style-absolute">
-                                                    <button
-                                                        className="btn btn-secondary bg-transparent border-0"
-                                                        type="button"
-                                                        onClick={togglePasswordVisibility}
-                                                    >
-                                                        {showPassword ? <FiEyeOff /> : <FiEye />}
-                                                    </button>
+                                        {isPasswordUpdateOpen && (
+                                            <div className="row">
+                                                <div className="col-sm-12 col-md-12">
+                                                    <p className="m-b-10 f-w-600 color-white">Old Password</p>
+                                                    <input
+                                                        type="password"
+                                                        className="form-control input_field"
+                                                        value={oldPassword}
+                                                        required
+                                                        onChange={(e) => setOldPassword(e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className="col-sm-12 col-md-12">
+                                                    <p className="m-b-10 f-w-600 color-white">New Password</p>
+                                                    <input
+                                                        type={showPassword ? "text" : "password"}
+                                                        required
+                                                        className="form-control input_field"
+                                                        value={newPassword}
+                                                        onChange={(e) => setNewPassword(e.target.value)}
+                                                    />
+                                                    <div className="input-group-append eye-style-absolute">
+                                                        <button
+                                                            className="btn btn-secondary bg-transparent border-0"
+                                                            type="button"
+                                                            onClick={togglePasswordVisibility}
+                                                        >
+                                                            {showPassword ? <FiEyeOff /> : <FiEye />}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-12 col-md-12">
+                                                    <p className="m-b-10 f-w-600 color-white">Confirm Password</p>
+                                                    <input
+                                                        type={showPassword ? "text" : "password"} // Use the 'showPassword' state
+                                                        required
+                                                        className="form-control input_field"
+                                                        value={confirmPassword}
+                                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className='up-btn-style'>
+                                                    <Button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
+                                                        Update Password
+                                                    </Button>
                                                 </div>
                                             </div>
-                                            <div className="col-sm-6 col-md-12">
-                                                <p className="m-b-10 f-w-600 color-white">Confirm Password</p>
-                                                <input
-                                                    type={showPassword ? "text" : "password"} // Use the 'showPassword' state
-                                                    required
-                                                    className="form-control input_field"
-                                                    value={confirmPassword}
-                                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                                />
-                                            </div>
-                                            <div className='up-btn-style'>
-                                                <Button className="btn btn-primary mt-3 uni-btn" onClick={handlePasswordUpdate}>
-                                                    Update Password
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>

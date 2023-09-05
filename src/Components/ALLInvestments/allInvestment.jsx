@@ -15,7 +15,6 @@ function AllInvestment() {
     const [isLoading, setLoading] = useState(true);
     const [showAll, setShowAll] = useState(true);
     const [tradeOptions, setTradeOptions] = useState([]);
-    const [isApiCallInProgress, setApiCallInProgress] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -33,17 +32,13 @@ function AllInvestment() {
         fetchData();
     }, [userId]);
     useEffect(() => {
-        fetchInvestmentData(selectedTimeOption, selectedTradeOption);
-    }, [selectedTimeOption, selectedTradeOption]);
+        if (userId && (selectedTimeOption === "current" || selectedTimeOption === "past" || selectedTradeOption !== "")) {
+            fetchInvestmentData(selectedTimeOption, selectedTradeOption);
+        }
+    }, [userId, selectedTimeOption, selectedTradeOption]);
 
     const fetchInvestmentData = async (timeOption, tradeOption) => {
         try {
-
-            if (isApiCallInProgress) {
-                return;
-            }
-            setApiCallInProgress(true); // Set the flag to indicate API call is in progress
-
             let response;
 
             if ((timeOption === "current" || timeOption === "past") && tradeOption !== "") {
@@ -60,8 +55,7 @@ function AllInvestment() {
         } catch (error) {
             console.error("Error fetching investment data:", error);
         } finally {
-            //setLoading(false); 
-            setApiCallInProgress(false); // Reset the flag here
+            setLoading(false);
         }
     };
 
@@ -69,20 +63,32 @@ function AllInvestment() {
         setSelectedTimeOption(timeOption);
         setSelectedTradeOption("");
         setShowAll(false);
-        // setLoading(true);
+        setLoading(true);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
     };
 
     const handleTradeOptionClick = (tradeOption) => {
         setSelectedTradeOption(tradeOption);
         setShowAll(false);
-        // setLoading(true);
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 100);
     };
 
     const handleShowAllClick = () => {
-        setSelectedTimeOption("");
+        const newSelectedTimeOption = selectedTimeOption === "current" ? "current" : "past";
+    
+        setSelectedTimeOption(newSelectedTimeOption);
         setSelectedTradeOption("");
-        setShowAll(true);
-        // setLoading(true);
+        setLoading(true);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 100);
     };
 
 
@@ -115,8 +121,8 @@ function AllInvestment() {
                 </div >
                 <div className={styles.container}>
                     <div
-                        // className={`${styles.item} ${(selectedTimeOption === "current" || selectedTimeOption === "past" || showAll) ? styles.selected : ''}`}
-                        className={`${styles.item} ${((selectedTimeOption === "current" || selectedTimeOption === "past") && !selectedTradeOption) || showAll ? styles.selected : ''}`}
+                        // // className={`${styles.item} ${(selectedTimeOption === "current" || selectedTimeOption === "past" || showAll) ? styles.selected : ''}`}
+                        className={`${styles.item} ${((selectedTimeOption === "current" || selectedTimeOption === "past") && !selectedTradeOption) ? styles.selected : ''}`}
                         onClick={handleShowAllClick}
                         style={{ borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px" }}
                     >

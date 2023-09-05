@@ -5,10 +5,14 @@
   }
   .Main-wdraw {
     margin-bottom: 100px;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 64vh;
+    height: 64vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 70vh;
   }
   
   .button-style {
