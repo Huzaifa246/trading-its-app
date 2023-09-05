@@ -18,7 +18,7 @@ function WithDrawBalance() {
     const [rangeValue, setRangeValue] = useState(withDraw); // Initial value is set to 50.00
     const [editableValue, setEditableValue] = useState(rangeValue?.toFixed(2));  // Initial value is set to 50
     const [isError, setIsError] = useState(false); // Flag to track if there's an error
-    const [isDepositDisabled, setIsDepositDisabled] = useState(false);
+    const [isDepositDisabled, setIsDepositDisabled] = useState(true);
 
     const handleShowDepositModal = () => {
         setShowDepositModal(true);
@@ -55,7 +55,8 @@ function WithDrawBalance() {
         setRangeValue(newValue);
         setEditableValue(newValue.toFixed(2));
         setIsError(newValue < 0 || newValue > withDraw);
-        setIsDepositDisabled(newValue < 0 || newValue > withDraw);
+        // setIsDepositDisabled(newValue < 0 || newValue > withDraw);
+        setIsDepositDisabled(newValue === 0 || newValue < 0 || newValue > withDraw);
     };
     const handleEditableValueChange = (e) => {
         const newValue = parseFloat(e.target.value);
@@ -72,7 +73,8 @@ function WithDrawBalance() {
             setIsError(true);
         }
         setEditableValue(e.target.value);
-        setIsDepositDisabled(isNaN(newValue) || newValue <= 0 || newValue > withDraw);
+        // setIsDepositDisabled(isNaN(newValue) || newValue <= 0 || newValue > withDraw);
+        setIsDepositDisabled(newValue === 0 || isNaN(newValue) || newValue <= 0 || newValue > withDraw);
     };
 
     return (
