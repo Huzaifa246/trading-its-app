@@ -12,7 +12,7 @@ function MainWithDraw() {
     return (
         <>
             <div className="padding-top"></div>
-            <div style={{ marginBottom: "100px" }}>
+            <div style={{ paddingBottom: "100px" }}>
                 <div
                     style={{
                         display: 'flex',
