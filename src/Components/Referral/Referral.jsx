@@ -26,12 +26,32 @@ function Referral() {
             email: 'john@example.com',
             subProfiles: [
                 {
-                    name: 'Emma',
+                    name: 'Emma Watson',
                     email: 'emma@example.com',
                 },
                 {
                     name: 'Smith',
                     email: 'smith@example.com',
+                },
+            ],
+        },
+        {
+            name: 'Qasim',
+            email: 'Qasim@example.com',
+            subProfiles: [
+                {
+                    name: 'Abdul',
+                    email: 'Abdul@example.com',
+                },
+            ],
+        },
+        {
+            name: 'TOV',
+            email: 'TOV@example.com',
+            subProfiles: [
+                {
+                    name: 'Hamza',
+                    email: 'hamza@example.com',
                 },
             ],
         },
@@ -72,23 +92,37 @@ function Referral() {
                 <div style={{ color: 'white' }}>
                     <div className="profile-list">
                         {allReferral.map((profile, index) => (
-                            <div
-                                key={index}
-                                className={`profile-item ${profile === activeProfile ? 'active' : ''
-                                    }`}
-                                onClick={() => handleClickProfile(profile)}
-                            >
-                                {profile.name}
-                                {profile.showSubProfiles && (
-                                    <ul>
-                                        {profile.subProfiles.map((subProfile, subIndex) => (
-                                            <li key={subIndex}>
-                                                <h4>{subProfile.name}</h4>
-                                                <p>Email: {subProfile.email}</p>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                            <div style={{
+                                display: "flex",
+                                alignItems: "center",
+                                color: "white",
+                                gap: "1rem",
+                                marginBottom: "1rem",
+                                justifyContent: "space-between"
+                            }}>
+                                <div
+                                    key={index}
+                                    className={`profile-item ${profile === activeProfile ? 'active' : ''
+                                        }`}
+                                    onClick={() => handleClickProfile(profile)}
+                                >
+                                    <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                                        <img src={"https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"} alt={"profile"} style={{ width: "11vw", height: "11vw", objectFit: "cover" }} />
+                                        {profile?.name}
+                                    </div>
+                                    {profile?.showSubProfiles && (
+                                        <ul>
+                                            {profile.subProfiles.map((subProfile, subIndex) => (
+                                                <li key={subIndex}>
+                                                    <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                                                        <img src={"https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"} alt={"profile"} style={{ width: "11vw", height: "11vw", objectFit: "cover" }} />
+                                                        <h4>{subProfile.name}</h4>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>
