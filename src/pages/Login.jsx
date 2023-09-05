@@ -69,7 +69,7 @@ const LoginPage = () => {
                 localStorage.setItem("token", decrypted?.data)
                 
                 setShowLoader(false)
-                navigate("/")
+                window.location.href = "/";
 
                 // const result = await AuthSession();
                 // console.log(result)

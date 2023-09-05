@@ -15,9 +15,10 @@ export const StatisticMain = () => {
     return (
         <>
             <div className="padding-top"></div>
-            <div style={{ marginTop: "1rem" }}></div>
-            <StaticChart name={name} graphValues={graphValues} />
-            <StatisticTable optionId={optionId} />
+            <div style={{ marginTop: "1rem", height: "80vh" }}>
+                <StaticChart name={name} graphValues={graphValues} />
+                <StatisticTable optionId={optionId} />
+            </div>
         </>
     );
 };

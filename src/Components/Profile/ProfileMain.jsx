@@ -311,7 +311,7 @@ function ProfileMain() {
                                         ) : (
                                             <>
                                                 <div className='Main-update-del'>
-                                                    <div style={{ padding: "0 5px" }}>
+                                                    <div style={{ padding: "0 10px" }}>
                                                         <label htmlFor="file-input" className="fi-edit-label">
                                                             <button onClick={handleFileUploadClick} className='Update-btn'>Update</button>
                                                         </label>
@@ -323,7 +323,7 @@ function ProfileMain() {
                                                             onChange={(event) => handleImageChange(event)}
                                                         />
                                                     </div>
-                                                    <div style={{ padding: "0 5px" }}>
+                                                    <div style={{ padding: "0 10px" }}>
                                                         <button className='del-btn' onClick={() => handleConfirmDelete(userId)}> Delete </button>
                                                     </div>
                                                 </div>
@@ -365,7 +365,6 @@ function ProfileMain() {
                                                         className="form-control input_field"
                                                         value={fullName}
                                                         onChange={(e) => setFullName(e.target.value)}
-                                                        onBlur={handleUserDetailsUpdate}
                                                     />
                                                 ) : (
                                                     <input
@@ -398,7 +397,6 @@ function ProfileMain() {
                                                         className="form-control input_field"
                                                         value={binanceId}
                                                         onChange={(e) => setBinanceId(e.target.value)}
-                                                        onBlur={handleUserDetailsUpdate}
                                                     />
                                                 ) : (
                                                     <input

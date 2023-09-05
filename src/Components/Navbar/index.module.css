@@ -10,7 +10,8 @@
 }
 .scrolled {
   background-color: #0a0d13af;
-  border-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   backdrop-filter: blur(10px);
 }
 

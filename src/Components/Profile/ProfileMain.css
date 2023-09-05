@@ -10,27 +10,27 @@
 }
 .Update-btn {
   color: white;
-  padding: 3px 4px;
+  padding: 5px;
   border-radius: 5px;
   background: linear-gradient(to right, #4791e1, #27cae1);
   border: none;
+  font-size: 4vw;
 }
 .del-btn {
   color: white;
-  padding: 3px 4px;
+  padding: 5px;
   border-radius: 5px;
   background: linear-gradient(to right, #4791e1, #27cae1);
   border: none;
+  font-size: 4vw;
 }
 .edit-btn{
-  align-items: center;
-  border-radius: 5px;
   color: white;
-  line-height: 1;
-  padding: 0 0.5rem;
-  text-align: center;
-  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
   background: linear-gradient(to right, #4791e1, #27cae1);
+  border: none;
+  font-size: 4vw;
 }
 .FiEdit-inner-style {
   color: #fff;
