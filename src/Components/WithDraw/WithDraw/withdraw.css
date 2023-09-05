@@ -4,7 +4,6 @@
     text-transform: upperCase;
   }
   .Main-wdraw {
-    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

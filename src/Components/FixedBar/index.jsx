@@ -21,6 +21,9 @@ const FixedBar = ({ fixedBarRef }) => {
             setActiveItem("allInvestment");
         } else if (path === "/withdraw") {
             setActiveItem("withdraw");
+        }
+        else if (path === "/referral") {
+            setActiveItem("referral");
         } else {
             setActiveItem("");
         }
@@ -64,11 +67,15 @@ const FixedBar = ({ fixedBarRef }) => {
                 gap: ".4rem",
                 fontWeight: "500",
                 cursor: "pointer",
-                color: "#a8a8a8",
+                color: activeItem === "referral" ? "#29c6e1" : "#a8a8a8",
                 fontSize: "6vw"
-            }}>
-                <BsWallet2 style={{ scale: ".8", color: activeItem === "wallet" ? "#29c6e1" : "#a8a8a8" }} />
-                <p style={{ fontSize: "3vw", color: activeItem === "wallet" ? "#29c6e1" : "#a8a8a8" }}>Wallet</p>
+            }}
+                onClick={() => handleItemClick("referral")}
+            >
+                <NavLink to="/referral" className="a-tag-style" onClick={(event) => handleLinkClick("referral", event)}>
+                    <BsWallet2 style={{ scale: ".8", color: activeItem === "referral" ? "#29c6e1" : "#a8a8a8" }} />
+                    <p style={{ fontSize: "3vw", color: activeItem === "referral" ? "#29c6e1" : "#a8a8a8" }}>Referral</p>
+                </NavLink>
             </div>
             <div style={{
                 flex: 1,
