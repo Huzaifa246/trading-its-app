@@ -78,7 +78,7 @@ function WithDrawBalance() {
     return (
         <>
             <ToastContainer />
-            <Modal show={showDepositModal} onHide={handleCloseDepositModal}>
+            <Modal show={showDepositModal} onHide={handleCloseDepositModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>With Draw Amount</Modal.Title>
                 </Modal.Header>

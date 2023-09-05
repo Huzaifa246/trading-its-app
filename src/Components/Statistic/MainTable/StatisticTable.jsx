@@ -66,7 +66,7 @@ function StatisticTable({ optionId }) {
 
     return (
         <>
-            <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
+            <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Confirm your investment</Modal.Title>
                 </Modal.Header>
@@ -82,7 +82,7 @@ function StatisticTable({ optionId }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Modal show={showSuccessModal} onHide={handleSuccessModalClose}>
+            <Modal show={showSuccessModal} onHide={handleSuccessModalClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Investment Successful</Modal.Title>
                 </Modal.Header>

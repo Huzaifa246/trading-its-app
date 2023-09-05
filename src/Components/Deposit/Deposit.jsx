@@ -61,7 +61,7 @@ function Deposit() {
     };
     return (
         <>
-            <Modal show={showDepositModal} onHide={handleCloseDepositModal}>
+            <Modal show={showDepositModal} onHide={handleCloseDepositModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Deposit Amount</Modal.Title>
                 </Modal.Header>

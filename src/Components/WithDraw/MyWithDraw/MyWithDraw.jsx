@@ -65,7 +65,7 @@ function MyWithDraw() {
 
     return (
         <>
-            <Modal show={cancellationModalOpen} onHide={() => setCancellationModalOpen(false)}>
+            <Modal show={cancellationModalOpen} onHide={() => setCancellationModalOpen(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Cancel Withdrawal</Modal.Title>
                 </Modal.Header>
