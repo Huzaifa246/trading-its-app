@@ -20,6 +20,8 @@ function WithDrawBalance() {
     const [isError, setIsError] = useState(false); // Flag to track if there's an error
     const [isDepositDisabled, setIsDepositDisabled] = useState(true);
 
+    const [isApiCallInProgress, setIsApiCallInProgress] = useState(false);
+
     const handleShowDepositModal = () => {
         setShowDepositModal(true);
     };
@@ -30,6 +32,12 @@ function WithDrawBalance() {
 
     const handleWithDraw = async () => {
         try {
+            if (isApiCallInProgress) {
+                return; // Don't allow multiple API calls
+            }
+
+            setIsApiCallInProgress(true);
+
             if (idOfSender !== "" && idOfSender !== null) {
                 const formattedRangeValue = rangeValue?.toFixed(2);
                 const response = await WdPostByUser(userId, formattedRangeValue.toString(), idOfSender);
@@ -46,6 +54,7 @@ function WithDrawBalance() {
             console.error('Error making withDraw:', error);
         } finally {
             setShowDepositModal(false);
+            setIsApiCallInProgress(false);
         }
     };
 
@@ -91,7 +100,10 @@ function WithDrawBalance() {
                     <Button variant="secondary" onClick={handleCloseDepositModal}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleWithDraw}>
+                    <Button variant="primary"
+                        onClick={handleWithDraw}
+                        disabled={isApiCallInProgress}
+                    >
                         Confirm
                     </Button>
                 </Modal.Footer>

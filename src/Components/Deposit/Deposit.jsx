@@ -16,6 +16,8 @@ function Deposit() {
     const [isError, setIsError] = useState(false); // Flag to track if there's an error
     const [isDepositDisabled, setIsDepositDisabled] = useState(false);
 
+    const [isApiCallInProgress, setIsApiCallInProgress] = useState(false);
+
     const handleShowDepositModal = () => {
         setShowDepositModal(true);
     };
@@ -26,6 +28,12 @@ function Deposit() {
 
     const handleDeposit = async () => {
         try {
+            if (isApiCallInProgress) {
+                return; // Don't allow multiple API calls
+            }
+
+            setIsApiCallInProgress(true);
+
             const formattedRangeValue = rangeValue.toFixed(2);
             const response = await DepositInvestment(userId, formattedRangeValue.toString());
             setDepositResponse(response);
@@ -35,6 +43,7 @@ function Deposit() {
             console.error('Error making deposit:', error);
         } finally {
             setShowDepositModal(false);
+            setIsApiCallInProgress(false);
         }
     };
 
@@ -72,7 +81,9 @@ function Deposit() {
                     <Button variant="secondary" onClick={handleCloseDepositModal}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleDeposit}>
+                    <Button variant="primary" onClick={handleDeposit}
+                      disabled={isApiCallInProgress}
+                    >
                         Confirm
                     </Button>
                 </Modal.Footer>
