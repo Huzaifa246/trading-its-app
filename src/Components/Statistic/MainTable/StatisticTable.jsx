@@ -7,9 +7,9 @@ import { useSelector } from "react-redux";
 import { Modal, Button } from 'react-bootstrap';
 
 function StatisticTable({ optionId }) {
-    // const [showDepositModal, setShowDepositModal] = useState(false);
-    // const [depositAmount, setDepositAmount] = useState('');
-    // const [depositResponse, setDepositResponse] = useState(null);
+    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
+    const userId = userDetails?.data?._id;
+    const totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable; 
 
     const [tradeOptions, setTradeOptions] = useState([]);
     const [investmentResponse, setInvestmentResponse] = useState(null);
@@ -18,9 +18,7 @@ function StatisticTable({ optionId }) {
     const [isError, setIsError] = useState(false);
     const [rangeValue, setRangeValue] = useState('');
 
-    const userDetails = useSelector((state) => state.userInfoStore.userDetails);
-    const userId = userDetails?.data?._id;
-    const totalBalance = userDetails?.data?.totalbalance + userDetails?.data?.withdrawable;
+    const [isApiCallInProgress, setIsApiCallInProgress] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -35,6 +33,11 @@ function StatisticTable({ optionId }) {
     };
     const confirmInvestment = async () => {
         try {
+            if (isApiCallInProgress) {
+                return; // Don't allow multiple API calls
+            }
+            setIsApiCallInProgress(true);
+
             const investmentResponse = await InvestmentByUser(userId, investmentValue, optionId);
             setInvestmentResponse(investmentResponse);
             if (investmentResponse.success) {
@@ -44,6 +47,7 @@ function StatisticTable({ optionId }) {
             console.error('Error making investment:', error);
         } finally {
             setShowConfirmationModal(false);
+            setIsApiCallInProgress(false)
         }
     };
     const handleSuccessModalClose = () => {
@@ -77,7 +81,9 @@ function StatisticTable({ optionId }) {
                     <Button variant="secondary" onClick={() => setShowConfirmationModal(false)}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={confirmInvestment}>
+                    <Button variant="primary" onClick={confirmInvestment}
+                        disabled={isApiCallInProgress}
+                    >
                         Confirm
                     </Button>
                 </Modal.Footer>
@@ -155,7 +161,7 @@ function StatisticTable({ optionId }) {
                         <div className='button-style'>
                             <button onClick={handleInvestment}
                                 className={`buy-btn ${investmentValue <= 0 || investmentValue > totalBalance ? 'disabled-button' : ''}`}
-                                disabled={investmentValue <= 0 || investmentValue > totalBalance  || isError}
+                                disabled={investmentValue <= 0 || investmentValue > totalBalance || isError}
                             >
                                 Invest
                             </button>

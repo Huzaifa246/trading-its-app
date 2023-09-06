@@ -156,15 +156,16 @@ h6 {
   color: white;
 }
 .main-container-pf {
-  /* background: linear-gradient(7deg, rgba(9,29,28,1) 0%, rgba(0,9,34,1) 100%); */
   background: #0b121d;
 }
 .input_field {
+  width: 100%;
   border: 2px solid #afafaf2f;
   padding: 10px 14px;
   border-radius: 8px;
-  transition: 0.5s;
+  transition: .5s;
   background-color: rgba(255, 255, 255, 0.068);
+  color: white;
 }
 
 .input_field:focus {

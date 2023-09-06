@@ -183,7 +183,7 @@ function ProfileMain() {
             }
             else {
                 const response = await UpdatePasswordApi(userId, oldPassword, newPassword);
-                setModalMessage(response.message);
+                setModalMessage(response?.data?.message);
                 setShowUpdateModal(true);
                 if (response?.data?.success) {
                     setModalMessage(response.message);
@@ -192,7 +192,7 @@ function ProfileMain() {
                     setModalMessage(response.message);
                     setShowUpdateModal(true);
                 } else {
-                    setModalMessage('Password update failed');
+                    setModalMessage('Password update failed, Old password is wrong');
                     setShowUpdateModal(true);
                 }
             }
@@ -362,7 +362,7 @@ function ProfileMain() {
                                                 {isFullNameEdit ? (
                                                     <input
                                                         type="text"
-                                                        className="form-control input_field"
+                                                        className="input_field"
                                                         value={fullName}
                                                         onChange={(e) => setFullName(e.target.value)}
                                                     />
@@ -394,7 +394,7 @@ function ProfileMain() {
                                                 {isBinanceIdEdit ? (
                                                     <input
                                                         type="text"
-                                                        className="form-control input_field"
+                                                        className="input_field"
                                                         value={binanceId}
                                                         onChange={(e) => setBinanceId(e.target.value)}
                                                     />
@@ -437,7 +437,7 @@ function ProfileMain() {
                                                     <p className="m-b-10 f-w-600 color-white">Old Password</p>
                                                     <input
                                                         type="password"
-                                                        className="form-control input_field"
+                                                        className="input_field"
                                                         value={oldPassword}
                                                         required
                                                         onChange={(e) => setOldPassword(e.target.value)}
@@ -448,7 +448,7 @@ function ProfileMain() {
                                                     <input
                                                         type={showPassword ? "text" : "password"}
                                                         required
-                                                        className="form-control input_field"
+                                                        className="input_field"
                                                         value={newPassword}
                                                         onChange={(e) => setNewPassword(e.target.value)}
                                                     />
@@ -465,9 +465,9 @@ function ProfileMain() {
                                                 <div className="col-sm-12 col-md-12">
                                                     <p className="m-b-10 f-w-600 color-white">Confirm Password</p>
                                                     <input
-                                                        type={showPassword ? "text" : "password"} // Use the 'showPassword' state
+                                                        type={showPassword ? "text" : "password"}
                                                         required
-                                                        className="form-control input_field"
+                                                        className="input_field"
                                                         value={confirmPassword}
                                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                                     />

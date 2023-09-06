@@ -15,9 +15,12 @@ function MyWithDraw() {
     const [activeStatus, setActiveStatus] = useState('');
     const [isLoading, setLoading] = useState(false);
 
+    const [filteredWithDrawData, setFilteredWithDrawData] = useState([]);
+
     // State for withdrawal cancellation confirmation
     const [cancellationModalOpen, setCancellationModalOpen] = useState(false);
     const [selectedWithdrawal, setSelectedWithdrawal] = useState(null);
+    const [isApiCallInProgress, setIsApiCallInProgress] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -28,7 +31,7 @@ function MyWithDraw() {
             } catch (error) {
                 console.error("Error fetching investment data:", error);
             }
-            finally{
+            finally {
                 setLoading(false);
             }
         }
@@ -47,6 +50,12 @@ function MyWithDraw() {
     };
 
     const handleConfirmCancel = async () => {
+        if (isApiCallInProgress) {
+            return; // Don't allow multiple API calls
+        }
+
+        setIsApiCallInProgress(true);
+
         let amount = selectedWithdrawal?.amount;
         let withDrawId = selectedWithdrawal?._id;
         let cancellation = true;
@@ -55,13 +64,26 @@ function MyWithDraw() {
             const response = await WdPostCancelUser(userId, amount, cancellation, withDrawId);
             setWithDrawData(response.data);
             console.log(response, "asd")
+            fetchData();
         } catch (error) {
             console.error("Error making API call:", error);
         }
         setCancellationModalOpen(false);
+        setIsApiCallInProgress(false);
         window.location.reload();
     };
 
+    useEffect(() => {
+        // Filter the data based on the selected status
+        const filteredData = withDrawData.filter((item) => {
+            if (status === '') {
+                return true; // Show all data when status is empty
+            }
+            return item.status === status;
+        });
+
+        setFilteredWithDrawData(filteredData);
+    }, [status, withDrawData]);
 
     return (
         <>
@@ -74,7 +96,9 @@ function MyWithDraw() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setCancellationModalOpen(false)}>Cancel</Button>
-                    <Button variant="primary" onClick={handleConfirmCancel}>Confirm</Button>
+                    <Button variant="primary" onClick={handleConfirmCancel}
+                        disabled={isApiCallInProgress}
+                    >Confirm</Button>
                 </Modal.Footer>
             </Modal>
             <div>
@@ -89,8 +113,8 @@ function MyWithDraw() {
                     {isLoading ? (
                         <Loader />
                     ) : (
-                        withDrawData?.length > 0 ? (
-                            withDrawData?.map((item) => (
+                        filteredWithDrawData?.length > 0 ? (
+                            filteredWithDrawData?.map((item) => (
                                 <div
                                     key={item._id}
                                     style={{

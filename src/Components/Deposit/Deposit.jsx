@@ -101,7 +101,6 @@ function Deposit() {
                                 onChange={handleEditableValueChange}
                                 min="50"
                                 max={500}
-                            // step={0.01}
                             />
                         </div>
                     </div>

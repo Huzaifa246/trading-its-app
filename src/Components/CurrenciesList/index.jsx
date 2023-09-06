@@ -35,7 +35,7 @@ const CurrenciesList = () => {
             }}>
                 <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600 }}>Current Investments</h6>
                 <a href="/allInvestment">
-                    <p style={{ color: "white", fontSize: "4vw", fontWeight: 500 }}>See All</p>
+                    <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 500 }}>See All</h6>
                 </a>
             </div>
             <div style={{
