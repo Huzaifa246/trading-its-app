@@ -418,7 +418,7 @@ function ProfileMain() {
                     </div>
                 </div>
             </div>
-            <div className="page-content page-container" style={{ marginBottom: "100px", paddingRight: "5px" }} id="page-content">
+            <div className="page-content page-container pass-main-mb" style={{ paddingRight: "5px" }} id="page-content">
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12">
                         <div className="card user-card-full ">

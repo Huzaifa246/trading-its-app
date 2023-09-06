@@ -206,3 +206,16 @@ h6 {
 .container{
   padding-right: 0;
 }
+.pass-main-mb{
+    margin-bottom: 13vh;
+}
+@media screen and (max-height: 760px) and (min-width: 500px) and (max-width: 550px) {
+  .pass-main-mb{
+    margin-bottom: 17vh;
+  }
+}
+@media screen and (max-height: 850px) and (min-width: 1100px) and (max-width: 1250px) {
+  .pass-main-mb{
+    margin-bottom: 20vh;
+  }
+}
