@@ -144,7 +144,7 @@ const FixedBar = ({ fixedBarRef }) => {
                     onClick={(event) => handleLinkClick("withdraw", event)}
                 >
                     <MdOutlineManageHistory style={{ color: activeItem === "withdraw" ? "#29c6e1" : "#a8a8a8" }} />
-                    <p style={{ fontSize: "3vw", color: activeItem === "withdraw" ? "#29c6e1" : "#a8a8a8" }}>WithDrawal</p>
+                    <p style={{ fontSize: "3vw", color: activeItem === "withdraw" ? "#29c6e1" : "#a8a8a8" }}>Withdrawal</p>
                 </NavLink>
             </div>
         </div>

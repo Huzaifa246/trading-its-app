@@ -159,7 +159,7 @@ function WithDrawBalance() {
                     <div className="button-style">
                         <button onClick={handleShowDepositModal} className="Depositbtn"
                             disabled={isDepositDisabled}>
-                            With Draw
+                            Withdrawal
                         </button>
                     </div>
                 </div>

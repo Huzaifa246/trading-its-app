@@ -11,7 +11,7 @@ import defImg1 from "../../../public/default-img.png";
 const Navbar = () => {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const navigate = useNavigate()
-    const fullName = userDetails?.data?.fullName || "User Not Found";
+    const fullName = userDetails?.data?.fullName || "";
     const ProfileImg = userDetails?.data?.profile_image?.url;
     const [showDropdown, setShowDropdown] = useState(false);
     const [hasScrolled, setHasScrolled] = useState(false);
