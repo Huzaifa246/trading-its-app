@@ -335,7 +335,7 @@ function ProfileMain() {
                                 <div className="col-sm-12 sec-container">
                                     <div className="card-block">
                                         <div className='user-info-style'>
-                                            <h6 className="p-b-5 f-w-600"><b>User Information </b></h6>
+                                            <h6 className="p-b-5 f-w-600"><b style={{fontSize: "2.5vh"}}>User Information </b></h6>
 
                                             {isFullNameEdit || isBinanceIdEdit ? (
                                                 <Button

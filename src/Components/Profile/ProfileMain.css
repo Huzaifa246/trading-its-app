@@ -151,6 +151,7 @@ h6 {
 .user-info-style {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 .sec-container {
   color: white;
