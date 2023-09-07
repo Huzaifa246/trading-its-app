@@ -16,7 +16,7 @@ function StatisticTable({ optionId }) {
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [rangeValue, setRangeValue] = useState('');
+    const [rangeValue, setRangeValue] = useState(0);
 
     const [isApiCallInProgress, setIsApiCallInProgress] = useState(false);
 
@@ -62,7 +62,7 @@ function StatisticTable({ optionId }) {
     const handleRangeChange = (event) => {
         const newValue = parseFloat(event.target.value);
         setIsError(newValue <= 0 || newValue > totalBalance);
-        setRangeValue(newValue);
+        setRangeValue(isNaN(newValue) ? 0 : newValue);
     };
     const getRangeColor = (value) => {
         return value >= totalBalance / 2 ? '#2fd3c9' : '#5c768b';
@@ -114,7 +114,7 @@ function StatisticTable({ optionId }) {
                         <div className="range-value">
                             <input
                                 type="number"
-                                className={`form-control Invest-input ${isError ? 'is-invalid' : ''}`}
+                                className={`Invest-input ${isError ? 'is-invalid' : ''}`}
                                 id="customRange1"
                                 min="0.00"
                                 max={totalBalance}

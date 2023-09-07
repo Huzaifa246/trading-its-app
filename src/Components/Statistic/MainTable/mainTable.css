@@ -81,3 +81,12 @@
   justify-content: space-around;
   height: 30vh;
 }
+.Invest-input.is-invalid {
+  border: 2px solid #ff0000; /* Red border for invalid input */
+}
+
+.invalid-feedback {
+  color: #ff0000; /* Red text for error message */
+  font-size: 14px;
+  margin-top: 5px;
+}

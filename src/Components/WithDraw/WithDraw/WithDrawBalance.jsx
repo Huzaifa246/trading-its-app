@@ -15,7 +15,7 @@ function WithDrawBalance() {
     const [showDepositModal, setShowDepositModal] = useState(false);
     const [withDrawResponse, setWithDrawResponse] = useState(null);
     const [withDrawText, setWithDrawText] = useState('');
-    const [rangeValue, setRangeValue] = useState(withDraw); // Initial value is set to 50.00
+    const [rangeValue, setRangeValue] = useState(withDraw || 0);
     const [editableValue, setEditableValue] = useState(rangeValue?.toFixed(2));  // Initial value is set to 50
     const [isError, setIsError] = useState(false); // Flag to track if there's an error
     const [isDepositDisabled, setIsDepositDisabled] = useState(true);
@@ -115,7 +115,7 @@ function WithDrawBalance() {
                         <div className="range-value">
                             <input
                                 type="number"
-                                className={`form-control wdraw-input-style ${isError ? 'is-invalid' : ''}`}
+                                className={`wdraw-input-style ${isError ? 'is-invalid' : ''}`}
                                 value={editableValue}
                                 onChange={handleEditableValueChange}
                                 min="0"

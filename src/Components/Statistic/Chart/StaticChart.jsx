@@ -29,7 +29,7 @@ const StaticChart = ({ name, graphValues }) => {
                         color: "white",
                         fontSize: "24px"
                     }}>
-                        {name}
+                        {name?.toUpperCase()}
                     </h2>
                 </div>
             </div>

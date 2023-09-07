@@ -141,7 +141,7 @@ function MyWithDraw() {
                                             </span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className='right-wd-fend'>
                                         <h2 style={{ fontSize: '4vw', fontWeight: 700 }}>{`${item?.binance_id || "Add Id"}`}</h2>
                                         <span style={{
                                             color: '#21c8d7', fontSize: '3vw', display: "flex",

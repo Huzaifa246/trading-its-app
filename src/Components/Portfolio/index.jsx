@@ -12,7 +12,6 @@ const Portfolio = () => {
     const [tradeOptions, setTradeOptions] = useState([]);
     const [pastUserTradeData, setPastUserTradeData] = useState([]);
     const [isChartLoading, setIsChartLoading] = useState(true);
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -27,10 +26,11 @@ const Portfolio = () => {
         fetchData();
     }, []);
 
+    console.log(isChartLoading)
     useEffect(() => {
         async function fetchData() {
+             setIsChartLoading(true);
             try {
-                setIsChartLoading(true)
                 let startDate = new Date();
                 let endDate = new Date();
                 startDate.setDate(startDate.getDate() - 7);
@@ -78,13 +78,9 @@ const Portfolio = () => {
         }
     }, [tradeOptions]);
 
-    // if (isChartLoading) {
-    //     return <Loader />;
+    // if (pastUserTradeData.length <= 0) {
+    //     return null; // Don't render anything if there is no data
     // }
-
-    if (pastUserTradeData.length <= 0) {
-        return null; // Don't render anything if there is no data
-    }
     return (
 
         <div style={{
@@ -94,7 +90,7 @@ const Portfolio = () => {
                 <Loader />
             ) : (
                 <>
-                    <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Portfolio</h6>
+                    <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Trades</h6>
                     <Swiper
                         slidesPerView={"auto"}
                         spaceBetween={10}

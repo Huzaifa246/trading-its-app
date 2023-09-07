@@ -96,7 +96,7 @@ function Deposit() {
                         <div className="range-value">
                             <input
                                 type="number"
-                                className={`form-control deposit-input-style ${isError ? 'is-invalid' : ''}`}
+                                className={`deposit-input-style ${isError ? 'is-invalid' : ''}`}
                                 value={editableValue}
                                 onChange={handleEditableValueChange}
                                 min="50"

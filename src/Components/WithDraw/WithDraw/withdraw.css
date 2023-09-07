@@ -43,7 +43,7 @@
     background: transparent;
     border: none;
     color: white;
-    outline: none;
+    outline: none !important;
   }
   .wdraw-input-style:focus {
     border: none;
@@ -79,4 +79,12 @@
   .wdraw-range h6 {
     color: #29c6e1 !important;
   }
+  .wdraw-input-style.is-invalid {
+    border: 2px solid #ff0000; /* Red border for invalid input */
+  }
   
+  .invalid-feedback {
+    color: #ff0000; /* Red text for error message */
+    font-size: 14px;
+    margin-top: 5px;
+  }
