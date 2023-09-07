@@ -87,24 +87,28 @@ const Portfolio = () => {
     }
     return (
 
-        <>
+        <div style={{
+            position: "relative"
+        }}>
+            {isChartLoading ? (
+                <Loader />
+            ) : (
+                <>
+                    <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Portfolio</h6>
+                    <Swiper
+                        slidesPerView={"auto"}
+                        spaceBetween={10}
+                        className="mySwiper"
+                        style={{
+                            padding: ".5rem 1rem",
 
-            <>
-                <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Portfolio</h6>
-                <Swiper
-                    slidesPerView={"auto"}
-                    spaceBetween={10}
-                    className="mySwiper"
-                    style={{
-                        padding: ".5rem 1rem",
-                        position: "relative"
-                    }}
-                >
+                        }}
+                    >
 
-                    {isChartLoading ? (
+                        {/* {isChartLoading ? (
                         <Loader />
-                    ) :
-                        pastUserTradeData?.map((item, index) => {
+                    ) : */}
+                        {pastUserTradeData?.map((item, index) => {
 
                             const tradeOption = item?.tradeOption;
                             const paymentData = item?.groupedPayments;
@@ -267,9 +271,10 @@ const Portfolio = () => {
                                 </>
                             )
                         })}
-                </Swiper>
-            </>
-        </>
+                    </Swiper>
+                </>
+            )}
+        </div>
     )
 }
 
