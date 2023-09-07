@@ -173,12 +173,13 @@ function ProfileMain() {
             } else if (oldPassword === newPassword) {
                 setModalMessage('Old and new passwords cannot be the same');
                 setShowUpdateModal(true);
-            } else if (!oldPassword.trim()) {
-                setModalMessage('Old password is empty. Please enter your old password');
-                setShowUpdateModal(true);
             }
             else if (newPassword !== confirmPassword) {
                 setModalMessage('New password and confirm password do not match');
+                setShowUpdateModal(true);
+            }
+            else if (!oldPassword.trim()) {
+                setModalMessage('Old password is empty. Please enter your old password');
                 setShowUpdateModal(true);
             }
             else {
@@ -188,7 +189,7 @@ function ProfileMain() {
                 if (response?.data?.success) {
                     setModalMessage(response.message);
                     setShowUpdateModal(true);
-                } else if (response) {
+                } else if (response?.data) {
                     setModalMessage(response.message);
                     setShowUpdateModal(true);
                 } else {
