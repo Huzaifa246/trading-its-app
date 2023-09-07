@@ -14,11 +14,14 @@ import UpdateImage from './../../helpers/PostApis/UpdateImage';
 import EditUserDetails from '../../helpers/PostApis/EditUserDetails';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { encryptData } from '../../helpers/encryption_decryption/Encryption';
+import { decryptData } from '../../helpers/encryption_decryption/Decryption';
 
 function ProfileMain() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
     // const fullName = userDetails?.data?.fullName;
+
     const fNameU = userDetails?.data?.fullName;
     const bin_id = userDetails?.data?.binance_id;
     const email = userDetails?.data?.email;
@@ -184,16 +187,15 @@ function ProfileMain() {
             }
             else {
                 const response = await UpdatePasswordApi(userId, oldPassword, newPassword);
+                console.log(response, "pf");
+
                 setModalMessage(response?.data?.message);
                 setShowUpdateModal(true);
-                if (response?.data?.success) {
-                    setModalMessage(response.message);
+                if (response?.success) {
+                    setModalMessage(response?.data?.message || 'Password Updated.');
                     setShowUpdateModal(true);
-                } else if (response?.data) {
-                    setModalMessage(response.message);
-                    setShowUpdateModal(true);
-                } else {
-                    setModalMessage('Password update failed, Old password is wrong');
+                } else if (response?.message === 'Old password is wrong.') {
+                    setModalMessage(response?.data?.message || 'Old password is wrong.');
                     setShowUpdateModal(true);
                 }
             }
@@ -336,7 +338,7 @@ function ProfileMain() {
                                 <div className="col-sm-12 sec-container">
                                     <div className="card-block">
                                         <div className='user-info-style'>
-                                            <h6 className="p-b-5 f-w-600"><b style={{fontSize: "2.5vh"}}>User Information </b></h6>
+                                            <h6 className="p-b-5 f-w-600"><b style={{ fontSize: "2.5vh" }}>User Information </b></h6>
 
                                             {isFullNameEdit || isBinanceIdEdit ? (
                                                 <Button

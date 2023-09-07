@@ -24,8 +24,7 @@
 .left > img {
   width: 14vw;
   height: 14vw;
-  /* object-fit: cover; */
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
 }
 
