@@ -33,6 +33,7 @@ const Portfolio = () => {
         }
         fetchData();
     }, []);
+    console.log(tradeOptions, "opts")
 
     console.log(isChartLoading)
 
@@ -89,8 +90,8 @@ const Portfolio = () => {
         fetchData();
     }, [tradeOptions]);
 
-    const defaultSwiperSlides = Array.from({ length: 4 }, (_, index) => (
-        <SwiperSlide key={`default-slide-${index}`} style={{
+    const defaultSwiperSlides = tradeOptions?.map((tradeOption) => (
+        <SwiperSlide key={tradeOption._id} style={{
             background: "#181f2d",
             boxShadow: "0 0 20px rgba(8, 21, 66, 0.05)",
             borderRadius: "16px",
@@ -99,16 +100,71 @@ const Portfolio = () => {
             cursor: "pointer",
             width: "35vw",
             transition: "250ms",
-            minHeight: "10vh"
+            maxHeight: "30vh"
         }}>
-            <Loader />
+            <div style={{minHeight: "20vh", zIndex: 1111}}>
+                <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: ".5rem",
+                    padding: ".5rem .75rem 0"
+                }}>
+                    <div style={{
+                        textDecoration: 'none', display: "flex",
+                        alignIxtems: "center", gap: "1rem", zIndex: "1111"
+                    }}>
+                        < img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" alt={tradeOption.name} style={{ width: "7vw" }} />
+                        <h5 style={{ fontSize: "3.9vw", fontWeight: "900", marginBottom: "0", color: "white" }}>{tradeOption.name}</h5>
+                    </div>
+                </div>
+                {/* <div style={{
+                    color: "white",
+                    marginTop: "0rem",
+                    padding: ".6rem 1rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "1rem"
+                }}>
+                    <h4 style={{ fontSize: "4vw" }}>$8,322</h4>
+                    <div
+                        style={{
+                            display: "flex",
+                            color: "#21c8d7",
+                            fontSize: "2.2vw",
+                            alignItems: "center",
+                            gap: ".2rem"
+                        }}>
+                        <span>+5.23%</span>
+                        <FaArrowTrendUp />
+                    </div>
+                </div>
+                <div style={{
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "2.8vw",
+                    padding: "0 1rem",
+                    gap: ".5rem",
+                    zIndex: "1111"
+                }}>
+                    <div style={{
+                        padding: ".25rem .5rem",
+                        borderRadius: "20px",
+                        background: "rgba(33, 200, 215, 0.21)",
+                        color: "#21c8d7"
+                    }}>$233</div>
+                    <span style={{ color: "#a8a8a8" }}>since 24h</span>
+                </div> */}
+            </div>
+            <Loader style={{maxHeight: "5vh"}}/>
         </SwiperSlide>
     ));
     return (
 
         <div style={{
             position: "relative",
-            minHeight: "100px"
+            minHeight: "50px"
         }}>
             {isMainLoading ? (
                 <Loader />
@@ -116,12 +172,8 @@ const Portfolio = () => {
                 <>
                     <h6 style={{
                         color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0"
-                        // , position: 'relative'    
                     }}>
                         Portfolio</h6>
-                    {/* {isMainLoading ? (
-                    <Loader />
-                ) : ( */}
                     <Swiper
                         slidesPerView={"auto"}
                         spaceBetween={10}
@@ -129,7 +181,7 @@ const Portfolio = () => {
                         style={{
                             padding: ".5rem 1rem",
                             position: 'relative',
-                            minHeight: '80px'
+                            minHeight: '30px'
                         }}
                     >
 
