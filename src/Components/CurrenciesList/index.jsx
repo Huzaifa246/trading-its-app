@@ -45,7 +45,8 @@ const CurrenciesList = () => {
                 </div>
                 <div style={{
                     padding: ".5rem",
-                    position: "relative"
+                    position: "relative",
+                    minHeight: "100px"
                 }}>
                     {isLoading ? (
                         <Loader />
