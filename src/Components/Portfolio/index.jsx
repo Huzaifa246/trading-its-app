@@ -12,24 +12,33 @@ const Portfolio = () => {
     const [tradeOptions, setTradeOptions] = useState([]);
     const [pastUserTradeData, setPastUserTradeData] = useState([]);
     const [isChartLoading, setIsChartLoading] = useState(true);
+    const [isMainLoading, setIsMainLoading] = useState(true);
+    const [selectedTradeOptionIndex, setSelectedTradeOptionIndex] = useState(0);
+
     useEffect(() => {
         async function fetchData() {
+            setIsMainLoading(true);
             try {
                 const decryptedData = await fetchAllTradeOption();
                 setTradeOptions(decryptedData.data);
+                // setTimeout(() => setIsMainLoading(false), 1000);
+                setIsMainLoading(true)
             } catch (error) {
                 console.error("Error fetching trade options:", error);
-            } finally {
-                setIsChartLoading(false); // Set loading to false whether fetching succeeds or fails
+                setIsMainLoading(false);
+            }
+            finally {
+                setIsMainLoading(false);       
             }
         }
         fetchData();
     }, []);
 
     console.log(isChartLoading)
+
     useEffect(() => {
         async function fetchData() {
-             setIsChartLoading(true);
+            setIsChartLoading(true);
             try {
                 let startDate = new Date();
                 let endDate = new Date();
@@ -60,37 +69,38 @@ const Portfolio = () => {
                             }
                         }
 
-                        fetchedData.push({ tradeOption, groupedPayments });
+                        fetchedData?.push({ tradeOption, groupedPayments });
                     } else {
                         console.log(`No data found for trade option ${tradeOption.name}`);
                     }
                 }
                 setPastUserTradeData(fetchedData);
+                setIsChartLoading(false);
             } catch (error) {
                 console.error("Error fetching past user trade data:", error);
             } finally {
                 setIsChartLoading(false)
             }
         }
-
-        if (tradeOptions?.length > 0) {
-            fetchData();
-        }
+        // if (tradeOptions?.length > 0) {
+        //     fetchData();
+        // }
+        
+        fetchData();
     }, [tradeOptions]);
-
-    // if (pastUserTradeData.length <= 0) {
-    //     return null; // Don't render anything if there is no data
-    // }
     return (
 
         <div style={{
             position: "relative"
         }}>
-            {isChartLoading ? (
+            {/* {isMainLoading ? (
                 <Loader />
-            ) : (
-                <>
-                    <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0" }}>Trades</h6>
+            ) : ( */}
+            <>
+                <h6 style={{ color: "white", fontSize: "4vw", fontWeight: 600, padding: ".2rem 1rem 0", position: 'relative' }}>Portfolio</h6>
+                {isMainLoading ? (
+                    <Loader />
+                ) : (
                     <Swiper
                         slidesPerView={"auto"}
                         spaceBetween={10}
@@ -253,13 +263,18 @@ const Portfolio = () => {
                                                 }}>$233</div>
                                                 <span style={{ color: "#a8a8a8" }}>since 24h</span>
                                             </div>
-                                            <div style={{ width: "100%", marginTop: "-4.5rem" }}>
-                                                <Chart
-                                                    // id="chart-currently"
-                                                    id={`chart-${tradeOption._id}`}
-                                                    options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
-                                                        transform: "translateX(-8%) translateY(44px)",
-                                                    }} />
+                                            <div style={{ width: "100%", marginTop: "-4.5rem", position: "relative", minHeight: "100px" }}>
+
+                                                {isChartLoading && !isMainLoading ? (
+                                                    <Loader />
+                                                ) : (
+                                                    <Chart
+                                                        // id="chart-currently"
+                                                        id={`chart-${tradeOption._id}`}
+                                                        options={Currentlysale.options} series={Currentlysale.series} type="area" height={"140px"} width={"118%"} style={{
+                                                            transform: "translateX(-8%) translateY(44px)",
+                                                        }} />
+                                                )}
                                             </div>
                                         </>
                                         {/* )} */}
@@ -268,8 +283,9 @@ const Portfolio = () => {
                             )
                         })}
                     </Swiper>
-                </>
-            )}
+                )}
+            </>
+            {/* )} */}
         </div>
     )
 }

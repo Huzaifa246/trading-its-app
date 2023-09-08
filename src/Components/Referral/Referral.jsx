@@ -18,6 +18,14 @@ function Referral() {
                     email: 'ali@example.com',
                     amount: '11$',
                     ref: '1',
+                    subsubProf: [
+                        {
+                            name: 'Hamza',
+                            email: 'hamza@example.com',
+                            amount: '11$',
+                            ref: '1',
+                        }
+                    ]
                 },
                 {
                     name: 'Hamza',
@@ -38,6 +46,20 @@ function Referral() {
                     email: 'emma@example.com',
                     amount: '77$',
                     ref: '1',
+                    subsubProf: [
+                        {
+                            name: 'Safi',
+                            email: 'Safi@example.com',
+                            amount: '11$',
+                            ref: '9',
+                        },
+                        {
+                            name: 'Smith',
+                            email: 'smith@example.com',
+                            amount: '66$',
+                            ref: '1',
+                        }
+                    ]
                 },
                 {
                     name: 'Smith',
@@ -94,71 +116,197 @@ function Referral() {
     }, [userId]);
 
     const handleClickProfile = (profile) => {
-        setAllReferral((prevData) =>
-            prevData.map((p) => ({
-                ...p,
-                showSubProfiles: p === profile ? !p.showSubProfiles : false,
-            }))
-        );
+        // Check if the profile has subProfiles
+        if (profile.subProfiles.length > 0) {
+            setAllReferral((prevData) =>
+                prevData.map((p) => ({
+                    ...p,
+                    showSubProfiles: p === profile ? !p.showSubProfiles : false,
+                }))
+            );
+        } else if (profile.subsubProf?.length > 0) {
+            setActiveProfile(activeProfile === profile ? null : profile);
+        }
     };
 
     return (
         <>
             <div className="padding-top"></div>
             <div>
-                <h1 className="h1-deposit">
-                    Referral
-                </h1>
+                <h1 className="h1-deposit">Referral</h1>
                 <div style={{ color: 'white' }}>
                     <div className="profile-list">
                         {allReferral.map((profile, index) => (
-                            <div>
+                            <div key={index}>
                                 <div
-                                    key={index}
-                                    className={`profile-item ${profile === activeProfile ? 'active' : ''
-                                        }`}
+                                    className={`profile-item ${activeProfile === profile ? 'active' : ''}`}
                                     onClick={() => handleClickProfile(profile)}
+                                    style={{
+                                        cursor: profile.subProfiles.length === 0 ? 'default' : 'pointer',
+                                    }}
                                 >
-                                    <div style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        color: "white",
-                                        gap: "1rem",
-                                        justifyContent: "space-between",
-                                        margin: "1rem"
-                                    }}>
-                                        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                            <img src={"https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"} alt={"profile"} style={{ width: "11vw", height: "11vw", objectFit: "cover" }} />
-                                            <span style={{ fontSize: "3vh" }}>{profile?.name}</span>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'white',
+                                            gap: '1rem',
+                                            justifyContent: 'space-between',
+                                            margin: '1rem',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '1rem',
+                                            }}
+                                        >
+                                            <img
+                                                src={'https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'}
+                                                alt={'profile'}
+                                                style={{
+                                                    width: '11vw',
+                                                    height: '11vw',
+                                                    objectFit: 'cover',
+                                                }}
+                                            />
+                                            <span style={{ fontSize: '3vh' }}>{profile?.name}</span>
                                         </div>
-                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "end" }}>
-                                            <h2 style={{ fontSize: "3vw", fontWeight: 700 }}>{profile?.amount}</h2>
-                                            <p style={{ color: "#21c8d7", fontSize: "3vw" }}>{profile?.ref}</p>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'end',
+                                            }}
+                                        >
+                                            <h2 style={{ fontSize: '3vw', fontWeight: 700 }}>
+                                                {profile?.amount}
+                                            </h2>
+                                            <p style={{ color: '#21c8d7', fontSize: '3vw' }}>
+                                                {profile?.ref}
+                                            </p>
                                         </div>
                                     </div>
 
-                                    {profile?.showSubProfiles && (
+                                    {(activeProfile === profile || profile.showSubProfiles) && (
                                         <ul>
                                             {profile.subProfiles.map((subProfile, subIndex) => (
                                                 <li key={subIndex}>
-                                                    <div style={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        color: "white",
-                                                        gap: "1rem",
-                                                        justifyContent: "space-between",
-                                                        margin: "1rem",
-                                                        padding: "0 2rem"
-                                                    }}>
-                                                        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                                            <img src={"https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"} alt={"profile"} style={{ width: "11vw", height: "11vw", objectFit: "cover" }} />
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            color: 'white',
+                                                            gap: '1rem',
+                                                            justifyContent: 'space-between',
+                                                            margin: '1rem',
+                                                            padding: '0 1rem',
+                                                        }}
+                                                    >
+                                                        <div
+                                                            style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '1rem',
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={'https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'}
+                                                                alt={'profile'}
+                                                                style={{
+                                                                    width: '11vw',
+                                                                    height: '11vw',
+                                                                    objectFit: 'cover',
+                                                                }}
+                                                            />
                                                             <h4>{subProfile.name}</h4>
                                                         </div>
-                                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "end" }}>
-                                                            <h2 style={{ fontSize: "3vw", fontWeight: 700 }}>{profile?.amount}</h2>
-                                                            <p style={{ color: "#21c8d7", fontSize: "3vw" }}>{profile?.ref}</p>
+                                                        <div
+                                                            style={{
+                                                                display: 'flex',
+                                                                flexDirection: 'column',
+                                                                alignItems: 'end',
+                                                            }}
+                                                        >
+                                                            <h2 style={{ fontSize: '3vw', fontWeight: 700 }}>
+                                                                {profile?.amount}
+                                                            </h2>
+                                                            <p
+                                                                style={{
+                                                                    color: '#21c8d7',
+                                                                    fontSize: '3vw',
+                                                                }}
+                                                            >
+                                                                {profile?.ref}
+                                                            </p>
                                                         </div>
                                                     </div>
+
+                                                    {subProfile?.subsubProf?.length > 0 && (
+                                                        <ul>
+                                                            {subProfile?.subsubProf.map(
+                                                                (subsubProfile, subsubIndex) => (
+                                                                    <li key={subsubIndex}>
+                                                                        <div
+                                                                            style={{
+                                                                                display: 'flex',
+                                                                                alignItems: 'center',
+                                                                                color: 'white',
+                                                                                gap: '1rem',
+                                                                                justifyContent: 'space-between',
+                                                                                margin: '1rem',
+                                                                                padding: '0 1rem',
+                                                                            }}
+                                                                        >
+                                                                            <div
+                                                                                style={{
+                                                                                    display: 'flex',
+                                                                                    alignItems: 'center',
+                                                                                    gap: '1rem',
+                                                                                }}
+                                                                            >
+                                                                                <img
+                                                                                    src={'https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'}
+                                                                                    alt={'profile'}
+                                                                                    style={{
+                                                                                        width: '11vw',
+                                                                                        height: '11vw',
+                                                                                        objectFit: 'cover',
+                                                                                    }}
+                                                                                />
+                                                                                <h4>{subsubProfile.name}</h4>
+                                                                            </div>
+                                                                            <div
+                                                                                style={{
+                                                                                    display: 'flex',
+                                                                                    flexDirection: 'column',
+                                                                                    alignItems: 'end',
+                                                                                }}
+                                                                            >
+                                                                                <h2
+                                                                                    style={{
+                                                                                        fontSize: '3vw',
+                                                                                        fontWeight: 700,
+                                                                                    }}
+                                                                                >
+                                                                                    {subsubProfile?.amount}
+                                                                                </h2>
+                                                                                <p
+                                                                                    style={{
+                                                                                        color: '#21c8d7',
+                                                                                        fontSize: '3vw',
+                                                                                    }}
+                                                                                >
+                                                                                    {subsubProfile?.ref}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                )
+                                                            )}
+                                                        </ul>
+                                                    )}
                                                 </li>
                                             ))}
                                         </ul>
@@ -170,7 +318,7 @@ function Referral() {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Referral
+export default Referral;
