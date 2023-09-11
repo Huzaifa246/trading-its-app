@@ -114,6 +114,7 @@ function Referral() {
         }
         fetchData();
     }, [userId]);
+    console.log(allReferral, "as")
 
     const handleClickProfile = (profile) => {
         // Check if the profile has subProfiles

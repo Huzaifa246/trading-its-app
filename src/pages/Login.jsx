@@ -154,7 +154,7 @@ const LoginPage = () => {
                     Login
                 </button>
                 <p style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-                    <Link to={"/login"} style={{ color: "white", fontWeight: 600, fontSize: ".8rem" }}>Forgot password?</Link>
+                    <Link to={"/forgetPassword"} style={{ color: "white", fontWeight: 600, fontSize: ".8rem" }}>Forgot password?</Link>
                 </p>
                 {
                     showLoader

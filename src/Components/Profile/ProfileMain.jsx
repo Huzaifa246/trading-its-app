@@ -16,10 +16,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { encryptData } from '../../helpers/encryption_decryption/Encryption';
 import { decryptData } from '../../helpers/encryption_decryption/Decryption';
+import InvitationLink from '../../helpers/getApis/getInvitationLink';
 
 function ProfileMain() {
     const userDetails = useSelector((state) => state.userInfoStore.userDetails);
     const userId = userDetails?.data?._id;
+    // console.log(userId)
     // const fullName = userDetails?.data?.fullName;
 
     const fNameU = userDetails?.data?.fullName;
@@ -50,6 +52,28 @@ function ProfileMain() {
 
     const [isProfileViewOpen, setIsProfileViewOpen] = useState(false);
     const [profileViewImage, setProfileViewImage] = useState('');
+
+    const [invitationLink, setInvitationLink] = useState('');
+    const [inviteClicked, setInviteClicked] = useState(false);
+    const handleInviteClick = async () => {
+        try {
+            // Call your API to fetch the invitation link
+            const invitationLinkResponse = await InvitationLink(userId);
+            console.log(invitationLinkResponse, "response")
+            const link = invitationLinkResponse?.data;
+            console.log(link, "link")
+            if (link) {
+                setInvitationLink(link);
+                setInviteClicked(true); // Set inviteClicked to true
+                toast.success('Invitation link fetched successfully');
+            } else {
+                toast.error('Failed to fetch invitation link');
+            }
+        } catch (error) {
+            console.error('Error fetching invitation link:', error);
+            toast.error('An error occurred while fetching the invitation link');
+        }
+    };
 
     //Profile view
     const handleProfileViewClick = (imageURL) => {
@@ -412,6 +436,30 @@ function ProfileMain() {
                                                         }}
                                                     />
                                                 )}
+                                            </div>
+                                            <div className="col-sm-12 col-md-12">
+                                                <p className="m-b-10 f-w-600 m-t-10">Invitation Link</p>
+
+                                                <input
+                                                    type="text"
+                                                    className="input_field"
+                                                    value={invitationLink}
+                                                    disabled
+                                                    style={{
+                                                        width: '100%',
+                                                    }}
+                                                />
+                                                <div>
+                                                    {inviteClicked ? (
+                                                        <button className="btn btn-primary edit-btn" onClick={() => navigator.clipboard.writeText(invitationLink)}>
+                                                            Copy
+                                                        </button>
+                                                    ) : (
+                                                        <button className="btn btn-success edit-btn" onClick={handleInviteClick}>
+                                                            Invite
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
