@@ -498,22 +498,22 @@ function ProfileMain() {
             </div>
             <div className="page-content page-container pass-main-mb" style={{ paddingRight: "5px" }} id="page-content">
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
-                    <div className="col-xl-6 col-md-12">
-                        <div className="card user-card-full" style={{
-                            boxShadow: "0 0 20px rgba(8,21,66,.05)",
-                            background: "#18202b", borderRadius: "5px"
-                        }}>
+                    <div className="col-xl-6 col-md-12" style={{
+                        boxShadow: "0 0 20px rgba(8,21,66,.05)",
+                        background: "#18202b", borderRadius: "5px"
+                    }}>
+                        <div className="card user-card-full ">
                             <div className="row">
                                 <div className="col-sm-12 card-block">
                                     <div style={{ padding: "0 5px" }}>
-                                        <h6 className="m-b-20 m-t-20 p-b-5 f-w-600 pass-color display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}>
-                                            Password Update
-                                            {isPasswordUpdateOpen ? (
-                                                <div style={{ marginLeft: '5px' }}>▲</div> // Upwards arrow
-                                            ) : (
-                                                <div style={{ marginLeft: '5px' }}>▼</div> // Downwards arrow
-                                            )}
-                                        </h6>
+                                            <h6 className="m-b-20 m-t-20 p-b-5 f-w-600 pass-color display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}>
+                                                Password Update
+                                                {isPasswordUpdateOpen ? (
+                                                    <div style={{ marginLeft: '5px' }}>▲</div> // Upwards arrow
+                                                ) : (
+                                                    <div style={{ marginLeft: '5px' }}>▼</div> // Downwards arrow
+                                                )}
+                                            </h6>
 
                                         {isPasswordUpdateOpen && (
                                             <div className="row">
