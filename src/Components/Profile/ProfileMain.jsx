@@ -506,17 +506,17 @@ function ProfileMain() {
                             <div className="row">
                                 <div className="col-sm-12 card-block">
                                     <div style={{ padding: "0 5px" }}>
-                                            <h6 className="m-b-20 m-t-20 p-b-5 f-w-600 pass-color display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}>
-                                                Password Update
-                                                {isPasswordUpdateOpen ? (
-                                                    <div style={{ marginLeft: '5px' }}>▲</div> // Upwards arrow
-                                                ) : (
-                                                    <div style={{ marginLeft: '5px' }}>▼</div> // Downwards arrow
-                                                )}
-                                            </h6>
+                                        <h6 className="f-w-600 pass-color display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}>
+                                            <b style={{ fontSize: "2.5vh" }}>Password Update</b>
+                                            {isPasswordUpdateOpen ? (
+                                                <div className='arrow-style'>▲</div>
+                                            ) : (
+                                                <div className='arrow-style'>▼</div>
+                                            )}
+                                        </h6>
 
                                         {isPasswordUpdateOpen && (
-                                            <div className="row">
+                                            <div className="row" style={{ paddingTop: "1rem" }}>
                                                 <div className="col-sm-12 col-md-12">
                                                     <p className="m-b-10 f-w-600 color-white">Old Password</p>
                                                     <input
@@ -568,7 +568,7 @@ function ProfileMain() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             </div >
         </>
     )

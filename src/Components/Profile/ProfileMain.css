@@ -237,4 +237,10 @@ h6 {
 .display-pass{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0 !important;
+}
+
+.arrow-style{
+  display: flex;
+  align-items: center;
 }
