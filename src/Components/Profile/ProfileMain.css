@@ -6,7 +6,7 @@
   position: absolute;
   right: 0em;
   left: 50px;
-  top: 5.8em;
+  top: 5.7em;
 }
 .Update-btn {
   color: white;
@@ -41,7 +41,7 @@
   text-align: center;
   border-radius: 100%;
   background: #007aff;
-  padding: 2px;
+  padding: 3px;
 }
 .card {
   border-radius: 5px;
