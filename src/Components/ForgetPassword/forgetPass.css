@@ -1,3 +1,14 @@
-.w-100{
-    width: 100%;
+.w-100 {
+  width: 100%;
+}
+.forgetPass-style {
+  border: 2px solid #afafaf2f;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: 0.5s;
+  background-color: rgba(255, 255, 255, 0.068);
+  color: white;
+}
+.forgetPass-style:focus {
+    border-color: #21c8d7;
 }

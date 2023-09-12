@@ -74,6 +74,7 @@ const App = () => {
         
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/api/users/invitation-signup/:userName/:userID" element={<SignInviteLink />} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

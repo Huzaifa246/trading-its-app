@@ -224,3 +224,13 @@ h6 {
 .card {
   --bs-card-bg: none;
 }
+
+.copy-style{
+  position: absolute;
+  right: 10px;
+  background: #212a36;
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid #363c44;
+}

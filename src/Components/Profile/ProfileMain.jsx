@@ -7,7 +7,7 @@ import UpdatePasswordApi from '../../helpers/PostApis/UpdatePassword';
 import defImg from "../../../public/avatar.svg"
 import defImg1 from "../../../public/avatar1.jpeg";
 import defImg2 from "../../../public/default-img.png";
-import { FiEdit2, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiEdit2, FiEye, FiEyeOff, FiCopy, FiCheckCircle } from "react-icons/fi";
 import UploadImage from '../../helpers/PostApis/UploadImage';
 import Loader from '../Loader';
 import UpdateImage from './../../helpers/PostApis/UpdateImage';
@@ -65,16 +65,32 @@ function ProfileMain() {
             if (link) {
                 setInvitationLink(link);
                 setInviteClicked(true); // Set inviteClicked to true
-                toast.success('Invitation link fetched successfully');
-            } else {
-                toast.error('Failed to fetch invitation link');
+                // toast.success('Invitation link fetched successfully');
             }
         } catch (error) {
             console.error('Error fetching invitation link:', error);
             toast.error('An error occurred while fetching the invitation link');
         }
     };
+    useEffect(() => {
+        // Fetch the invitation link when the component mounts
+        handleInviteClick();
+    }, [userId]);
 
+    const [isCopied, setIsCopied] = useState(false);
+
+    // Function to handle copying text
+    const handleCopyText = () => {
+        if (invitationLink) {
+            navigator.clipboard.writeText(invitationLink);
+            setIsCopied(true);
+            toast.success('Text copied');
+            
+            setTimeout(() => {
+                setIsCopied(false);
+            }, 20000);
+        }
+    };
     //Profile view
     const handleProfileViewClick = (imageURL) => {
         setProfileViewImage(imageURL);
@@ -439,27 +455,28 @@ function ProfileMain() {
                                             </div>
                                             <div className="col-sm-12 col-md-12">
                                                 <p className="m-b-10 f-w-600 m-t-10">Invitation Link</p>
+                                                <span style={{display: "flex", width: "100%"}}>
+                                                    <input
+                                                        type="text"
+                                                        className="input_field"
+                                                        value={invitationLink}
+                                                        disabled
+                                                        style={{
+                                                            width: '100%'
+                                                        }}
+                                                    />
 
-                                                <input
-                                                    type="text"
-                                                    className="input_field"
-                                                    value={invitationLink}
-                                                    disabled
-                                                    style={{
-                                                        width: '100%',
-                                                    }}
-                                                />
-                                                <div>
-                                                    {inviteClicked ? (
-                                                        <button className="btn btn-primary edit-btn" onClick={() => navigator.clipboard.writeText(invitationLink)}>
-                                                            Copy
-                                                        </button>
+                                                    {isCopied ? (
+                                                        <span className='copy-style' style={{ cursor: 'default' }}>
+                                                            <FiCheckCircle style={{ color: 'green' }} />
+                                                        </span>
                                                     ) : (
-                                                        <button className="btn btn-success edit-btn" onClick={handleInviteClick}>
-                                                            Invite
-                                                        </button>
+                                                        <span className='copy-style' style={{ cursor: 'pointer' }} onClick={handleCopyText}>
+                                                            <FiCopy />
+                                                        </span>
                                                     )}
-                                                </div>
+                                                </span>
+                                                
                                             </div>
                                         </div>
                                     </div>
