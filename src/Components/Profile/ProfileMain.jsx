@@ -468,7 +468,7 @@ function ProfileMain() {
 
                                                     {isCopied ? (
                                                         <span className='copy-style' style={{ cursor: 'default' }}>
-                                                            <FiCheckCircle style={{ color: 'green' }} />
+                                                            <FiCheckCircle style={{ color: '#44bcd8' }} />
                                                         </span>
                                                     ) : (
                                                         <span className='copy-style' style={{ cursor: 'pointer' }} onClick={handleCopyText}>
