@@ -506,7 +506,9 @@ function ProfileMain() {
                             <div className="row">
                                 <div className="col-sm-12 card-block">
                                     <div style={{ padding: "0 5px" }}>
-                                        <h6 className="f-w-600 pass-color display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}>
+                                        <h6 className="f-w-600 display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
+                                        style={{ paddingBottom: "1rem" }}
+                                        >
                                             <b style={{ fontSize: "2.5vh" }}>Password Update</b>
                                             {isPasswordUpdateOpen ? (
                                                 <div className='arrow-style'>▲</div>
@@ -516,7 +518,7 @@ function ProfileMain() {
                                         </h6>
 
                                         {isPasswordUpdateOpen && (
-                                            <div className="row" style={{ paddingTop: "1rem" }}>
+                                            <div className="row">
                                                 <div className="col-sm-12 col-md-12">
                                                     <p className="m-b-10 f-w-600 color-white">Old Password</p>
                                                     <input
