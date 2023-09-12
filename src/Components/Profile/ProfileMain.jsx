@@ -517,7 +517,7 @@ function ProfileMain() {
                                         </h6>
 
                                         {isPasswordUpdateOpen && (
-                                            <div className="row">
+                                            <div className="row" style={{paddingTop: "1rem"}}>
                                                 <div className="col-sm-12 col-md-12">
                                                     <p className="m-b-10 f-w-600 color-white">Old Password</p>
                                                     <input
