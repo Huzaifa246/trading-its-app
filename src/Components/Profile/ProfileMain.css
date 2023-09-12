@@ -5,8 +5,8 @@
 .edit-style {
   position: absolute;
   right: 0em;
-  left: 46px;
-  top: 5.7em;
+  left: 50px;
+  top: 5.8em;
 }
 .Update-btn {
   color: white;
@@ -34,8 +34,8 @@
 }
 .FiEdit-inner-style {
   color: #fff;
-  width: 14px;
-  height: 16px;
+  width: 2.2vh;
+  height: 2.5vh;
   font-size: 12px;
   line-height: 20px;
   text-align: center;

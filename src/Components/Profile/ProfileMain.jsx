@@ -85,10 +85,10 @@ function ProfileMain() {
             navigator.clipboard.writeText(invitationLink);
             setIsCopied(true);
             toast.success('Text copied');
-            
+
             setTimeout(() => {
                 setIsCopied(false);
-            }, 20000);
+            }, 10000);
         }
     };
     //Profile view
@@ -353,7 +353,7 @@ function ProfileMain() {
                                             </>
                                         ) : (
                                             <>
-                                                <div className='Main-update-del'>
+                                                {/* <div className='Main-update-del'>
                                                     <div style={{ padding: "0 10px" }}>
                                                         <label htmlFor="file-input" className="fi-edit-label">
                                                             <button onClick={handleFileUploadClick} className='Update-btn'>Update</button>
@@ -365,11 +365,21 @@ function ProfileMain() {
                                                             style={{ display: 'none' }}
                                                             onChange={(event) => handleImageChange(event)}
                                                         />
-                                                    </div>
-                                                    <div style={{ padding: "0 10px" }}>
+                                                    </div> */}
+                                                <label htmlFor="file-input" className="fi-edit-label edit-style">
+                                                    <FiEdit2 onClick={handleFileUploadClick} className='FiEdit-inner-style' />
+                                                </label>
+                                                <input
+                                                    id="file-input"
+                                                    type="file"
+                                                    accept=".png, .jpg, .jpeg"
+                                                    style={{ display: 'none' }}
+                                                    onChange={(event) => handleImageChange(event)}
+                                                />
+                                                {/* <div style={{ padding: "0 10px" }}>
                                                         <button className='del-btn' onClick={() => handleConfirmDelete(userId)}> Delete </button>
-                                                    </div>
-                                                </div>
+                                                    </div> */}
+                                                {/* </div> */}
                                             </>
                                         )}
 
@@ -455,7 +465,7 @@ function ProfileMain() {
                                             </div>
                                             <div className="col-sm-12 col-md-12">
                                                 <p className="m-b-10 f-w-600 m-t-10">Invitation Link</p>
-                                                <span style={{display: "flex", width: "100%"}}>
+                                                <span style={{ display: "flex", width: "100%" }}>
                                                     <input
                                                         type="text"
                                                         className="input_field"
@@ -476,7 +486,7 @@ function ProfileMain() {
                                                         </span>
                                                     )}
                                                 </span>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
