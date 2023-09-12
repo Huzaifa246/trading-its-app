@@ -24,7 +24,7 @@
   border: none;
   font-size: 4vw;
 }
-.edit-btn{
+.edit-btn {
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -135,7 +135,7 @@ h6 {
 .m-t-20 {
   margin-top: 20px;
 }
-.m-t-10{
+.m-t-10 {
   margin-top: 10px;
 }
 .user-card-full .social-link li {
@@ -164,7 +164,7 @@ h6 {
   border: 2px solid #afafaf2f;
   padding: 10px 14px;
   border-radius: 8px;
-  transition: .5s;
+  transition: 0.5s;
   background-color: rgba(255, 255, 255, 0.068);
   color: white;
 }
@@ -172,14 +172,14 @@ h6 {
 .input_field:focus {
   border-color: #21c8d7;
 }
-.color-white{
+.color-white {
   padding-top: 5px;
   color: white;
 }
-.pass-color{
+.pass-color {
   color: #27cae1;
 }
-.eye-style-absolute{
+.eye-style-absolute {
   display: flex;
   align-items: center;
   position: absolute;
@@ -192,31 +192,31 @@ h6 {
 .input-field:focus + .eye-style-absolute button {
   color: black;
 }
-.row>*{
+.row > * {
   padding-left: 0;
 }
-.custom-modal-content .modal-content{
+.custom-modal-content .modal-content {
   background: transparent;
 }
-.up-btn-style{
+.up-btn-style {
   display: flex;
   justify-content: center;
   padding-right: 0 !important;
   margin-bottom: 15px;
 }
-.container{
+.container {
   padding-right: 0;
 }
-.pass-main-mb{
-    margin-bottom: 13vh;
+.pass-main-mb {
+  margin-bottom: 13vh;
 }
 @media screen and (max-height: 760px) and (min-width: 500px) and (max-width: 550px) {
-  .pass-main-mb{
+  .pass-main-mb {
     margin-bottom: 17vh;
   }
 }
 @media screen and (max-height: 850px) and (min-width: 1100px) and (max-width: 1250px) {
-  .pass-main-mb{
+  .pass-main-mb {
     margin-bottom: 20vh;
   }
 }
@@ -225,7 +225,7 @@ h6 {
   --bs-card-bg: none;
 }
 
-.copy-style{
+.copy-style {
   position: absolute;
   right: 10px;
   background: #212a36;
@@ -233,4 +233,8 @@ h6 {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #363c44;
+}
+.display-pass{
+  display: flex;
+  justify-content: space-between;
 }

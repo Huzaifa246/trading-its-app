@@ -55,13 +55,13 @@ const Navbar = () => {
                         <div className={`${styles.dropdown} dropdown-menu`}>
                             <ul>
                                 <li className="li-style">
-                                    <a href="/profile" style={{ textDecoration: "none" }}>
+                                    <a href="/profile" style={{ textDecoration: "none", fontSize: "1.5vh" }}>
                                         <FaUser style={{ paddingRight: "5px" }} /> Profile
                                     </a>
                                 </li>
                                 <li className="li-style">
                                     <RiLogoutBoxRLine style={{ paddingRight: "5px", color: "red" }} />
-                                    <button style={{ color: "red", backgroundColor: "transparent", border: "none" }} onClick={handleLogout}>Logout</button>
+                                    <button style={{ color: "red", backgroundColor: "transparent", border: "none" , fontSize: "1.5vh" }} onClick={handleLogout}>Logout</button>
                                 </li>
                             </ul>
                         </div>
