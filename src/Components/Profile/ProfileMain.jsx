@@ -507,7 +507,6 @@ function ProfileMain() {
                                 <div className="col-sm-12 card-block">
                                     <div style={{ padding: "0 5px" }}>
                                         <h6 className="f-w-600 display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
-                                        style={{ paddingBottom: "1rem" }}
                                         >
                                             <b style={{ fontSize: "2.5vh" }}>Password Update</b>
                                             {isPasswordUpdateOpen ? (

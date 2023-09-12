@@ -181,7 +181,7 @@ h6 {
   align-items: center;
   position: absolute;
   height: 100%;
-  top: 2.5%;
+  top: 0.5%;
   right: 0;
   padding-right: 1px;
   color: #27cae1;
@@ -205,7 +205,7 @@ h6 {
   padding-right: 0;
 }
 .pass-main-mb {
-  margin-bottom: 13vh;
+  margin-bottom: 15vh;
 }
 @media screen and (max-height: 760px) and (min-width: 500px) and (max-width: 550px) {
   .pass-main-mb {
