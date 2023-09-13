@@ -6,7 +6,7 @@
   position: absolute;
   right: 0em;
   left: 50px;
-  top: 5.7em;
+  top: 5.9em;
 }
 .Update-btn {
   color: white;
@@ -159,7 +159,7 @@ h6 {
 .main-container-pf {
   background: #0b121d;
 }
-.input_field {
+.input_field-Prof {
   width: 100%;
   border: 2px solid #afafaf2f;
   padding: 10px 14px;
@@ -169,7 +169,7 @@ h6 {
   color: white;
 }
 
-.input_field:focus {
+.input_field-Prof:focus {
   border-color: #21c8d7;
 }
 .color-white {
@@ -183,7 +183,7 @@ h6 {
   height: 100%;
   top: 2.0%;
   right: 0;
-  padding-right: 1px;
+  padding-right: 1rem;
   color: #27cae1;
 }
 .input-field:focus + .eye-style-absolute button {
@@ -191,6 +191,7 @@ h6 {
 }
 .row > * {
   padding-left: 0;
+  padding-right: 0;
 }
 .custom-modal-content .modal-content {
   background: transparent;
@@ -224,7 +225,7 @@ h6 {
 
 .copy-style {
   position: absolute;
-  right: 10px;
+  right: 16px;
   background: #212a36;
   padding: 10px;
   border-top-right-radius: 10px;

@@ -4,8 +4,6 @@ import "./ProfileMain.css";
 import { Button, Modal } from 'react-bootstrap';
 import DeleteUserImage from '../../helpers/PostApis/DeleteImage';
 import UpdatePasswordApi from '../../helpers/PostApis/UpdatePassword';
-import defImg from "../../../public/avatar.svg"
-import defImg1 from "../../../public/avatar1.jpeg";
 import defImg2 from "../../../public/default-img.png";
 import { FiEdit2, FiEye, FiEyeOff, FiCopy, FiCheckCircle } from "react-icons/fi";
 import UploadImage from '../../helpers/PostApis/UploadImage';
@@ -14,8 +12,6 @@ import UpdateImage from './../../helpers/PostApis/UpdateImage';
 import EditUserDetails from '../../helpers/PostApis/EditUserDetails';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { encryptData } from '../../helpers/encryption_decryption/Encryption';
-import { decryptData } from '../../helpers/encryption_decryption/Decryption';
 import InvitationLink from '../../helpers/getApis/getInvitationLink';
 
 function ProfileMain() {
@@ -55,6 +51,8 @@ function ProfileMain() {
 
     const [invitationLink, setInvitationLink] = useState('');
     const [inviteClicked, setInviteClicked] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
     const handleInviteClick = async () => {
         try {
             // Call your API to fetch the invitation link
@@ -212,31 +210,31 @@ function ProfileMain() {
         try {
             if (!newPassword) {
                 setModalMessage('New password cannot be empty');
-                setShowUpdateModal(true);
+                setShowErrorModal(true);
             } else if (oldPassword === newPassword) {
                 setModalMessage('Old and new passwords cannot be the same');
-                setShowUpdateModal(true);
+                setShowErrorModal(true);
             }
             else if (newPassword !== confirmPassword) {
                 setModalMessage('New password and confirm password do not match');
-                setShowUpdateModal(true);
+                setShowErrorModal(true);
             }
             else if (!oldPassword.trim()) {
                 setModalMessage('Old password is empty. Please enter your old password');
-                setShowUpdateModal(true);
+                setShowErrorModal(true);
             }
             else {
                 const response = await UpdatePasswordApi(userId, oldPassword, newPassword);
                 console.log(response, "pf");
 
-                setModalMessage(response?.data?.message);
-                setShowUpdateModal(true);
+                // setModalMessage(response?.data?.message);
+                // setShowUpdateModal(true);
                 if (response?.success) {
                     setModalMessage(response?.data?.message || 'Password Updated.');
                     setShowUpdateModal(true);
                 } else if (response?.message === 'Old password is wrong.') {
                     setModalMessage(response?.data?.message || 'Old password is wrong.');
-                    setShowUpdateModal(true);
+                    setShowErrorModal(true);
                 }
             }
         } catch (error) {
@@ -252,6 +250,9 @@ function ProfileMain() {
         setShowUpdateModal(false);
         window.location.reload();
     };
+    const UpdateErrorModal = () => {
+        setShowErrorModal(false);
+    };
     const EditCloseModal = () => {
         setShowModalEdit(false);
         window.location.reload();
@@ -259,6 +260,17 @@ function ProfileMain() {
     return (
         <>
             {isImageUploading && <Loader />}
+            <Modal show={showErrorModal} onHide={UpdateErrorModal} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Password Update Failed</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modalMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={UpdateErrorModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <ToastContainer />
             <Modal show={showUpdateModal} onHide={UpdateCloseModal} centered>
                 <Modal.Header closeButton>
@@ -415,14 +427,14 @@ function ProfileMain() {
                                                 {isFullNameEdit ? (
                                                     <input
                                                         type="text"
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={fullName}
                                                         onChange={(e) => setFullName(e.target.value)}
                                                     />
                                                 ) : (
                                                     <input
                                                         type="text"
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={fNameU || "ITS"}
                                                         disabled
                                                         style={{
@@ -433,7 +445,7 @@ function ProfileMain() {
                                                 <p className="m-b-10 f-w-600 m-t-10">Email</p>
                                                 <input
                                                     type="text"
-                                                    className="input_field"
+                                                    className="input_field-Prof"
                                                     value={email || "its@gmail.com"}
                                                     disabled
                                                     style={{
@@ -447,14 +459,14 @@ function ProfileMain() {
                                                 {isBinanceIdEdit ? (
                                                     <input
                                                         type="text"
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={binanceId}
                                                         onChange={(e) => setBinanceId(e.target.value)}
                                                     />
                                                 ) : (
                                                     <input
                                                         type="text"
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={bin_id}
                                                         disabled
                                                         style={{
@@ -468,7 +480,7 @@ function ProfileMain() {
                                                 <span style={{ display: "flex", width: "100%" }}>
                                                     <input
                                                         type="text"
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={invitationLink}
                                                         disabled
                                                         style={{
@@ -506,9 +518,9 @@ function ProfileMain() {
                             <div className="row">
                                 <div className="col-sm-12 card-block">
                                     <div style={{ padding: "0 5px" }}>
-                                        <h6 className="f-w-600 display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
+                                        <h6 className="display-pass" onClick={() => setIsPasswordUpdateOpen(!isPasswordUpdateOpen)}
                                         >
-                                            <b style={{ fontSize: "2.5vh" }}>Password Update</b>
+                                            <b style={{ fontSize: "2.5vh" }} className='f-w-600'>Password Update</b>
                                             {isPasswordUpdateOpen ? (
                                                 <div className='arrow-style'>▲</div>
                                             ) : (
@@ -522,7 +534,7 @@ function ProfileMain() {
                                                     <p className="m-b-10 f-w-600 color-white">Old Password</p>
                                                     <input
                                                         type="password"
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={oldPassword}
                                                         required
                                                         onChange={(e) => setOldPassword(e.target.value)}
@@ -533,7 +545,7 @@ function ProfileMain() {
                                                     <input
                                                         type={showPassword ? "text" : "password"}
                                                         required
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={newPassword}
                                                         onChange={(e) => setNewPassword(e.target.value)}
                                                     />
@@ -552,7 +564,7 @@ function ProfileMain() {
                                                     <input
                                                         type={showPassword ? "text" : "password"}
                                                         required
-                                                        className="input_field"
+                                                        className="input_field-Prof"
                                                         value={confirmPassword}
                                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                                     />

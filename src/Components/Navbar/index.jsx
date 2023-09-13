@@ -4,7 +4,7 @@ import { GoSortAsc } from "react-icons/go"
 import { AiOutlineSetting } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
-import { FaUser } from "react-icons/fa"; // Import Profile icon
+import { FaUser,FaQuestionCircle } from "react-icons/fa"; // Import Profile icon
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import defImg1 from "../../../public/default-img.png";
 
@@ -43,7 +43,6 @@ const Navbar = () => {
                 <h5>{fullName}</h5>
             </div>
             <div className={styles.right}>
-                <GoSortAsc />
                 <div className={`${styles.settingIconContainer} dropdown-container`}>
                     <AiOutlineSetting style={{
                         height: "2.8vh",
@@ -56,7 +55,12 @@ const Navbar = () => {
                             <ul>
                                 <li className="li-style">
                                     <a href="/profile" style={{ textDecoration: "none", fontSize: "1.5vh" }}>
-                                        <FaUser style={{ paddingRight: "5px" }} /> Profile
+                                        <FaUser style={{ paddingRight: "5px" }} /> <span style={{fontSize: "1.5vh" }}>Profile</span>
+                                    </a>
+                                </li>
+                                <li className="li-style">
+                                    <a href="/" style={{ textDecoration: "none", fontSize: "1.5vh" }}>
+                                        <FaQuestionCircle style={{ paddingRight: "5px" }} /> <span style={{fontSize: "1.5vh" }}>Contact Support</span>
                                     </a>
                                 </li>
                                 <li className="li-style">
