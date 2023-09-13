@@ -512,7 +512,8 @@ function ProfileMain() {
                 <div className="row container d-flex justify-content-center" style={{ margin: "20px 0", maxWidth: "100%" }}>
                     <div className="col-xl-6 col-md-12" style={{
                         boxShadow: "0 0 20px rgba(8,21,66,.05)",
-                        background: "#18202b", borderRadius: "5px"
+                        background: "#18202b", borderRadius: "5px",
+                        padding: "5px 0"
                     }}>
                         <div className="card user-card-full ">
                             <div className="row">
