@@ -176,16 +176,16 @@ function AllInvestment() {
                                                     style={{ width: "11vw", height: "11vw", objectFit: "cover" }}
                                                 />
                                                 <div>
-                                                    <h2 style={{ fontSize: "4vw", fontWeight: 600 }}>
+                                                    <h2 style={{ fontSize: "3.7vw", fontWeight: 600 }}>
                                                         {item?.investment_name?.name}
                                                     </h2>
-                                                    <span style={{ color: "#a8a8a8", fontSize: "3.7vw" }}>
+                                                    <span style={{ color: "#a8a8a8", fontSize: "3.4vw" }}>
                                                         {formatDateTime(item?.invesAt)}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end"}}>
-                                                <h2 style={{ fontSize: "4vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
+                                                <h2 style={{ fontSize: "3.7vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
                                                 <span style={{ color: "#21c8d7", fontSize: "3vw" }}>
                                                     {item?.profitPercentage.toFixed(2)}
                                                 </span>
