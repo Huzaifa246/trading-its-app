@@ -45,7 +45,7 @@ const Navbar = () => {
             <div className={styles.right}>
                 <div className={`${styles.settingIconContainer} dropdown-container`}>
                     <AiOutlineSetting style={{
-                        height: "2.8vh",
+                        height: "3.5vh",
                         marginBottom: "5px"
                     }}
                         onClick={() => setShowDropdown(!showDropdown)}

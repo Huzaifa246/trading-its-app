@@ -67,4 +67,9 @@ a {
     padding-top: 12.5rem;
   }
 }
+@media screen and (min-width: 1401px) and (max-width: 1800px) {
+  .padding-top{
+    padding-top: 16.5rem;
+  }
+}
 
