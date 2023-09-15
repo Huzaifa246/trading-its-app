@@ -38,7 +38,7 @@ function StatisticTable({ optionId }) {
             }
             setIsApiCallInProgress(true);
 
-            const investmentResponse = await InvestmentByUser(userId, investmentValue, optionId);
+            const investmentResponse = await InvestmentByUser(userId, investmentValue.toFixed(2), optionId);
             setInvestmentResponse(investmentResponse);
             if (investmentResponse.success) {
                 setShowSuccessModal(true);
@@ -56,13 +56,13 @@ function StatisticTable({ optionId }) {
     }
 
 
-    const depositValue = totalBalance - rangeValue;
+    const depositValue = totalBalance - parseFloat(rangeValue.toFixed(2));
     const investmentValue = rangeValue;
 
     const handleRangeChange = (event) => {
         const newValue = parseFloat(event.target.value);
-        setIsError(newValue <= 0 || newValue > totalBalance);
         setRangeValue(isNaN(newValue) ? 0 : newValue);
+        setIsError(newValue <= 0 || newValue > totalBalance);
     };
     const getRangeColor = (value) => {
         return value >= totalBalance / 2 ? '#2fd3c9' : '#5c768b';
@@ -116,7 +116,7 @@ function StatisticTable({ optionId }) {
                                 type="number"
                                 className={`Invest-input ${isError ? 'is-invalid' : ''}`}
                                 id="customRange1"
-                                min="0.00"
+                                min={0.00}
                                 max={totalBalance}
                                 value={rangeValue}
                                 onChange={handleRangeChange}
@@ -140,21 +140,21 @@ function StatisticTable({ optionId }) {
                             id="customRange1"
                             min="0"
                             step={0.01}
-                            max={totalBalance}
-                            value={rangeValue}
+                            max={totalBalance.toFixed(2)}
+                            value={rangeValue.toFixed(2)}
                             onChange={handleRangeChange}
                             style={{
                                 '--range-color': getRangeColor(rangeValue),
-                                background: `linear-gradient(to right, #5c768b ${investmentValue / totalBalance * 100}%, #2fd3c9 0)`,
+                                background: `linear-gradient(to right, #5c768b ${investmentValue.toFixed(2) / totalBalance * 100}%, #2fd3c9 0)`,
                             }}
                         />
                     </div>
                     <div className='sell-buy-main'>
-                        <h6 className={`range-head ${depositValue >= totalBalance / 2 ? 'sell-percentage-grey' : ''}`}>
+                        <h6 className={`range-head ${depositValue.toFixed(2) >= totalBalance / 2 ? 'sell-percentage-grey' : ''}`}>
                             {depositValue?.toFixed(2)} deposit
                         </h6>
-                        <h6 className={`range-head ${investmentValue >= totalBalance / 2 ? 'buy-percentage-blue' : ''}`}>
-                            {investmentValue} investment
+                        <h6 className={`range-head ${investmentValue.toFixed(2) >= totalBalance / 2 ? 'buy-percentage-blue' : ''}`}>
+                            {investmentValue.toFixed(2)} investment
                         </h6>
                     </div>
                     <div style={{ padding: "0 10px" }}>
