@@ -2,8 +2,8 @@ import axios from 'axios';
 import { UserHeader } from '../header';
 import { decryptData } from '../encryption_decryption/Decryption';
 
-async function WithDrawAll(userId, status = '') {
-  let url = `${import.meta.env.VITE_APP_API}/api/users/get-user-all-withdraw/${userId}`;
+async function WithDrawAll(userId, status = '', pageNumber) {
+  let url = `${import.meta.env.VITE_APP_API}/api/users/get-user-all-withdraw/${userId}/${pageNumber}`;
     try {
       const params = {};
       if (status) {

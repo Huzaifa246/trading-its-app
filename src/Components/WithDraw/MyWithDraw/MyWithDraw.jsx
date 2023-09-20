@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import WithDrawAll from './../../../helpers/WithDrawApi/WdAllGet';
 import { useSelector } from "react-redux";
 import { formatDateTime } from '../../../helpers/DataFormat/DateFormat';
@@ -21,13 +21,16 @@ function MyWithDraw() {
     const [cancellationModalOpen, setCancellationModalOpen] = useState(false);
     const [selectedWithdrawal, setSelectedWithdrawal] = useState(null);
     const [isApiCallInProgress, setIsApiCallInProgress] = useState(false);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             setLoading(true);
             try {
-                const response = await WithDrawAll(userId, status); // Pass the selected status
-                setWithDrawData(response.data);
+                const response = await WithDrawAll(userId, status, pageNumber); // Pass the selected status and pageNumber
+                setWithDrawData((prevData) => [...prevData, ...response.data]); // Append the new data to the existing data
+                setHasMore(response.data.length > 0);
             } catch (error) {
                 console.error("Error fetching investment data:", error);
             }
@@ -36,8 +39,35 @@ function MyWithDraw() {
             }
         }
         fetchData();
-    }, [userId, status]); // Include status in the dependency array
+    }, [userId, status, pageNumber]); // Include status in the dependency array
 
+    const tableWrapperRef = useRef(null);
+
+    // Function to handle scrolling
+    const handleScroll = () => {
+        const wrapper = tableWrapperRef.current;
+        if (wrapper) {
+            const isScrolledToBottom = wrapper.scrollHeight - wrapper.scrollTop === wrapper.clientHeight;
+            if (isScrolledToBottom && !isLoading && hasMore) {
+                setPageNumber((prevPageNumber) => prevPageNumber + 1);
+            }
+        }
+    };
+
+    useEffect(() => {
+        // Add a scroll event listener when the component mounts
+        const wrapper = tableWrapperRef.current;
+        if (wrapper) {
+            wrapper.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            // Remove the scroll event listener when the component unmounts
+            if (wrapper) {
+                wrapper.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
     // Function to handle button clicks and set the status
     const handleStatusChange = (newStatus) => {
         setStatus(newStatus);

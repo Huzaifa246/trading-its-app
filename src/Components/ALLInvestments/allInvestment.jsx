@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from "./index.module.css";
 import { useSelector } from "react-redux";
 import Loader from './../Loader/index';
@@ -15,6 +15,8 @@ function AllInvestment() {
     const [isLoading, setLoading] = useState(true);
     const [showAll, setShowAll] = useState(true);
     const [tradeOptions, setTradeOptions] = useState([]);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
@@ -42,11 +44,11 @@ function AllInvestment() {
             let response;
 
             if ((timeOption === "current" || timeOption === "past") && tradeOption !== "") {
-                response = await fetchAllInvestment(userId, timeOption, tradeOption);
+                response = await fetchAllInvestment(userId, pageNumber, timeOption, tradeOption);
             } else if (timeOption === "current" || timeOption === "past") {
-                response = await fetchAllInvestment(userId, timeOption);
+                response = await fetchAllInvestment(userId, pageNumber, timeOption);
             } else if (tradeOption !== "" && (timeOption === "current" || timeOption === "past")) {
-                response = await fetchAllInvestment(userId, timeOption, tradeOption);
+                response = await fetchAllInvestment(userId, pageNumber, timeOption, tradeOption);
             } else {
                 return
             }
@@ -59,6 +61,37 @@ function AllInvestment() {
         }
     };
 
+    const tableWrapperRef = useRef(null);
+
+    const handleScroll = () => {
+        const wrapper = tableWrapperRef.current;
+        if (wrapper) {
+            const isScrolledToBottom =
+                wrapper.scrollHeight - wrapper.scrollTop === wrapper.clientHeight;
+            if (isScrolledToBottom && !isLoading && hasMore) {
+                setPage((prevPage) => prevPage + 1);
+            }
+        }
+    };
+
+    useEffect(() => {
+        const wrapper = tableWrapperRef.current;
+        if (wrapper) {
+            wrapper.addEventListener('scroll', handleScroll);
+        }
+        return () => {
+            if (wrapper) {
+                wrapper.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (pageNumber > 1) {
+          // You can call your fetchInvestmentData function with the updated 'page'
+          fetchInvestmentData(selectedTimeOption, selectedTradeOption);
+        }
+      }, [pageNumber]);
     const handleTimeOptionClick = (timeOption) => {
         setSelectedTimeOption(timeOption);
         setSelectedTradeOption("");
@@ -81,7 +114,7 @@ function AllInvestment() {
 
     const handleShowAllClick = () => {
         const newSelectedTimeOption = selectedTimeOption === "current" ? "current" : "past";
-    
+
         setSelectedTimeOption(newSelectedTimeOption);
         setSelectedTradeOption("");
         setLoading(true);
@@ -184,7 +217,7 @@ function AllInvestment() {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end"}}>
+                                            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
                                                 <h2 style={{ fontSize: "3.7vw", fontWeight: 700 }}>{`$${item?.payment}`}</h2>
                                                 <span style={{ color: "#21c8d7", fontSize: "3vw" }}>
                                                     {item?.profitPercentage.toFixed(2)}

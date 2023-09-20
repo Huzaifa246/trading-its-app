@@ -10,13 +10,14 @@ const CurrenciesList = () => {
     const userId = userDetails?.data?._id;
     const [investmentData, setInvestmentData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [pageNumber, setPageNumber] = useState(1);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 setIsLoading(true);
                 const investtype = 'current';
-                const response = await fetchAllInvestment(userId, investtype);
+                const response = await fetchAllInvestment(userId, pageNumber, investtype);
                 setInvestmentData(response.data);
                 setIsLoading(false);
             } catch (error) {

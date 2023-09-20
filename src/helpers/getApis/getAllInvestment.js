@@ -2,9 +2,9 @@ import axios from 'axios';
 import { decryptData } from '../encryption_decryption/Decryption';
 import { UserHeader } from '../header';
 
-async function fetchAllInvestment(userId, investtype, tradeID = "") {
+async function fetchAllInvestment(userId, pageNumber, investtype, tradeID = "") {
   try {
-    let url = `${import.meta.env.VITE_APP_API}/api/users/get-user-investment/${userId}/${investtype}`;
+    let url = `${import.meta.env.VITE_APP_API}/api/users/get-user-investment/${userId}/${pageNumber}/${investtype}`;
 
     const queryParams = [];
 
