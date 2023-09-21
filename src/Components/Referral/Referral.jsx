@@ -136,63 +136,67 @@ function Referral() {
             <div>
                 <h1 className="h1-deposit">Referral</h1>
                 <div style={{ color: 'white' }}>
-                    <div className="profile-list">
-                        {allReferral?.map((profile, index) => (
-                            <div key={index}>
-                                <div
-                                    className={`profile-item ${activeProfile === profile ? 'active' : ''}`}
-                                    onClick={() => handleClickProfile(profile)}
-                                    style={{
-                                        cursor: 'pointer',
-                                    }}
-                                >
+                    {allReferral.length === 0 ? (
+                        <p style={{textAlign: 'center'}}>No Referral Found!!!</p>
+                    ) : (
+                        <div className="profile-list">
+                            {allReferral?.map((profile, index) => (
+                                <div key={index}>
                                     <div
+                                        className={`profile-item ${activeProfile === profile ? 'active' : ''}`}
+                                        onClick={() => handleClickProfile(profile)}
                                         style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            color: 'white',
-                                            gap: '1rem',
-                                            justifyContent: 'space-between',
-                                            margin: '1rem',
+                                            cursor: 'pointer',
                                         }}
                                     >
                                         <div
                                             style={{
                                                 display: 'flex',
                                                 alignItems: 'center',
+                                                color: 'white',
                                                 gap: '1rem',
+                                                justifyContent: 'space-between',
+                                                margin: '1rem',
                                             }}
                                         >
-                                            <img
-                                                src={'https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'}
-                                                alt={'profile'}
+                                            <div
                                                 style={{
-                                                    width: '11vw',
-                                                    height: '11vw',
-                                                    objectFit: 'cover',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '1rem',
                                                 }}
-                                            />
-                                            <span style={{ fontSize: '3vh' }}>{profile?.fullName}</span>
-                                        </div>
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'end',
-                                            }}
-                                        >
-                                            <h2 style={{ fontSize: '3vw', fontWeight: 700 }}>
-                                                {profile?.parent1?.commission}
-                                            </h2>
-                                            <p style={{ color: '#21c8d7', fontSize: '3vw' }}>
-                                                {profile?.parent1?.user}
-                                            </p>
+                                            >
+                                                <img
+                                                    src={'https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'}
+                                                    alt={'profile'}
+                                                    style={{
+                                                        width: '11vw',
+                                                        height: '11vw',
+                                                        objectFit: 'cover',
+                                                    }}
+                                                />
+                                                <span style={{ fontSize: '3vh' }}>{profile?.fullName}</span>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'end',
+                                                }}
+                                            >
+                                                <h2 style={{ fontSize: '3vw', fontWeight: 700 }}>
+                                                    {profile?.parent1?.commission}
+                                                </h2>
+                                                <p style={{ color: '#21c8d7', fontSize: '3vw' }}>
+                                                    {profile?.parent1?.user}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </>
